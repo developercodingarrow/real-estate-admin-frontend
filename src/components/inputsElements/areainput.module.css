@@ -1,0 +1,41 @@
+.lable_wrapper {
+  margin-bottom: 0.5rem;
+  padding: 0.2rem;
+}
+
+.lable_style {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.inputBox_wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.input_wrapper {
+}
+
+.area_text_wrapper {
+  border-left: 2px solid #ddd;
+  height: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  height: 100%;
+}
+
+.inputStyle {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 1rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.error_text {
+  color: red;
+  font-size: 1rem;
+}

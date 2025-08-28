@@ -1,0 +1,98 @@
+.selector_container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 1.6rem;
+}
+
+.selector_header {
+  padding: 1rem 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.selector_header:hover {
+  border-color: #aaa;
+}
+
+.selector_header.open {
+  border-color: #0078db;
+  box-shadow: 0 0 0 0.1px #0078db;
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  fill: #666;
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.options_list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.option_item {
+  padding: 1rem 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+.option_item:hover {
+  background-color: #f5f5f5;
+}
+
+.option_item.selected {
+  background-color: #0078db;
+  color: white;
+}
+
+.option_item.selected:hover {
+  background-color: #0078db;
+}
+
+/* custome hook selector  */
+.input_wrapper {
+  border: 1px solid #ddd;
+  padding-right: 1rem;
+  border-radius: 0.8rem;
+  font-size: 1.2rem;
+}
+.lable_wrapper {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+.text_inputStyle {
+  border: none;
+  border-radius: 0.8rem;
+  padding: 1.2rem 0.8rem;
+  font-size: 1.2rem;
+  outline: none;
+}
+.error_text {
+  color: red;
+  font-size: 1rem;
+}

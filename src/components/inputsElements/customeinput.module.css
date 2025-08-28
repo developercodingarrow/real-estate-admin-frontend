@@ -1,0 +1,29 @@
+.input_wrapper {
+  border: 1px solid #ddd;
+  border-radius: 0.8rem;
+  background-color: white;
+  /* margin-bottom: 0.5rem; */
+}
+.lable_wrapper {
+  margin-bottom: 0.5rem;
+  padding: 0.2rem;
+}
+
+.lable_style {
+  font-size: 1.2rem;
+  /* margin-bottom: 1rem; */
+}
+
+.text_inputStyle {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 1rem 0.8rem;
+  border-radius: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.error_text {
+  color: red;
+  font-size: 1rem;
+}

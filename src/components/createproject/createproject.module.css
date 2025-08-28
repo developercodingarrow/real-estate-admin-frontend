@@ -1,0 +1,33 @@
+.main_container {
+  padding-top: 5rem;
+}
+
+.inner_container {
+  width: 100%;
+}
+
+.section_heading {
+  margin-bottom: 2rem;
+}
+
+.single_block {
+}
+
+.option_section,
+.option_title {
+  margin-bottom: 1rem;
+}
+
+/* Radio options container */
+.inline_radio_options_wrapper,
+.options_list {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.project_basic_details_section {
+  margin-bottom: 2rem;
+  padding: 2rem 0rem;
+  border-bottom: 0.1rem solid #ccc;
+}

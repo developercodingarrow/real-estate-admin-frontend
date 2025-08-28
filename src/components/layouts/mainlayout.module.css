@@ -1,0 +1,47 @@
+.main_container {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar_wrapper {
+  position: fixed;
+  box-shadow: var(--th-box-shadow);
+  border: 1px solid var(--th-border-color-gray);
+  height: 5rem;
+  margin-left: 25rem;
+  width: calc(100% - 25rem); /* Add spaces around the minus operator */
+}
+
+.navbar_wrapper_collapsed {
+  margin-left: 7rem;
+  width: calc(100% - 7rem); /* Add spaces around the minus operator */
+}
+
+.asidbar_wrapper {
+  width: 25rem;
+  background-color: #fff;
+  box-shadow: var(--th-box-shadow);
+  border: 1px solid var(--th-border-color-gray);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 8;
+  transition: all 0.3s ease-in-out;
+}
+
+.asidbar_wrapper_collapsed {
+  width: 7rem;
+}
+
+.children_wrapper {
+  margin-left: 25rem;
+  padding-top: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.children_wrapper_collapsed {
+  margin-left: 7rem;
+}

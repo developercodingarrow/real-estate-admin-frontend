@@ -1,0 +1,41 @@
+.amnities_mainConatiner {
+  padding: 5rem;
+}
+
+.inner_conatiner {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.amnities_column {
+  width: 80%;
+}
+
+.static_box_wrapper {
+  width: 40%;
+}
+
+.fillter_tab_wrapper {
+  /* border: 1px solid red; */
+  height: 5rem;
+  width: 100%;
+}
+
+.amnities_container {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5rem;
+  row-gap: 2rem;
+  padding: 2rem 1rem;
+}
+
+.amenity_item {
+  width: 20rem;
+}
+
+.amnities_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 3rem;
+  row-gap: 2rem;
+}

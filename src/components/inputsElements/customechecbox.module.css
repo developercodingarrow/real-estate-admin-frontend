@@ -1,0 +1,90 @@
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkboxWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.hiddenCheckbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%; /* Add this */
+  height: 100%; /* Add this */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensure it's above the custom checkbox */
+}
+
+.customCheckbox {
+  display: inline-block;
+  border: 2px solid #0078db;
+  background-color: white;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative; /* Add this */
+  z-index: 0; /* Add this - lower than hidden checkbox */
+}
+
+.customCheckbox.checked {
+  background-color: #0078db;
+  border-color: #0078db;
+  box-shadow: 0 2px 8px rgba(0, 120, 219, 0.3);
+}
+
+.customCheckbox.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.customCheckbox.small {
+  width: 16px;
+  height: 16px;
+}
+
+.customCheckbox.medium {
+  width: 20px;
+  height: 20px;
+}
+
+.customCheckbox.large {
+  width: 24px;
+  height: 24px;
+}
+
+/* Checkmark styles */
+.checkmark {
+  width: 70%;
+  height: 70%;
+}
+
+/* Label styles */
+.checkboxLabel {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Focus styles for accessibility */
+.hiddenCheckbox:focus + .customCheckbox {
+  outline: 2px solid #0078db;
+  outline-offset: 2px;
+}
+
+/* Hover effect */
+.customCheckbox:not(.disabled):hover {
+  box-shadow: 0 2px 8px rgba(0, 120, 219, 0.4);
+  transform: translateY(-1px);
+}

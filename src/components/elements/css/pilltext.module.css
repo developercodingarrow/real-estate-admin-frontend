@@ -1,0 +1,12 @@
+.pill_container {
+  padding: 0.5rem 1rem;
+  background-color: #0078db;
+  border: 1px solid #d1d5db;
+  text-transform: capitalize;
+  color: #ffff;
+}
+
+.small {
+  font-size: 1.2rem;
+  border-radius: 0.7rem;
+}

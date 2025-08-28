@@ -1,0 +1,207 @@
+.main_conatiner {
+  padding: 5rem;
+}
+
+.page_heading {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  margin-bottom: 2rem;
+}
+
+.page_fillter_wrapper {
+  padding: 10px 14px;
+  position: relative;
+  background: #fff;
+  margin-bottom: 4rem;
+  font-size: 13px;
+  color: #999;
+  box-shadow: 2px 2px 0 0 #ececec;
+  font-weight: 600;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #ebecf0;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.table_wrapper {
+}
+
+.project_card {
+  background: #fff;
+  border: 1px solid #ebecf0;
+  box-shadow: 0px 1px 4px rgba(31, 92, 163, 0.2);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.card_topBar {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  justify-content: end;
+  width: 100%;
+  height: 3rem;
+  padding-right: 2rem;
+}
+
+.card_topBarTag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0rem 0rem;
+  width: 15rem;
+}
+
+.tagImgStyle {
+  position: absolute;
+  top: -3px;
+  width: 100%;
+  height: 100%;
+}
+.tagText {
+  z-index: 10;
+}
+
+.card_inner_container {
+  display: flex;
+  border: 1px solid #f1f1f4;
+  padding: 1rem 2rem;
+  display: flex;
+  column-gap: 2rem;
+}
+
+.project_img_wrapper {
+  width: 180px;
+  height: 98px;
+  display: inline-block;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative; /* Add this */
+}
+
+.project_img_wrapper::before {
+  content: ""; /* Don't forget content property for pseudo-elements */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+  z-index: 1; /* Ensure it's above the image */
+}
+
+.projectImgStyle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Add this for better image scaling */
+  position: relative; /* Add this */
+  z-index: 0; /* Ensure image is below the overlay */
+}
+
+.tag_on_image {
+  padding: 2px 4px;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  position: absolute;
+  top: 1.5rem;
+  background-color: rgb(235, 236, 240);
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  height: 1.8rem;
+  width: 4rem;
+}
+
+.project_content_wrapper {
+  width: 90%;
+}
+
+.card_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 24px;
+  color: #041533;
+}
+
+.project_location_wrapper {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 16px;
+  color: #0d1e40;
+  padding-top: 2px;
+  margin-bottom: 2rem;
+}
+
+.card_footer_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.project_stats {
+  display: flex;
+  column-gap: 2rem;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.stats_staticText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #42526e;
+}
+
+.stats_dynimicText {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #42526e;
+}
+
+.card_action_wrapper {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.action_btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 14px;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #ebecf0;
+  border-radius: 4px;
+  margin-left: 30px;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.action_btn:hover {
+  background-color: var(--th-primary-color);
+  color: var(--th-white-color);
+}

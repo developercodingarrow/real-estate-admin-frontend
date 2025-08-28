@@ -1,0 +1,54 @@
+:root {
+  --font-poppins: "Poppins", sans-serif;
+  --th-white-color: #ffffff;
+  --th-black-color: #171717;
+  --th-dark-blue-color: #091e42;
+  --th-border-color-gray: #e5e7eb;
+  --th-gray-bg: #f4f5f7;
+  --th-box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  --th-primary-color: #0078db;
+}
+
+html {
+  font-size: 62.5%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+  font-family: var(--font-poppins);
+  background-color: var(--th-white-color);
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-family: var(--font-poppins);
+}
+
+h4 {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+@media only screen and (max-width: 720px) {
+}
