@@ -4,9 +4,7 @@ import CustomeInput from "@/src/components/inputsElements/CustomeInput";
 import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
 
 export default function ProjectBasicsDetails(props) {
-  const { register, setValue, watch, errors } = props;
-
-  const unitTypesValue = watch ? watch("unittypes") ?? "" : "";
+  const { register, setValue, watch, errors, control } = props;
 
   return (
     <section className={styles.section_container}>
@@ -22,8 +20,9 @@ export default function ProjectBasicsDetails(props) {
               <CustomeHookInput
                 inputLabel="No of Floors..."
                 inputPlaceholder="Ex - 20"
-                name="floors"
+                name="noOfFloors"
                 type="number"
+                control={control}
                 register={register}
                 rules={{
                   required: "Number of floors is required",
@@ -32,7 +31,7 @@ export default function ProjectBasicsDetails(props) {
                     message: "Only numbers are allowed",
                   },
                 }}
-                error={errors.floors?.message}
+                error={errors.noOfFloors?.message}
               />
             </div>
           </div>
@@ -41,8 +40,9 @@ export default function ProjectBasicsDetails(props) {
               <CustomeHookInput
                 inputLabel="No of Units"
                 inputPlaceholder="Ex - 800"
-                name="units"
+                name="noOfUnits"
                 type="number"
+                control={control}
                 register={register}
                 rules={{
                   required: "Number of units is required",
@@ -51,7 +51,7 @@ export default function ProjectBasicsDetails(props) {
                     message: "Only numbers are allowed",
                   },
                 }}
-                error={errors.units?.message}
+                error={errors.noOfUnits?.message}
               />
             </div>
           </div>
@@ -60,12 +60,13 @@ export default function ProjectBasicsDetails(props) {
               <CustomeHookInput
                 inputLabel="Types of Units"
                 inputPlaceholder="Ex - 2BHK, 3BHK+3T"
-                name="unittypes"
+                name="unitType"
+                control={control}
                 register={register}
                 rules={{
                   required: "Unit types are required",
                 }}
-                error={errors.unittypes?.message}
+                error={errors.unitType?.message}
               />
             </div>
           </div>

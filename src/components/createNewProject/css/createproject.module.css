@@ -1,0 +1,61 @@
+.main_container {
+  padding-top: 5rem;
+  padding-right: 10rem;
+  padding-left: 10rem;
+}
+
+.inner_container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  column-gap: 2rem;
+}
+
+.left_column {
+  width: 60%;
+}
+
+.page_title {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+}
+
+.section_container {
+  margin-bottom: 2rem;
+}
+
+.radio_options_title {
+  font-size: 1.6rem;
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+}
+
+.inline_custome_radion_wrapper {
+  display: flex;
+}
+
+.options_wrappe {
+  height: 5rem;
+}
+
+.options_list {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.btn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.right_column {
+  width: 40%;
+}

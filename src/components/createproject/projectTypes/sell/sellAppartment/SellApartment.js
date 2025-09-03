@@ -8,10 +8,13 @@ import ProjectOfficialDetails from "./ProjectOfficialDetails";
 import ClickBtn from "@/src/components/elements/buttons/ClickBtn";
 import { useForm } from "react-hook-form";
 import SubmitBtn from "@/src/components/elements/buttons/SubmitBtn";
+import { createProjectAction } from "@/src/app/utils/projectActions";
+
 export default function SellApartment(props) {
   const { pageHeading, onNext } = props;
 
   const {
+    control, // add this
     register,
     handleSubmit,
     setValue,
@@ -23,7 +26,7 @@ export default function SellApartment(props) {
     defaultValues: {
       projectStatus: "",
       projectType: "",
-      projectBuilder: "",
+      builder: "",
       city: "",
       location: "",
       address: "",
@@ -31,22 +34,31 @@ export default function SellApartment(props) {
       projectTitle: "",
       price: "",
       carpetArea: "",
-      BuiltUpArea: "",
+      builtUpArea: "",
       SuperBuiltUpArea: "",
-      floors: "",
-      units: "",
-      unittypes: "",
+      noOfFloors: "",
+      noOfUnits: "",
+      unitType: "",
       reraNo: "",
-      posssession: "",
+      possessionDate: "",
       basicPrice: "",
       // ...etc
     },
   });
 
-  const handelsubmit = (data) => {
-    // data contains all registered fields from this form (child components must register fields)
+  const handelsubmit = async (data) => {
     console.log("SellApartment form data:", data);
-    // also show JSON string in case you want to copy-paste
+    try {
+      const response = await createProjectAction(data);
+      if (response.error) {
+        console.error("Error creating project:", response.error);
+      }
+      if (response.data.status === "success") {
+        console.log("Create Project Action Response:", response);
+      }
+    } catch (error) {
+      console.error("Error creating project:", error);
+    }
   };
 
   return (
@@ -56,38 +68,17 @@ export default function SellApartment(props) {
         <div className={styles.inner_container}>
           <div className={styles.section_fileds_wrapper}>
             <div className={styles.fileds_wrapper}>
-              <ProjectTypeLocationSection
-                register={register}
-                setValue={setValue}
-                watch={watch}
-                errors={errors}
-              />
+              <ProjectTypeLocationSection control={control} errors={errors} />
+            </div>
+            <div className={styles.fileds_wrapper}>
+              <ProjectAreaSection control={control} errors={errors} />
             </div>
 
             <div className={styles.fileds_wrapper}>
-              <ProjectAreaSection
-                register={register}
-                errors={errors}
-                setValue={setValue}
-                watch={watch}
-              />
-            </div>
-
-            <div className={styles.fileds_wrapper}>
-              <ProjectBasicsDetails
-                register={register}
-                errors={errors}
-                setValue={setValue}
-                watch={watch}
-              />
+              <ProjectBasicsDetails control={control} errors={errors} />
             </div>
             <div className={styles.fileds_wrapper}>
-              <ProjectOfficialDetails
-                register={register}
-                errors={errors}
-                setValue={setValue}
-                watch={watch}
-              />
+              <ProjectOfficialDetails control={control} errors={errors} />
             </div>
           </div>
         </div>

@@ -29,3 +29,21 @@
   line-height: 1.3;
   letter-spacing: 0.3px;
 }
+
+.medium:disabled {
+  cursor: not-allowed;
+}
+
+.small {
+  font-size: 1.2rem;
+  font-family: var(--th-font-family);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  padding: 0.7rem 0.8rem;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+}
+
+.small:disabled {
+  cursor: not-allowed;
+}

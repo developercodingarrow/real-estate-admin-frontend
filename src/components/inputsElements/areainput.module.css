@@ -16,6 +16,7 @@
 }
 
 .input_wrapper {
+  position: relative;
 }
 
 .area_text_wrapper {
@@ -36,6 +37,7 @@
 }
 
 .error_text {
+  position: absolute;
   color: red;
   font-size: 1rem;
 }

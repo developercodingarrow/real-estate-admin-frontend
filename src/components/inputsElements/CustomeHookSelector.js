@@ -3,7 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./customeselector.module.css";
 
 export default function CustomeHookSelector(props) {
-  const { label, name, options, register, rules, error } = props;
+  const { label, name, options, register, rules, error, value, onChange } =
+    props;
 
   return (
     <div className={styles.selector_container}>
@@ -21,7 +22,10 @@ export default function CustomeHookSelector(props) {
           className={`${styles.text_inputStyle} ${
             error ? styles.errorBorder : ""
           }`}
-          {...(register ? register(name, rules) : {})} // <-- register applied here
+          // defaultValue=""
+          // {...(register ? register(name, rules) : {})} // <-- register applied here
+          value={value || ""} // <-- controlled value
+          onChange={(e) => onChange(e.target.value)}
         >
           <option value="">Select {label}</option>
           {options.map((opt) => (

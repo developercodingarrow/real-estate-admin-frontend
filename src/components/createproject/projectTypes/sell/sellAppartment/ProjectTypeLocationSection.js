@@ -9,10 +9,10 @@ import {
 } from "@/src/jsonData/sellApartmentData";
 import CustomeHookSelector from "@/src/components/inputsElements/CustomeHookSelector";
 import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
+import { Controller } from "react-hook-form";
 
 export default function ProjectTypeLocationSection(props) {
-  const { register, setValue, watch, errors } = props;
-
+  const { register, setValue, watch, errors, control } = props;
   return (
     <section className={styles.section_container}>
       <div className={styles.section_column}>
@@ -20,38 +20,59 @@ export default function ProjectTypeLocationSection(props) {
         <div className={styles.section_column_wrapper}>
           <div className={styles.section_TitleColumn}>
             <div className={styles.column_fileds}>
-              <CustomeHookSelector
-                label="Project Status"
-                name="projectStatus"
-                options={projectStatusOptions}
-                register={register}
-                rules={{ required: "Project status is required" }}
-                error={errors.projectStatus?.message}
+              <Controller
+                name="projectType"
+                control={control}
+                rules={{ required: "Project type is required" }}
+                render={({ field, fieldState }) => (
+                  <CustomeHookSelector
+                    label="Property Type"
+                    name={field.name}
+                    options={projectTypeOptions}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
             </div>
           </div>
           <div className={styles.section_TitleColumn}>
             <div className={styles.column_fileds}>
-              <CustomeHookSelector
-                label="Project Type"
+              <Controller
                 name="projectType"
-                options={projectTypeOptions}
-                register={register}
+                control={control}
                 rules={{ required: "Project type is required" }}
-                error={errors.projectType?.message}
+                render={({ field, fieldState }) => (
+                  <CustomeHookSelector
+                    label="Property Type"
+                    name={field.name}
+                    options={projectTypeOptions}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
             </div>
           </div>
 
           <div className={styles.section_TitleColumn}>
             <div className={styles.column_fileds}>
-              <CustomeHookSelector
-                label="Project Builder"
-                name="projectBuilder"
-                options={builderOptions}
-                register={register}
+              <Controller
+                name="builder"
+                control={control}
                 rules={{ required: "Project builder is required" }}
-                error={errors.projectBuilder?.message}
+                render={({ field, fieldState }) => (
+                  <CustomeHookSelector
+                    label="Project Builder"
+                    name={field.name}
+                    options={builderOptions}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
             </div>
           </div>
@@ -62,25 +83,39 @@ export default function ProjectTypeLocationSection(props) {
         <div className={styles.section_column_wrapper}>
           <div className={styles.section_TitleColumn}>
             <div className={styles.column_fileds}>
-              <CustomeHookSelector
-                label="Project City"
+              <Controller
                 name="city"
-                options={cityOptions}
-                register={register}
-                rules={{ required: "Project city is required" }}
-                error={errors.city?.message}
+                control={control}
+                rules={{ required: "Project builder is required" }}
+                render={({ field, fieldState }) => (
+                  <CustomeHookSelector
+                    label="Project City"
+                    name={field.name}
+                    options={cityOptions}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
             </div>
           </div>
           <div className={styles.section_TitleColumn}>
             <div className={styles.column_fileds}>
-              <CustomeHookSelector
-                label="Project Location"
-                name="location"
-                options={locationOptions}
-                register={register}
+              <Controller
+                name="projectType"
+                control={control}
                 rules={{ required: "Project location is required" }}
-                error={errors.location?.message}
+                render={({ field, fieldState }) => (
+                  <CustomeHookSelector
+                    label="Project Location"
+                    name={field.name}
+                    options={locationOptions}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
             </div>
           </div>
@@ -88,10 +123,14 @@ export default function ProjectTypeLocationSection(props) {
             <div className={styles.column_fileds}>
               <CustomeHookInput
                 inputLabel="Project Address"
-                inputPlaceholder="Enter project Address"
+                inputPlaceholder="Project Address"
+                type="text"
                 name="address"
+                control={control}
                 register={register}
-                rules={{ required: "Address is required" }}
+                rules={{
+                  required: "address is required",
+                }}
                 error={errors.address?.message}
               />
             </div>

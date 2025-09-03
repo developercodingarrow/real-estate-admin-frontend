@@ -1,0 +1,51 @@
+/* Container styling */
+.quillWrapper {
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Editor base styles */
+.editor .ql-container.ql-bubble {
+  border: none;
+  font-size: 1.1rem;
+  font-family: "Inter", sans-serif;
+}
+
+.editor .ql-editor {
+  min-height: 400px;
+  padding: 24px;
+  line-height: 1.6;
+}
+
+/* Custom placeholder styling */
+.editor .ql-editor.ql-blank::before {
+  content: attr(data-placeholder);
+  color: #94a3b8; /* Cool gray color */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.1rem;
+  left: 24px !important;
+  right: 24px !important;
+  pointer-events: none;
+  position: absolute;
+  transition: all 0.2s ease;
+}
+
+/* Placeholder animation on focus */
+.editor .ql-editor:focus-within.ql-blank::before {
+  color: #cbd5e1;
+  transform: translateY(-5px);
+  font-size: 0.9rem;
+}
+
+/* Bubble theme tooltip customization */
+.editor .ql-bubble .ql-tooltip {
+  background-color: #334155;
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.editor .ql-bubble .ql-tooltip.ql-flip .ql-tooltip-arrow {
+  border-top-color: #334155;
+}

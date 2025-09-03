@@ -1,0 +1,19 @@
+.main_container {
+  margin-bottom: 2rem;
+}
+
+.column_title {
+  font-size: 1.6rem;
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+.filed_container {
+  display: flex;
+  column-gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./areainput.module.css";
+import { Controller } from "react-hook-form";
 export default function CustomeAreaHookInput(props) {
   const {
     inputLabel,
@@ -10,6 +11,7 @@ export default function CustomeAreaHookInput(props) {
     register,
     rules,
     error,
+    control,
   } = props;
   return (
     <div className={styles.main_container}>
@@ -19,12 +21,26 @@ export default function CustomeAreaHookInput(props) {
 
       <div className={styles.inputBox_wrapper}>
         <div className={styles.input_wrapper}>
-          <input
+          {/* <input
             id={name}
             type={type}
             placeholder={inputPlaceholder}
             className={styles.inputStyle}
             {...register(name, rules)}
+          /> */}
+          <Controller
+            name={name}
+            control={control}
+            rules={rules}
+            render={({ field }) => (
+              <input
+                {...field}
+                id={name}
+                type={type}
+                placeholder={inputPlaceholder}
+                className={styles.inputStyle}
+              />
+            )}
           />
         </div>
         <div className={styles.area_text_wrapper}>sq.ft.</div>

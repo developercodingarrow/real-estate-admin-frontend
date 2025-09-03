@@ -1,14 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./sellapartment.module.css";
-import AreaInput from "@/src/components/inputsElements/AreaInput";
+
 import CustomeAreaHookInput from "@/src/components/inputsElements/CustomeAreaHookInput";
+
 export default function ProjectAreaSection(props) {
-  const { register, setValue, watch, errors } = props;
+  const { register, setValue, watch, errors, control } = props;
   // read current values from RHF store
 
-  const carpetValue = watch ? watch("carpetArea") ?? "" : "";
-  const superBuiltValue = watch ? watch("SuperBuiltUpArea") ?? "" : "";
   return (
     <section className={styles.section_container}>
       <div className={styles.section_column}>
@@ -20,7 +19,8 @@ export default function ProjectAreaSection(props) {
                 inputLabel="project Built Up Area"
                 inputPlaceholder="Built-up-area"
                 type="number"
-                name="BuiltUpArea"
+                name="builtUpArea"
+                control={control}
                 register={register}
                 rules={{
                   required: "Number of floors is required",
@@ -40,6 +40,7 @@ export default function ProjectAreaSection(props) {
                 inputPlaceholder="carpetArea-area"
                 type="number"
                 name="carpetArea"
+                control={control}
                 register={register}
                 rules={{
                   required: "carpetArea is required",
@@ -59,6 +60,7 @@ export default function ProjectAreaSection(props) {
                 inputPlaceholder="super built-up-area"
                 type="number"
                 name="SuperBuiltUpArea"
+                control={control}
                 register={register}
                 rules={{
                   required: "Super BuiltUp Area is required",

@@ -1,18 +1,12 @@
 .amnities_mainConatiner {
-  padding: 5rem;
+  padding: 0rem 5rem;
 }
 
 .inner_conatiner {
-  display: flex;
-  column-gap: 2rem;
 }
 
 .amnities_column {
-  width: 80%;
-}
-
-.static_box_wrapper {
-  width: 40%;
+  width: 100%;
 }
 
 .fillter_tab_wrapper {
@@ -38,4 +32,20 @@
   flex-wrap: wrap;
   column-gap: 3rem;
   row-gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.updateBtn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 2rem;
+  column-gap: 2rem;
+}
+
+.submitBtn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 2rem;
 }

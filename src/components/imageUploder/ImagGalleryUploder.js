@@ -1,11 +1,22 @@
 "use client";
 import React, { useContext, useEffect, useState, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import useImageGallery from "@/src/_custome_hooks/useImageGallery";
 import Image from "next/image";
 import styles from "./css/imageUplaoder.module.css";
 import { MdDeleteForever } from "../ApplicationIcons";
+import {
+  deleteGalleryImgAction,
+  updateProjectGallery,
+} from "@/src/app/utils/projectActions";
+import ClickBtn from "../elements/buttons/ClickBtn";
 
-export default function ImagGalleryUploder() {
+export default function ImagGalleryUploder(props) {
+  const { slug, apiData } = props;
+  const [isBtnLoading, setisBtnLoading] = useState(false);
+  const [apiImages, setApiImages] = useState(apiData?.galleryImages || []); // only urls
+  console.log("apidata", apiData);
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
   const { images, addImages, removeImage, clearAllImages, maxImages } =
@@ -32,16 +43,12 @@ export default function ImagGalleryUploder() {
   const handleFileSelect = (e) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    addImages(files);
+    const remainingSlots = maxImages - apiImages.length - images.length;
+    if (remainingSlots <= 0) return;
+    addImages(Array.from(files).slice(0, remainingSlots));
     // allow re-selecting same files
     e.target.value = "";
   };
-
-  // remove handler that also clears preview if needed
-  // const handleRemove = (id) => {
-  //   if (previewImage?.id === id) setPreviewImage(null);
-  //   removeImage(id);
-  // };
 
   // optional: see what's in state
   useEffect(() => {
@@ -53,9 +60,47 @@ export default function ImagGalleryUploder() {
       fileInputRef.current.click();
     }
   };
+  const handelUplodeImgages = async () => {
+    setisBtnLoading(true);
+    if (images.length === 0) return;
+
+    const formData = new FormData();
+    images.forEach((item) => {
+      formData.append("galleryImages", item.file); // multer expects "galleryImages"
+    });
+
+    try {
+      const res = await updateProjectGallery(formData, slug);
+      if (res.data.status === "success") {
+        console.log("✅ Gallery updated:", res.data);
+        setisBtnLoading(false);
+        toast.success(res.data.message);
+      } else {
+        setisBtnLoading(false);
+        console.error("Upload failed:", res.error);
+      }
+    } catch (err) {
+      setisBtnLoading(false);
+      console.error("Error uploading:", err);
+    }
+  };
+
+  const handelDeleteApiGalleryImage = async (imgurl) => {
+    try {
+      const res = await deleteGalleryImgAction(imgurl, slug);
+      console.log(res.data);
+      if (res.data.status === "success") {
+        setApiImages((prev) => prev.filter((img) => img.url !== imgurl));
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.error("Error uploading:", err);
+    }
+  };
 
   return (
     <div className={styles.image_gallery}>
+      <ToastContainer />
       <h2 className={styles.title}>Image Gallery Uploader</h2>
       <p className={styles.subtitle}>Upload up to {maxImages} images</p>
       <p className={styles.debug}>Current images: {images.length}</p>
@@ -70,11 +115,31 @@ export default function ImagGalleryUploder() {
           style={{ display: "none" }}
         />
         <div className={styles.img_info}>
+          <div>
+            click to Upload your photo max siz 10Mb. formates:png, jpg,webp
+          </div>
           Total images in state: {images.length}
         </div>
       </div>
       <div className={styles.prev_container}>
         <div className={styles.thumbnails_wrapper}>
+          {apiImages.map((img) => (
+            <div className={styles.prev_imgBox} key={img._id}>
+              <Image
+                src={img.url}
+                alt="gallery"
+                width={50}
+                height={50}
+                className={styles.gallery_prev_imgStyle}
+              />
+              <div
+                className={styles.remove_img}
+                onClick={() => handelDeleteApiGalleryImage(img.url)}
+              >
+                <MdDeleteForever />
+              </div>
+            </div>
+          ))}
           {images.map((item, index) => {
             if (!item.preview) {
               return <div key={item.id}>Missing preview for {item.name}</div>;
@@ -98,6 +163,12 @@ export default function ImagGalleryUploder() {
           })}
         </div>
         <div className={styles.prev_footer}>
+          <ClickBtn
+            btnText="update"
+            handelClick={handelUplodeImgages}
+            btnLoading={isBtnLoading}
+          />
+
           {images.length > 0 && (
             <div className={styles.remove_btn} onClick={clearAllImages}>
               clear all image

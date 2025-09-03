@@ -2,7 +2,10 @@
 import { useState, useEffect, useMemo, useCallback, useContext } from "react";
 import { FillterContext } from "../_contextApi/FillterContextProvider";
 
-export default function useTableFillters(initialRows, initialRowsPerPage = 2) {
+export default function useTableFillters(
+  initialRows,
+  initialRowsPerPage = 100
+) {
   const { visibleRows, setvisibleRows } = useContext(FillterContext);
   const totalRows = initialRows?.length ?? 0;
   const [currentPage, setcurrentPage] = useState(1);
@@ -16,7 +19,7 @@ export default function useTableFillters(initialRows, initialRowsPerPage = 2) {
   useEffect(() => {
     // Update visible rows when page or rowsPerPage changes
     updateVisibleRows(initialRows);
-  }, [currentPage, rowsPerPage]);
+  }, [currentPage, rowsPerPage, initialRows]);
 
   const searchByTableFiled = (searchTerm, field) => {
     if (!searchTerm) {

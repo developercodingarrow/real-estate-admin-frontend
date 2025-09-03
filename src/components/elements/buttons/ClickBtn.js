@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import styles from "./css/buttons.module.css";
+import BtnLoading from "../../loading/BtnLoading";
 export default function ClickBtn(props) {
   const {
-    btnText,
+    btnText = "update",
     btnLoading = false, // Default is not loading
     size = "medium", // Default size
     btnType = "fill_type_btn",
@@ -26,10 +27,9 @@ export default function ClickBtn(props) {
           fullWidth ? styles.fullWidth : ""
         } ${btnLoading ? "loading" : ""}`}
         disabled={disabledBtn || btnLoading} // Disable button during loading
-        onClick={handelClick}
+        onClick={handelClickBtn}
       >
-        {btnLoading && <span className={styles.spinner}></span>}
-        <span>{btnText}</span>
+        {btnLoading ? <BtnLoading /> : btnText}
       </button>
     </div>
   );

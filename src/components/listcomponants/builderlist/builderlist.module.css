@@ -27,6 +27,7 @@
 .fillter_left_column {
   display: flex;
   column-gap: 5rem;
+  align-items: center;
 }
 
 .page_fillter_wrapper {

@@ -6,7 +6,7 @@ import AreaInput from "@/src/components/inputsElements/AreaInput";
 import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
 import CustomeAreaHookInput from "@/src/components/inputsElements/CustomeAreaHookInput";
 export default function ProjectOfficialDetails(props) {
-  const { register, setValue, watch, errors } = props;
+  const { register, setValue, watch, errors, control } = props;
   // read current values from RHF store
 
   const basicPriceValue = watch ? watch("basicPrice") ?? "" : "";
@@ -25,6 +25,7 @@ export default function ProjectOfficialDetails(props) {
                 inputLabel="RERA NO"
                 inputPlaceholder="Enter RERA NO"
                 name="reraNo"
+                control={control}
                 register={register}
                 rules={{
                   required: "RERA No required",
@@ -38,12 +39,13 @@ export default function ProjectOfficialDetails(props) {
               <CustomeHookInput
                 inputLabel="posssession"
                 inputPlaceholder="posssession Ex-2028"
-                name="posssession"
+                name="possessionDate"
+                control={control}
                 register={register}
                 rules={{
                   required: "posssession Date is required",
                 }}
-                error={errors.posssession?.message}
+                error={errors.possessionDate?.message}
               />
             </div>
           </div>
@@ -54,6 +56,7 @@ export default function ProjectOfficialDetails(props) {
                 inputPlaceholder="Basic Price"
                 type="number"
                 name="basicPrice"
+                control={control}
                 register={register}
                 rules={{
                   required: "Number of floors is required",

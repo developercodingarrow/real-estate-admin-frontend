@@ -50,5 +50,64 @@ h4 {
   font-weight: 400;
 }
 
+.pageLoader_Maincontainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+  /* Transition */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* When loader is active */
+.pageLoader_Maincontainer.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l11 2s infinite;
+}
+@keyframes l11 {
+  0% {
+    background: conic-gradient(var(--th-primary-color) 0, #0000 0);
+  }
+  12.5% {
+    background: conic-gradient(var(--th-primary-color) 45deg, #0000 46deg);
+  }
+  25% {
+    background: conic-gradient(var(--th-primary-color) 90deg, #0000 91deg);
+  }
+  37.5% {
+    background: conic-gradient(var(--th-primary-color) 135deg, #0000 136deg);
+  }
+  50% {
+    background: conic-gradient(var(--th-primary-color) 180deg, #0000 181deg);
+  }
+  62.5% {
+    background: conic-gradient(var(--th-primary-color) 225deg, #0000 226deg);
+  }
+  75% {
+    background: conic-gradient(var(--th-primary-color) 270deg, #0000 271deg);
+  }
+  87.5% {
+    background: conic-gradient(var(--th-primary-color) 315deg, #0000 316deg);
+  }
+  100% {
+    background: conic-gradient(var(--th-primary-color) 360deg, #0000 360deg);
+  }
+}
+
 @media only screen and (max-width: 720px) {
 }

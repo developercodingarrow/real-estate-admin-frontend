@@ -1,77 +1,109 @@
-import React, { useState } from "react";
+"use client";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import CustomeCheckBox from "../inputsElements/CustomeCheckBox";
 import styles from "./projectamenities.module.css";
-export default function AllAmenities() {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+import { allAmnitiesAction } from "@/src/app/utils/amnitiesActions";
+import { updateProjectAmnitiesAction } from "@/src/app/utils/projectActions";
+import ClickBtn from "../elements/buttons/ClickBtn";
+import { AppContext } from "@/src/_contextApi/AppContext";
+
+export default function AllAmenities(props) {
+  const { apiData, slug, onBack, onNext } = props;
+  const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
+  console.log("API Data in AllAmenities:", apiData);
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [amnitiesList, setamnitiesList] = useState([]);
 
-  const amenitiesOptions = [
-    { value: "car-parking", label: "Car Parking" },
-    { value: "covered-parking", label: "Covered Parking" },
-    { value: "valet-parking", label: "Valet Parking" },
-    { value: "visitor-parking", label: "Visitor Parking" },
-    { value: "24x7-security", label: "24/7 Security" },
-    { value: "cctv", label: "CCTV Surveillance" },
-    { value: "security-guards", label: "Security Guards" },
-    { value: "gated-community", label: "Gated Community" },
-    { value: "intercom", label: "Video Intercom" },
-    { value: "swimming-pool", label: "Swimming Pool" },
-    { value: "gym", label: "Gym/Fitness Center" },
-    { value: "garden", label: "Garden/Lawn" },
-    { value: "children-play-area", label: "Children's Play Area" },
-    { value: "clubhouse", label: "Clubhouse" },
-    { value: "jogging-track", label: "Jogging Track" },
-    { value: "sports-court", label: "Sports Court" },
-    { value: "power-backup", label: "Power Backup" },
-    { value: "water-supply", label: "24/7 Water Supply" },
-    { value: "waste-disposal", label: "Waste Disposal" },
-    { value: "rainwater-harvesting", label: "Rainwater Harvesting" },
-    { value: "solar-panels", label: "Solar Panels" },
-    { value: "air-conditioning", label: "Air Conditioning" },
-    { value: "modular-kitchen", label: "Modular Kitchen" },
-    { value: "wardrobes", label: "Built-in Wardrobes" },
-    { value: "wooden-flooring", label: "Wooden Flooring" },
-    { value: "balcony", label: "Balcony/Terrace" },
-    { value: "lift", label: "Lift/Elevator" },
-    { value: "pet-friendly", label: "Pet Friendly" },
-    { value: "senior-friendly", label: "Senior Citizen Friendly" },
-    { value: "community-hall", label: "Community Hall" },
-    { value: "near-school", label: "Near School" },
-    { value: "near-hospital", label: "Near Hospital" },
-    { value: "near-shopping", label: "Near Shopping Mall" },
-    { value: "near-transport", label: "Near Public Transport" },
-    { value: "main-road-facing", label: "Main Road Facing" },
-    { value: "fire-safety", label: "Fire Safety Systems" },
-    { value: "internet", label: "High-speed Internet" },
-    { value: "housekeeping", label: "Housekeeping" },
-    { value: "conference-room", label: "Conference Room" },
-    { value: "business-center", label: "Business Center" },
-  ];
-
-  const handleAmenityChange = (e) => {
-    const value = e.target.value;
+  const handleAmenityChange = (e, amenity) => {
     const isChecked = e.target.checked;
 
-    setSelectedAmenities((prev) =>
-      isChecked ? [...prev, value] : prev.filter((item) => item !== value)
+    setSelectedAmenities(
+      (prev) =>
+        isChecked
+          ? [...prev, amenity] // add full object
+          : prev.filter((item) => item._id !== amenity._id) // remove by _id
     );
   };
 
+  const fetchAmenities = async () => {
+    const res = await allAmnitiesAction();
+    console.log("Fetched Amenities:", res);
+    if (res.data.status === "success") {
+      const allAmenities = res.data.data;
+      // match amenities from apiData with fetched amenities
+      const preSelected = allAmenities.filter((a) =>
+        apiData.amenities.includes(a._id)
+      );
+      setamnitiesList(allAmenities);
+      setSelectedAmenities(preSelected);
+    } else {
+      console.error("Failed to fetch amenities:", res.error);
+    }
+  };
+
+  // call API to update project amenities
+  const handelAddAmenities = async () => {
+    try {
+      setisBtnLoading(true);
+      const payload = {
+        amenities: selectedAmenities.map((a) => a._id), // only send IDs
+      };
+
+      console.log(payload);
+
+      const res = await updateProjectAmnitiesAction(payload, slug);
+      console.log("Update Project Response:", res.data);
+      if (res.data.status === "success") {
+        toast.success(res.data.message);
+        setisBtnLoading(false);
+      }
+    } catch (error) {
+      console.log("Error uploading image:", error);
+      setisBtnLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAmenities();
+  }, []);
+
+  console.log("selected Amenities:", selectedAmenities);
+
   return (
-    <div className={styles.amnities_container}>
-      <div className={styles.amnities_wrapper}>
-        {amenitiesOptions.map((item) => (
-          <div key={item.value} className={styles.amenity_item}>
-            <CustomeCheckBox
-              label={item.label}
-              value={item.value}
-              name="amenities"
-              id={`amenity-${item.value}`}
-              checked={selectedAmenities.includes(item.value)}
-              onChange={handleAmenityChange}
-              labelPosition="right"
-            />
-          </div>
-        ))}
+    <div>
+      <ToastContainer />
+      <div className={styles.amnities_container}>
+        <div className={styles.amnities_wrapper}>
+          {amnitiesList.map((item) => (
+            <div key={item.value} className={styles.amenity_item}>
+              <CustomeCheckBox
+                label={item.name}
+                value={item.slug}
+                name="amenities"
+                id={item._id}
+                checked={selectedAmenities.some((a) => a._id === item._id)}
+                onChange={(e) => handleAmenityChange(e, item)}
+                labelPosition="right"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={styles.updateBtn_wrapper}>
+        {selectedAmenities.length > 0 && (
+          <ClickBtn
+            btnText="update"
+            handelClick={handelAddAmenities}
+            className={styles.submit_btn}
+            btnLoading={isBtnLoading}
+          >
+            Save Amenities
+          </ClickBtn>
+        )}
+        <ClickBtn btnText="Back" handelClick={onBack} />
+        <ClickBtn btnText="Next" handelClick={onNext} />
       </div>
     </div>
   );

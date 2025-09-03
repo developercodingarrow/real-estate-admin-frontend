@@ -3,39 +3,6 @@ import { useState, useCallback } from "react";
 const useImageGallery = (initialImages = [], maxImages = 5) => {
   const [images, setImages] = useState(initialImages);
 
-  //   const addImages = useCallback(
-  //     (fileList) => {
-  //       // FileList is array-like; convert to real array
-  //       const files = Array.from(fileList || []);
-  //       console.log("[hook:addImages] received files:", files);
-
-  //       if (files.length === 0) return;
-
-  //       setImages((prev) => {
-  //         const remaining = Math.max(0, maxImages - prev.length);
-  //         const filesToAdd = files.slice(0, remaining);
-
-  //         // Keep it simple in step-1: store basic metadata + original File
-  //         const newItems = filesToAdd.map((file) => ({
-  //           id:
-  //             typeof crypto !== "undefined" && crypto.randomUUID
-  //               ? crypto.randomUUID()
-  //               : `${Date.now()}_${Math.random()}`,
-  //           file, // keep the File object for later (previews/upload)
-  //           name: file.name,
-  //           size: file.size,
-  //           type: file.type,
-  //           preview,
-  //         }));
-
-  //         const next = [...prev, ...newItems];
-  //         console.log("[hook:addImages] next images state:", next);
-  //         return next;
-  //       });
-  //     },
-  //     [maxImages]
-  //   );
-
   const addImages = useCallback(
     (fileList) => {
       const files = Array.from(fileList || []);

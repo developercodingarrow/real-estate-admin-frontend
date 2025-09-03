@@ -17,6 +17,11 @@ export default function AsidebarNavigation() {
   const { isSidebarCollapsed } = useContext(AppContext);
   const navigationOption = [
     {
+      hrfLink: "/create-project",
+      name: "New Project",
+      icon: FaPlusSquare,
+    },
+    {
       hrfLink: "/",
       name: "projects",
       icon: FaBuilding, // Use the actual component, not a string
@@ -55,11 +60,6 @@ export default function AsidebarNavigation() {
       hrfLink: "/",
       name: "Keywords",
       icon: LiaHashtagSolid,
-    },
-    {
-      hrfLink: "/",
-      name: "New Project",
-      icon: FaPlusSquare,
     },
   ];
 

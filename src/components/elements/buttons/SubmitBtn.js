@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./css/btn.module.css";
+import BtnLoading from "../../loading/BtnLoading";
 export default function SubmitBtn(props) {
   const {
     btnText,
@@ -18,7 +19,7 @@ export default function SubmitBtn(props) {
         } ${btnLoading ? "loading" : ""}`}
         disabled={disabledBtn || btnLoading} // Disable button during loading
       >
-        {btnText}
+        {btnLoading ? <BtnLoading /> : btnText}
       </button>
     </div>
   );

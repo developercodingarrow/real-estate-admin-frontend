@@ -1,8 +1,9 @@
 .selector_container {
   position: relative;
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
   margin-top: 1.6rem;
+  cursor: pointer;
 }
 
 .selector_header {
@@ -20,6 +21,7 @@
 
 .selector_header:hover {
   border-color: #aaa;
+  cursor: pointer;
 }
 
 .selector_header.open {

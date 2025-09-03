@@ -1,8 +1,16 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import styles from "./listtable.module.css";
 import { MdDelete, FiEdit } from "../ApplicationIcons";
 export default function ListTable(props) {
-  const { tableData } = props;
+  const { tableData, handelDeleteItem } = props;
+
+  console.log(tableData);
+
+  const handelDeleteTableItem = (id) => {
+    console.log(id);
+    handelDeleteItem(id);
+  };
 
   return (
     <div className={styles.table_wrapper}>
@@ -20,8 +28,8 @@ export default function ListTable(props) {
           {tableData.map((item, index) => {
             return (
               <tr>
-                <td>{item.sno}</td>
-                <td>{item.buliderName}</td>
+                <td>{index + 1}</td>
+                <td>{item.name}</td>
                 <td>{item.createdAt}</td>
                 <td>
                   <span className={styles.table_iconBox}>
@@ -30,7 +38,10 @@ export default function ListTable(props) {
                 </td>
                 <td>
                   <span className={styles.table_iconBox}>
-                    <MdDelete className={styles.table_icon} />
+                    <MdDelete
+                      className={styles.table_icon}
+                      onClick={() => handelDeleteTableItem(item._id)}
+                    />
                   </span>
                 </td>
               </tr>

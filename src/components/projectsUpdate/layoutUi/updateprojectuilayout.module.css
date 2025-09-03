@@ -1,0 +1,19 @@
+.main_container {
+  padding-bottom: 100rem;
+  padding-top: 5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.inner_container {
+  display: flex;
+  column-gap: 5%;
+}
+
+.left_column {
+  width: 60%;
+}
+
+.right_column {
+  width: 35%;
+}

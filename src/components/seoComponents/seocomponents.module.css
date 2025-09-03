@@ -1,0 +1,61 @@
+.main_Conatiner {
+  padding: 5rem;
+}
+
+.inner_conatiner {
+}
+
+.content_column {
+  width: 100%;
+}
+
+.updateBtn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+  column-gap: 2rem;
+}
+
+.page_title {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+}
+
+.steper_column {
+  width: 30%;
+}
+
+.form_group {
+  margin-bottom: 2rem;
+}
+
+.lable_wrapper {
+  margin-bottom: 0.5rem;
+  padding: 0.2rem;
+}
+
+.lable_style {
+  font-size: 1.2rem;
+  /* margin-bottom: 1rem; */
+}
+
+.input_wrapper {
+  border: 1px solid #ddd;
+  border-radius: 0.8rem;
+  background-color: white;
+  /* margin-bottom: 0.5rem; */
+}
+
+.inputStyle,
+.textareaStyle {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 1rem 0.8rem;
+  border-radius: 0.8rem;
+  font-size: 1.2rem;
+}

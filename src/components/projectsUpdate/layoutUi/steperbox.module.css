@@ -1,0 +1,82 @@
+.main_container {
+  padding: 5rem;
+  background-color: var(--th-gray-bg);
+}
+
+.steper_infoBox {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.steper_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.step_wrapper {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.circle_wrapper {
+  flex-direction: column; /* 👈 add this */
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  position: relative;
+}
+
+.circle {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  position: relative;
+}
+
+.circle.active {
+  border-color: var(--th-primary-color);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.circle.active .dot {
+  background: var(--th-primary-color);
+}
+
+.line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2px;
+  height: 60px;
+  margin: 0px 0;
+  color: #ccc;
+  background-color: #ccc;
+  margin-left: 10px;
+}
+
+/* 🔥 NEW: Active line between completed steps */
+.activeLine {
+  color: var(--th-primary-color);
+  background-color: var(--th-primary-color);
+}
+
+.step_label {
+  font-size: 14px;
+  margin-top: 2px;
+  color: #333;
+  text-transform: capitalize;
+}
