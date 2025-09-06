@@ -12,6 +12,8 @@ export const commercialOptions = [
   { value: "mall", label: "Mall" },
   { value: "commerercial-project", label: "Commerercial Project" },
   { value: "residential-project", label: "Residential Project" },
+  { value: "ready-to-move-office-space", label: "Ready To Move Office Space" },
+  { value: "co-working-office-space", label: "Co-Working Office Space" },
 ];
 
 export const availabilityStatus = [

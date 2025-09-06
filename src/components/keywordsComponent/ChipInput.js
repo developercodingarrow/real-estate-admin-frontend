@@ -8,9 +8,8 @@ import { addKeywordsAction } from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
 
 export default function ChipInput(props) {
-  const { size = "medium", apiData, slug } = props;
-  const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
-  console.log(apiData);
+  const { size = "medium", apiData, handelUpdate, isLoading } = props;
+
   const [newValue, setnewValue] = useState("");
   const [keywords, setkeywords] = useState([]);
 
@@ -40,19 +39,7 @@ export default function ChipInput(props) {
   };
 
   const handelKeywordSubmit = async () => {
-    console.log(keywords);
-    setisBtnLoading(true);
-    try {
-      const res = await addKeywordsAction({ keywords }, slug);
-      console.log("chip---", res.data);
-      if (res.data.status === "success") {
-        setisBtnLoading(false);
-        toast.success(res.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      setisBtnLoading(false);
-    }
+    handelUpdate(keywords);
   };
   return (
     <div>
@@ -89,7 +76,7 @@ export default function ChipInput(props) {
         <ClickBtn
           btnText="Add Keywords"
           handelClick={handelKeywordSubmit}
-          btnLoading={isBtnLoading}
+          btnLoading={isLoading}
         />
       </div>
     </div>

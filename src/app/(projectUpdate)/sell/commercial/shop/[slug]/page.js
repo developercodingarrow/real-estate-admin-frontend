@@ -1,6 +1,6 @@
 import React from "react";
-import UpdateSCShopWrapper from "../wrapper";
 import { API_BASE_URL } from "@/config";
+import UpdateSCShopWrapper from "../wrapper";
 
 export default async function UpdateSCShopPage({ params }) {
   const { slug } = params;

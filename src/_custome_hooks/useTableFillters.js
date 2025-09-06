@@ -25,6 +25,7 @@ export default function useTableFillters(
     if (!searchTerm) {
       updateVisibleRows(initialRows);
     }
+
     let filteredData;
     filteredData = initialRows.filter((item) => {
       if (

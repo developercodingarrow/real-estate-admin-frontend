@@ -12,14 +12,13 @@ import ClickBtn from "../elements/buttons/ClickBtn";
 import { AppContext } from "@/src/_contextApi/AppContext";
 
 export default function SingleImageUpload(props) {
-  const { slug, apiData } = props;
+  const { slug, apiData, imageUrl, uploadFor, imageUplodhandeler } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
 
   const fileInputRef = useRef(null);
   // 🔥 keep API image in state so UI updates immediately after delete
-  const [serverImage, setServerImage] = useState(
-    apiData?.projectImage?.url || null
-  );
+  const [serverImage, setServerImage] = useState(imageUrl || null);
+  console.log("serverImage---", serverImage);
   const {
     previewImage,
     setPreviewImage,
@@ -27,7 +26,7 @@ export default function SingleImageUpload(props) {
     handleImageUpload,
     removeImg,
     handleSave,
-  } = useImageUpload(apiData, "projectImage");
+  } = useImageUpload(apiData, uploadFor);
 
   const handleBoxClick = () => {
     if (fileInputRef.current) {
@@ -38,7 +37,7 @@ export default function SingleImageUpload(props) {
   const handelSubmit = async () => {
     try {
       setisBtnLoading(true);
-      const res = await handeluplodProjectImage(image, "projectImage", slug);
+      const res = await imageUplodhandeler(image, uploadFor, slug);
 
       if (res.error) {
         console.log(res.error);
@@ -99,7 +98,7 @@ export default function SingleImageUpload(props) {
         ) : serverImage ? (
           <div className={styles.single_img_prevWrapper}>
             <Image
-              src={apiData.projectImage.url}
+              src={imageUrl}
               width={500}
               height={500}
               alt="Project Image"

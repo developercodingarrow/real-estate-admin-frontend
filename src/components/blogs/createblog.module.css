@@ -1,0 +1,26 @@
+.top_bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+/* Title input styles */
+.titleContainer {
+  margin-bottom: 2rem;
+}
+
+.inputTitle {
+  width: 100%;
+  font-size: 32px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  padding: 10px 0;
+  color: #333;
+  background: transparent;
+}
+
+.inputTitle::placeholder {
+  color: #999;
+  font-weight: normal;
+}

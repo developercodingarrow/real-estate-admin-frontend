@@ -42,7 +42,9 @@
 }
 
 .options_wrappe {
-  height: 5rem;
+  height: 10rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .options_list {

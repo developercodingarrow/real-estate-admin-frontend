@@ -2,6 +2,8 @@
 
 .radio_group {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 1rem;
 }
 
 .radio_wrapper {
@@ -34,6 +36,9 @@
   background-color: white;
   border: 1px solid #d1d5db;
   border-radius: 10px;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add "..." if text is too long */
 }
 
 .pill .radio_label:hover {

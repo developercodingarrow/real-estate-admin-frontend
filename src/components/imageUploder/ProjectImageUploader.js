@@ -3,6 +3,7 @@ import styles from "./css/imageUplaoder.module.css";
 import SingleImageUpload from "./SingleImageUpload";
 import ImagGalleryUploder from "./ImagGalleryUploder";
 import ClickBtn from "../elements/buttons/ClickBtn";
+import { handeluplodProjectImage } from "@/src/app/imghandlers/imageHandlers";
 export default function ProjectImageUploader(props) {
   const { apiData, slug, onNext, onBack } = props;
   return (
@@ -13,7 +14,13 @@ export default function ProjectImageUploader(props) {
             <div className={styles.section_title}>
               Add Main Photo Of your Property
             </div>
-            <SingleImageUpload slug={slug} apiData={apiData} />
+            <SingleImageUpload
+              slug={slug}
+              apiData={apiData}
+              uploadFor="projectImage"
+              imageUrl={apiData?.projectImage?.url}
+              imageUplodhandeler={handeluplodProjectImage}
+            />
           </div>
 
           <div className={styles.single_image_uplaod_wrapper}>

@@ -42,8 +42,8 @@ export default function AsidebarNavigation() {
       icon: MdContactPhone, // Use the actual component, not a string
     },
     {
-      hrfLink: "/",
-      name: "Stats",
+      hrfLink: "/create-new-blog",
+      name: "Create New Blog",
       icon: MdLeaderboard, // Use the actual component, not a string
     },
     {
@@ -57,8 +57,8 @@ export default function AsidebarNavigation() {
       icon: FaLocationDot,
     },
     {
-      hrfLink: "/",
-      name: "Keywords",
+      hrfLink: "/amenities",
+      name: "amenities",
       icon: LiaHashtagSolid,
     },
   ];

@@ -6,7 +6,10 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["pub-5bfce6e3ebb54942a136b00643733395.r2.dev"],
+    domains: [
+      "pub-5bfce6e3ebb54942a136b00643733395.r2.dev",
+      "pub-9f2aa428a9484d4a9693c901716b18f6.r2.dev",
+    ],
   },
 };
 

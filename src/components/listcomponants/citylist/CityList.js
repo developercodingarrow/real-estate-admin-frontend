@@ -13,25 +13,8 @@ import FillterBarCreate from "../../barcreate/FillterBarCreate";
 import { AppContext } from "@/src/_contextApi/AppContext";
 
 export default function CityList(props) {
-  const { apiData } = props;
-  const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
+  const { apiData, handelCreate, handelDelete } = props;
 
-  const [cities, setcities] = useState(apiData);
-  const handelCreateCity = async (data) => {
-    try {
-      setisBtnLoading(true);
-      const response = await createCityAction(data);
-
-      if (response.data.status === "success") {
-        console.log(response.data.data);
-        setcities((prev) => [response.data.data, ...prev]);
-        setisBtnLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setisBtnLoading(false);
-    }
-  };
   const {
     totalRows,
     currentPage,
@@ -42,19 +25,7 @@ export default function CityList(props) {
     prevPage,
     handleRowsPerPageChange,
     searchByTableFiled,
-  } = useTableFillters(cities);
-
-  const handelDelete = async (id) => {
-    try {
-      const response = await deleteCityAction({ _id: id }); // ✅ pass id in body
-      if (response?.data?.status === "success") {
-        // remove deleted builder instantly
-        setcities((prev) => prev.filter((item) => item._id !== id));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  } = useTableFillters(apiData);
 
   return (
     <div className={styles.main_conatiner}>
@@ -78,7 +49,7 @@ export default function CityList(props) {
               <div className={styles.elemnet_wrapper}>
                 <FillterBarCreate
                   inputPlaceholder="create new city"
-                  handelCreate={handelCreateCity}
+                  handelCreate={handelCreate}
                 />
               </div>
             </div>

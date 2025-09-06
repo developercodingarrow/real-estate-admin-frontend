@@ -129,8 +129,8 @@ export default function StartCreateProject() {
             </section>
 
             <section className={styles.section_container}>
-              <div className={styles.options_wrappe}>
-                {propertyCategory === "residential" && (
+              {propertyCategory === "residential" && (
+                <div className={styles.options_wrappe}>
                   <CustomeHookRadioBtn
                     name="propertyType"
                     label="Residential Type"
@@ -138,10 +138,10 @@ export default function StartCreateProject() {
                     control={control}
                     errors={errors}
                   />
-                )}
-              </div>
-              <div className={styles.options_wrappe}>
-                {propertyCategory === "commercial" && (
+                </div>
+              )}
+              {propertyCategory === "commercial" && (
+                <div className={styles.options_wrappe}>
                   <CustomeHookRadioBtn
                     name="propertyType"
                     label="Commercial Type"
@@ -149,8 +149,8 @@ export default function StartCreateProject() {
                     control={control}
                     errors={errors}
                   />
-                )}
-              </div>
+                </div>
+              )}
             </section>
 
             <div className={styles.btn_wrapper}>

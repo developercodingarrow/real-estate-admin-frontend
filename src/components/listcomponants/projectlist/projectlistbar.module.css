@@ -1,0 +1,11 @@
+.inner_contaner {
+  display: flex;
+}
+
+.left_column {
+  display: flex;
+}
+
+.option_radio_Wrapper {
+  display: flex;
+}

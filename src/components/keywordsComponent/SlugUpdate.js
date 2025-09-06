@@ -9,7 +9,7 @@ import SubmitBtn from "../elements/buttons/SubmitBtn";
 import { updateProjectAction } from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
 export default function SlugUpdate(props) {
-  const { apiData, slug } = props;
+  const { apiData, handelUpdate } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const {
     control, // add this
@@ -36,24 +36,7 @@ export default function SlugUpdate(props) {
   }, [apiData, reset]);
 
   const handelsubmit = async (data) => {
-    try {
-      setisBtnLoading(true);
-      const response = await updateProjectAction(data, slug);
-      if (response.error) {
-        console.error("Error creating project:", response.error);
-        setisBtnLoading(false);
-        return;
-      }
-      if (response.data.status === "success") {
-        console.log("Create Project Action Response:", response);
-        toast.success(response.data.message);
-        setisBtnLoading(false);
-        return;
-      }
-    } catch (error) {
-      console.error("Error creating project:", error);
-      setisBtnLoading(false);
-    }
+    handelUpdate(data);
   };
   return (
     <div>

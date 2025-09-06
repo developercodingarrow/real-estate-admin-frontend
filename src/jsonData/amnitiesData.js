@@ -40,3 +40,8 @@ export const amenitiesOptions = [
   { value: "conference-room", label: "Conference Room" },
   { value: "business-center", label: "Business Center" },
 ];
+
+export const amenitiesTypeOption = [
+  { value: "apartment", label: "Apartment" },
+  { value: "house", label: "House" },
+];
