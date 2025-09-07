@@ -1,12 +1,19 @@
-import React from "react";
+"use client";
+import React, { useState, useContext, useMemo } from "react";
 import styles from "./projectlist.module.css";
 import tagBg from "../../../../public/web-img/tagbg.png";
 import StaticprojectImg from "../../../../public/web-img/default-project-image.png";
 import Image from "next/image";
+import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
+import Link from "next/link";
 export default function ProjectListCard(props) {
   const { dataList } = props;
+  const { handelOpenDeleteModel } = useContext(ModelsContext);
 
-  console.log("image url---", dataList.projectImage.url);
+  const handelDeleteModel = (itemId) => {
+    console.log(itemId);
+    handelOpenDeleteModel(itemId);
+  };
   return (
     <div className={styles.project_card}>
       <div className={styles.card_topBar}>
@@ -22,7 +29,7 @@ export default function ProjectListCard(props) {
       </div>
       <div className={styles.card_inner_container}>
         <div className={styles.project_img_wrapper}>
-          {dataList.projectImage.url ? (
+          {dataList?.projectImage?.url ? (
             <Image
               src={dataList?.projectImage.url}
               width={500}
@@ -72,8 +79,20 @@ export default function ProjectListCard(props) {
               </div>
             </div>
             <div className={styles.card_action_wrapper}>
-              <div className={styles.action_btn}> Delete</div>
-              <div className={styles.action_btn}> Edit</div>
+              <div
+                className={styles.action_btn}
+                onClick={() => handelDeleteModel(dataList._id)}
+              >
+                {" "}
+                Delete
+              </div>
+              <Link
+                href={`/${dataList.lookingFor}/${dataList.propertyCategory}/${dataList?.propertyType}/${dataList?._id}`}
+                className={styles.action_btn}
+              >
+                {" "}
+                Edit
+              </Link>
               <div className={styles.action_btn}> View</div>
             </div>
           </div>

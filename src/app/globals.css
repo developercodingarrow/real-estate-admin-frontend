@@ -79,6 +79,11 @@ h4 {
   border-radius: 50%;
   animation: l11 2s infinite;
 }
+
+.authMainLayout_wrapper {
+  padding: 6rem 10rem;
+}
+
 @keyframes l11 {
   0% {
     background: conic-gradient(var(--th-primary-color) 0, #0000 0);

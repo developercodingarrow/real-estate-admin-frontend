@@ -5,10 +5,21 @@ export const ModelsContext = createContext();
 
 export default function ModelContextProvider({ children }) {
   const [isCreatedOpen, setisCreatedOpen] = useState(false);
+  const [isDeleteOpen, setisDeleteOpen] = useState(false);
+  const [idForDelete, setidForDelete] = useState(null);
 
   const handelCloseCreatedModel = useCallback(() => {
     setisCreatedOpen(false);
   }, []);
+
+  const handelCloseDeleteModel = useCallback(() => {
+    setisDeleteOpen(false);
+  }, []);
+
+  const handelOpenDeleteModel = (itemId) => {
+    setisDeleteOpen(true);
+    setidForDelete(itemId);
+  };
 
   return (
     <ModelsContext.Provider
@@ -16,6 +27,11 @@ export default function ModelContextProvider({ children }) {
         isCreatedOpen,
         setisCreatedOpen,
         handelCloseCreatedModel,
+        isDeleteOpen,
+        setisDeleteOpen,
+        handelCloseDeleteModel,
+        handelOpenDeleteModel,
+        idForDelete,
       }}
     >
       {children}

@@ -6,6 +6,11 @@
   margin: 0rem;
 }
 
+.fullWidth {
+  width: 100%;
+  border: 1px solid red;
+}
+
 .fill_type_btn {
   background-color: var(--th-primary-color);
   outline: none;
@@ -20,12 +25,22 @@
   position: relative;
 }
 
+.large {
+  font-size: 1.8rem;
+  font-family: var(--th-font-family);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  padding: 1rem 0rem;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
+}
+
 .medium {
   font-size: 1.4rem;
   font-family: var(--th-font-family);
   border-radius: 0.5rem;
   font-weight: 500;
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 0rem;
   line-height: 1.3;
   letter-spacing: 0.3px;
 }
@@ -39,7 +54,7 @@
   font-family: var(--th-font-family);
   border-radius: 0.5rem;
   font-weight: 500;
-  padding: 0.7rem 0.8rem;
+  padding: 0.7rem 0rem;
   line-height: 1.3;
   letter-spacing: 0.5px;
 }

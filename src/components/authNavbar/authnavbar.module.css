@@ -1,0 +1,27 @@
+.main_container {
+  padding: 0rem 2rem;
+  transition: all 0.3s ease-in-out;
+  position: fixed;
+  box-shadow: var(--th-box-shadow);
+  border: 1px solid var(--th-border-color-gray);
+  height: 6rem;
+  width: 100%;
+}
+
+.inner_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 10rem;
+  height: 100%;
+}
+
+.navLogo_wrapper {
+  width: 10.5rem;
+  height: 5rem;
+}
+
+.imgStyle {
+  width: 100%;
+  height: 100%;
+}

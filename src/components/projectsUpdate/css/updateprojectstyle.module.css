@@ -13,3 +13,8 @@
   align-items: center;
   column-gap: 2rem;
 }
+
+.flex_column {
+  display: flex;
+  column-gap: 3rem;
+}

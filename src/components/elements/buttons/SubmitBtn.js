@@ -3,11 +3,11 @@ import styles from "./css/btn.module.css";
 import BtnLoading from "../../loading/BtnLoading";
 export default function SubmitBtn(props) {
   const {
-    btnText,
+    btnText = "save",
     btnLoading = false, // Default is not loading
     size = "medium", // Default size
     btnType = "fill_type_btn",
-    fullWidth = false,
+    fullWidth = true,
     disabledBtn = false,
   } = props;
   return (
@@ -19,7 +19,7 @@ export default function SubmitBtn(props) {
         } ${btnLoading ? "loading" : ""}`}
         disabled={disabledBtn || btnLoading} // Disable button during loading
       >
-        {btnLoading ? <BtnLoading /> : btnText}
+        {btnLoading ? <BtnLoading loadingSize={size} /> : btnText}
       </button>
     </div>
   );

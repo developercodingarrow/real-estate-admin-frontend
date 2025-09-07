@@ -1,6 +1,8 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import styles from "./projectlist.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import tagBg from "../../../../public/web-img/tagbg.png";
 import StaticprojectImg from "../../../../public/web-img/default-project-image.png";
 import Image from "next/image";
@@ -9,8 +11,21 @@ import ProjectFillterBar from "./ProjectFillterBar";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import TableFooter from "../../tableElements/TableFooter";
 import TableSearch from "../../search/TableSearch";
+import { deleteProjectWithImagesAction } from "@/src/app/utils/projectActions";
+import { AppContext } from "@/src/_contextApi/AppContext";
+import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
+import DeleteModel from "../../models/DeleteModel";
+
 export default function ProjectList(props) {
   const { apiData } = props;
+
+  const { handelOpenDeleteModel, idForDelete, handelCloseDeleteModel } =
+    useContext(ModelsContext);
+  const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
+  // 🔹 Keep local state of blogs
+
+  const [projects, setprojects] = useState(apiData);
+
   const [filters, setFilters] = useState({
     propertyCategory: "commercial",
     lookingFor: "sell",
@@ -22,14 +37,14 @@ export default function ProjectList(props) {
   };
 
   const filteredData = useMemo(() => {
-    return apiData.filter((item) => {
+    return projects.filter((item) => {
       return (
         (!filters.propertyCategory ||
           item.propertyCategory === filters.propertyCategory) &&
         (!filters.lookingFor || item.lookingFor === filters.lookingFor)
       );
     });
-  }, [apiData, filters]);
+  }, [projects, filters]);
 
   const {
     totalRows,
@@ -43,8 +58,29 @@ export default function ProjectList(props) {
     searchByTableFiled,
   } = useTableFillters(filteredData);
 
+  const handelDeleteProject = async () => {
+    try {
+      setisBtnLoading(true);
+      const res = await deleteProjectWithImagesAction(idForDelete);
+      console.log("res---", res);
+      if (res?.data?.status === "success") {
+        // 🔹 Remove deleted blog from state
+        setprojects((prev) => prev.filter((item) => item._id !== idForDelete));
+        toast.success(res.data.message);
+        // 🔹 Close modal
+        handelCloseDeleteModel();
+      }
+      setisBtnLoading(false);
+    } catch (error) {
+      console.log(error);
+      setisBtnLoading(false);
+    }
+  };
+
   return (
     <div className={styles.main_conatiner}>
+      <ToastContainer />
+      <DeleteModel deletehandel={handelDeleteProject} />
       <div className={styles.page_heading}>Project List</div>
       <div className={styles.page_fillter_wrapper}>
         <div className={styles.fillter_left_column}>

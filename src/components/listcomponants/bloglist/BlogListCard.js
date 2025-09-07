@@ -1,0 +1,73 @@
+"use client";
+import React, { useState, useContext, useEffect } from "react";
+import styles from "./bloglistcard.module.css";
+import Image from "next/image";
+import StaticprojectImg from "../../../../public/web-img/default-project-image.png";
+import Link from "next/link";
+import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
+export default function BlogListCard(props) {
+  const { dataList } = props;
+  const { handelOpenDeleteModel } = useContext(ModelsContext);
+
+  const handelDeleteModel = (itemId) => {
+    console.log(itemId);
+    handelOpenDeleteModel(itemId);
+  };
+  return (
+    <div className={styles.blog_card}>
+      <div className={styles.card_inner_container}>
+        <div className={styles.project_img_wrapper}>
+          {dataList.blogImage.url ? (
+            <Image
+              src={dataList?.blogImage.url}
+              width={500}
+              height={500}
+              className={styles.projectImgStyle}
+            />
+          ) : (
+            <Image
+              src={StaticprojectImg}
+              width={500}
+              height={500}
+              className={styles.projectImgStyle}
+            />
+          )}
+        </div>
+        <div className={styles.project_content_wrapper}>
+          <div className={styles.card_title}>{dataList?.title}</div>
+          <div className={styles.card_metaDescreption}>
+            {dataList?.metaDescription}
+          </div>
+          <div className={styles.keywords_wrapper}>
+            {dataList.keywords.map((item, index) => {
+              return <div className={styles.keyword_item}>{item}</div>;
+            })}
+          </div>
+          <div className={styles.card_action_wrapper}>
+            <div
+              className={styles.action_btn}
+              onClick={() => handelDeleteModel(dataList._id)}
+            >
+              {" "}
+              Delete
+            </div>
+            <Link
+              href={`/create-new-blog/${dataList._id}`}
+              className={styles.action_btn}
+            >
+              {" "}
+              Edit
+            </Link>
+            <Link
+              href={`/create-new-blog/${dataList._id}`}
+              className={styles.action_btn}
+            >
+              {" "}
+              view
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

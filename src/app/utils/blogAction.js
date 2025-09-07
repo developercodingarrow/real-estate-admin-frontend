@@ -134,3 +134,36 @@ export async function updateBlogSlugAction(formData, slug) {
     };
   }
 }
+
+export async function deleteBlogWithImageAction(id) {
+  const url = `${API_BASE_URL}/cdn-imge-upload/deletBlogWithImage/${id}`;
+
+  try {
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      // body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    console.log("delete Project API Response:", data);
+
+    if (data.status === "success") {
+      return { data };
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}

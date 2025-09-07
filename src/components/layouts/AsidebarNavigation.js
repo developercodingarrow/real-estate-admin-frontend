@@ -22,13 +22,13 @@ export default function AsidebarNavigation() {
       icon: FaPlusSquare,
     },
     {
-      hrfLink: "/",
-      name: "projects",
+      hrfLink: "/blogs",
+      name: "blogs",
       icon: FaBuilding, // Use the actual component, not a string
     },
     {
-      hrfLink: "/residential-project",
-      name: "Create residential",
+      hrfLink: "/enquires",
+      name: "Enquires",
       icon: IoDocumentText, // Use the actual component, not a string
     },
     {

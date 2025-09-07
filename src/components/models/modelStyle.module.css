@@ -87,6 +87,16 @@
   column-gap: 2rem;
 }
 
+.delete_model_container {
+  padding: 3rem 1rem 0rem 1rem;
+}
+
+.model_title {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 /* small animations */
 @keyframes overlayFadeIn {
   to {
