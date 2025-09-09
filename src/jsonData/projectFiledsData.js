@@ -3,7 +3,7 @@ export const residentialOptions = [
   { value: "house", label: "House" },
   { value: "villa", label: "Villa" },
   { value: "plot", label: "plot/Land" },
-  { value: "builder-floor", label: "Independent" },
+  { value: "independent", label: "Independent" },
   { value: "farmhouse", label: "Farmhouse" },
 ];
 
@@ -11,7 +11,6 @@ export const commercialOptions = [
   { value: "shop", label: "Shop" },
   { value: "mall", label: "Mall" },
   { value: "commerercial-project", label: "Commerercial Project" },
-  { value: "residential-project", label: "Residential Project" },
   { value: "ready-to-move-office-space", label: "Ready To Move Office Space" },
   { value: "co-working-office-space", label: "Co-Working Office Space" },
 ];
@@ -46,4 +45,44 @@ export const propertyOnFloorOptions = [
   { value: "18", label: "18" },
   { value: "19", label: "19" },
   { value: "20", label: "20" },
+];
+
+export const bedroomOptions = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+  { value: "6", label: "6" },
+];
+
+export const bathroomOptions = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+  { value: "6", label: "6" },
+];
+
+export const balconiesOptions = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+  { value: "6", label: "6" },
+];
+
+export const plotPossionTime = [
+  { value: "immediate", label: "Immediate" },
+  { value: "3-months ", label: "Within 3 Monrhs" },
+  { value: "6-months ", label: "Within 6 Monrhs" },
+];
+
+export const plotOpenSide = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
 ];

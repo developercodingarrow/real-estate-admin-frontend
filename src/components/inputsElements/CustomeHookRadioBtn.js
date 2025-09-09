@@ -6,13 +6,12 @@ import { useController } from "react-hook-form";
 export default function CustomeHookRadioBtn({
   control,
   name,
-  rules,
   radioStyle = "pill", // default style
   size = "medium",
   color = "#3b82f6", // default color
   options = [],
+  rules,
 }) {
-  console.log("name--", name);
   return (
     <div className={styles.radio_group}>
       {options.map((option) => (

@@ -7,7 +7,7 @@ import AddBlogKeywords from "@/src/components/keywordsComponent/AddBlogKeywords"
 
 export default function CreateBlogwrapper(props) {
   const { data, slug } = props;
-  const [step, setStep] = useState(3); // step tracking
+  const [step, setStep] = useState(1); // step tracking
   const goNext = () => setStep((prev) => prev + 1);
   const goBack = () => setStep((prev) => Math.max(1, prev - 1));
 

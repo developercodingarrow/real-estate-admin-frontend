@@ -63,7 +63,13 @@
 .card_action_wrapper {
   display: flex;
   column-gap: 2rem;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_actions {
+  display: flex;
+  column-gap: 2rem;
 }
 
 .action_btn {

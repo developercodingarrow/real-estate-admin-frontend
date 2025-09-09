@@ -10,7 +10,7 @@
 .inputBox_wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  border: 1px solid var(--th-gray-border-color);
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -20,10 +20,10 @@
 }
 
 .area_text_wrapper {
-  border-left: 2px solid #ddd;
+  border-left: 2px solid var(--th-gray-border-color);
   height: 100%;
   padding: 0.4rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   height: 100%;
 }
 

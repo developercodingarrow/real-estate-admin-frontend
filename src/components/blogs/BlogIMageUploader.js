@@ -1,23 +1,22 @@
 import React from "react";
 import styles from "./blog.module.css";
-import SingleImageUpload from "../imageUploder/SingleImageUpload";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import { handeluplodBlogImage } from "@/src/app/imghandlers/imageHandlers";
-export default function BlogIMageUploader(props) {
-  const { slug, apiData } = props;
+import ClickBtn from "../elements/buttons/ClickBtn";
 
-  const uplodeblogIng = (image, imagefor, slug) => {
-    alert("ok");
-    console.log(image, imagefor, slug);
-  };
+import SinglBlogImageUplod from "../imageUploder/SinglBlogImageUplod";
+export default function BlogIMageUploader(props) {
+  const { slug, apiData, onNext, onBack } = props;
 
   return (
     <div className={styles.blogImage_wrapper_conatiner}>
       <div className={styles.inner_conatiner}>
         <div className={styles.single_image_uplaod_wrapper}>
           <div className={styles.section_title}>
-            Add Main Photo Of your Property
+            Add Main Photo Of your Blog
           </div>
-          <SingleImageUpload
+          <SinglBlogImageUplod
             slug={slug}
             apiData={apiData}
             uploadFor="blogImage"
@@ -25,6 +24,11 @@ export default function BlogIMageUploader(props) {
             imageUplodhandeler={handeluplodBlogImage}
           />
         </div>
+      </div>
+
+      <div className={styles.submitBtn_wrapper}>
+        <ClickBtn btnText="Back" handelClick={onBack} />
+        <ClickBtn btnText="Next" handelClick={onNext} />
       </div>
     </div>
   );

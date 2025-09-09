@@ -7,15 +7,20 @@ import {
   IoDocumentText,
   FaBuilding,
   MdLeaderboard,
-  MdContactPhone,
-  FaHospitalUser,
   FaLocationDot,
-  LiaHashtagSolid,
   FaPlusSquare,
+  MdOutlineHomeWork,
+  FaEnvelopeOpenText,
+  SiBrandfolder,
 } from "../ApplicationIcons";
 export default function AsidebarNavigation() {
   const { isSidebarCollapsed } = useContext(AppContext);
   const navigationOption = [
+    {
+      hrfLink: "/",
+      name: "Home",
+      icon: MdLeaderboard,
+    },
     {
       hrfLink: "/create-project",
       name: "New Project",
@@ -24,32 +29,22 @@ export default function AsidebarNavigation() {
     {
       hrfLink: "/blogs",
       name: "blogs",
-      icon: FaBuilding, // Use the actual component, not a string
+      icon: IoDocumentText, // Use the actual component, not a string
     },
     {
       hrfLink: "/enquires",
       name: "Enquires",
-      icon: IoDocumentText, // Use the actual component, not a string
-    },
-    {
-      hrfLink: "/commercial-project",
-      name: "Create commercial",
-      icon: IoDocumentText, // Use the actual component, not a string
+      icon: FaEnvelopeOpenText, // Use the actual component, not a string
     },
     {
       hrfLink: "/project-list",
       name: "Project List",
-      icon: MdContactPhone, // Use the actual component, not a string
-    },
-    {
-      hrfLink: "/create-new-blog",
-      name: "Create New Blog",
-      icon: MdLeaderboard, // Use the actual component, not a string
+      icon: FaBuilding, // Use the actual component, not a string
     },
     {
       hrfLink: "/builders",
       name: "Builder",
-      icon: FaHospitalUser,
+      icon: SiBrandfolder,
     },
     {
       hrfLink: "/cities",
@@ -59,7 +54,7 @@ export default function AsidebarNavigation() {
     {
       hrfLink: "/amenities",
       name: "amenities",
-      icon: LiaHashtagSolid,
+      icon: MdOutlineHomeWork,
     },
   ];
 
@@ -68,8 +63,17 @@ export default function AsidebarNavigation() {
       {navigationOption.map((item, index) => {
         const IconComponent = item.icon; // Store the icon component in a variable
         return (
-          <Link href={`${item.hrfLink}`} className={styles.navigation_links}>
-            <div className={styles.navigation_icon}>
+          <Link
+            href={`${item.hrfLink}`}
+            className={`${styles.navigation_links} ${
+              isSidebarCollapsed ? styles.collapsediconStyle : ""
+            } `}
+          >
+            <div
+              className={`${styles.navigation_icon} ${
+                isSidebarCollapsed ? styles.collapsed_icon : ""
+              }`}
+            >
               <IconComponent />
             </div>
             <div

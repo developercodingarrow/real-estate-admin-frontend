@@ -8,11 +8,12 @@
   font-weight: 500;
   font-family: var(--font-poppins);
   text-transform: capitalize;
-  margin-bottom: 0rem;
+  margin-bottom: 2rem;
 }
 
 .filed_container {
   display: flex;
   column-gap: 2rem;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }

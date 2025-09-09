@@ -27,6 +27,7 @@ export default function CreatedModel(props) {
                 width={200}
                 height={200}
                 className={styles.img_style}
+                alt="Saransh realtors"
               />
             </div>
           </div>

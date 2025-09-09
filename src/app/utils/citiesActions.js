@@ -21,7 +21,7 @@ export async function createCityAction(formData) {
     console.log("Create Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -55,7 +55,38 @@ export async function deleteCityAction(formData) {
     console.log("delete Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+// 3) GET ALL BUILDERS
+export async function allCitiesAction() {
+  const url = `${API_BASE_URL}/city/allCity`;
+
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      return { data: data.data }; // return builder array directly
     }
 
     return {

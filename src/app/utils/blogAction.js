@@ -1,6 +1,39 @@
 "use server";
 
 import { API_BASE_URL } from "@/config";
+
+//8) Update Project  SEO API
+export async function starteBlogCreateAction(formData, slug) {
+  const url = `${API_BASE_URL}/blog/startCreateBlog/`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      return data;
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
 //8) Update Project  SEO API
 export async function updateBlogContentAction(formData, slug) {
   const url = `${API_BASE_URL}/blog/updateBlogContnet/${slug}`;
@@ -20,7 +53,7 @@ export async function updateBlogContentAction(formData, slug) {
     console.log("Update Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -53,7 +86,7 @@ export async function updateBlogImage(formData, slug) {
     const data = await res.json();
     console.log("Update Project Image API Response:", data);
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -153,7 +186,7 @@ export async function deleteBlogWithImageAction(id) {
     console.log("delete Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {

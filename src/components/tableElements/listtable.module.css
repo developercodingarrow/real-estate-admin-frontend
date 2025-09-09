@@ -73,3 +73,14 @@
 .table_icon:hover {
   color: var(--th-primary-color);
 }
+
+.table_loaderCell {
+  text-align: center; /* horizontal center for inline/flex */
+  padding: 40px; /* more breathing space */
+  width: 100%; /* span full table width */
+}
+
+.loading_tr td {
+  display: table-cell; /* reset back to normal table cell */
+  vertical-align: middle; /* center vertically in row */
+}

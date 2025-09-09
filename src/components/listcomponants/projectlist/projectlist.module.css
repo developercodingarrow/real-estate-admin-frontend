@@ -173,11 +173,13 @@
 .stats_staticText {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 1.4rem;
   line-height: 16px;
   display: flex;
   align-items: center;
   color: #42526e;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
 }
 
 .stats_dynimicText {
@@ -188,6 +190,7 @@
   display: flex;
   align-items: center;
   color: #42526e;
+  text-transform: capitalize;
 }
 
 .card_action_wrapper {

@@ -7,6 +7,11 @@
   --th-gray-bg: #f4f5f7;
   --th-box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   --th-primary-color: #0078db;
+  --th-disable-btn-bg-color: #d1d5db;
+  --th-disable-btn-color: #9ca3af;
+  --th-disable-btn-opacity: 0.7;
+  --th-gray-border-color: #c7c7c7;
+  --th-balanced-gray-text-color: #6b7280;
 }
 
 html {
@@ -50,67 +55,166 @@ h4 {
   font-weight: 400;
 }
 
-.pageLoader_Maincontainer {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
+.dynimic_model_wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 9999;
-  /* Transition */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-/* When loader is active */
-.pageLoader_Maincontainer.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.loader {
-  width: 60px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  animation: l11 2s infinite;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18); /* light white tint */
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  z-index: 10000;
 }
 
 .authMainLayout_wrapper {
   padding: 6rem 10rem;
 }
 
-@keyframes l11 {
-  0% {
-    background: conic-gradient(var(--th-primary-color) 0, #0000 0);
-  }
-  12.5% {
-    background: conic-gradient(var(--th-primary-color) 45deg, #0000 46deg);
-  }
-  25% {
-    background: conic-gradient(var(--th-primary-color) 90deg, #0000 91deg);
-  }
-  37.5% {
-    background: conic-gradient(var(--th-primary-color) 135deg, #0000 136deg);
-  }
-  50% {
-    background: conic-gradient(var(--th-primary-color) 180deg, #0000 181deg);
-  }
-  62.5% {
-    background: conic-gradient(var(--th-primary-color) 225deg, #0000 226deg);
-  }
-  75% {
-    background: conic-gradient(var(--th-primary-color) 270deg, #0000 271deg);
-  }
-  87.5% {
-    background: conic-gradient(var(--th-primary-color) 315deg, #0000 316deg);
+.error_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background: #f9fafb;
+  color: #333;
+  padding: 20px;
+}
+
+.error_icon {
+  font-size: 3rem;
+  background: #ffe5e5;
+  color: #d32f2f;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.error_title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #d32f2f;
+  margin-bottom: 10px;
+}
+
+.error_message {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.error_actions {
+  display: flex;
+  gap: 15px;
+}
+
+.error_btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  border: none;
+}
+
+.retry_btn {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.retry_btn:hover {
+  background: #b71c1c;
+  transform: translateY(-2px);
+}
+
+.home_btn {
+  background: #e0e0e0;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home_btn:hover {
+  background: #bdbdbd;
+  transform: translateY(-2px);
+}
+
+.loader {
+  --c1: #673b14;
+  --c2: #f8b13b;
+  width: 40px;
+  height: 80px;
+  border-top: 4px solid var(--c1);
+  border-bottom: 4px solid var(--c1);
+  background: linear-gradient(
+      90deg,
+      var(--c1) 2px,
+      var(--c2) 0 5px,
+      var(--c1) 0
+    )
+    50%/7px 8px no-repeat;
+  display: grid;
+  overflow: hidden;
+  animation: l5-0 2s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  width: 75%;
+  height: calc(50% - 4px);
+  margin: 0 auto;
+  border: 2px solid var(--c1);
+  border-top: 0;
+  box-sizing: content-box;
+  border-radius: 0 0 40% 40%;
+  -webkit-mask: linear-gradient(#000 0 0) bottom/4px 2px no-repeat,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  background: linear-gradient(var(--d, 0deg), var(--c2) 50%, #0000 0) bottom /
+      100% 205%,
+    linear-gradient(var(--c2) 0 0) center/0 100%;
+  background-repeat: no-repeat;
+  animation: inherit;
+  animation-name: l5-1;
+}
+.loader::after {
+  transform-origin: 50% calc(100% + 2px);
+  transform: scaleY(-1);
+  --s: 3px;
+  --d: 180deg;
+}
+@keyframes l5-0 {
+  80% {
+    transform: rotate(0);
   }
   100% {
-    background: conic-gradient(var(--th-primary-color) 360deg, #0000 360deg);
+    transform: rotate(0.5turn);
+  }
+}
+@keyframes l5-1 {
+  10%,
+  70% {
+    background-size: 100% 205%, var(--s, 0) 100%;
+  }
+  70%,
+  100% {
+    background-position: top, center;
   }
 }
 

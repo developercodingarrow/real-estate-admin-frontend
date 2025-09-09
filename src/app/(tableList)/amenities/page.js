@@ -1,6 +1,7 @@
 import React from "react";
 import AmenitiesWrapper from "./wrapper";
 import { API_BASE_URL } from "@/config";
+import NotDataFound from "@/src/components/errorpages/NotDataFound";
 
 export default async function Amenitiespage() {
   let data;
@@ -15,7 +16,7 @@ export default async function Amenitiespage() {
     });
 
     if (response.status === 404) {
-      return "not found";
+      return <NotDataFound />;
     }
 
     if (response.status === 200) {

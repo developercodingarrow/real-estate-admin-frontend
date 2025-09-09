@@ -18,13 +18,13 @@ export default function FloorDetails(props) {
                 inputLabel="Total no of Floors"
                 inputPlaceholder="Total Floors"
                 type="number"
-                name="totalFloors"
+                name="noOfFloors"
                 control={control}
                 register={register}
                 rules={{
-                  required: "address is required",
+                  required: "Floors is required",
                 }}
-                error={errors.address?.message}
+                error={errors.noOfFloors?.message}
               />
             </div>
             <div className={styles.filed_wrapper}>

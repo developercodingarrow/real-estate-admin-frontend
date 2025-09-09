@@ -40,13 +40,16 @@
   font-family: var(--th-font-family);
   border-radius: 0.5rem;
   font-weight: 500;
-  padding: 0.7rem 0rem;
+  padding: 0.7rem 1rem;
   line-height: 1.3;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
 }
 
 .medium:disabled {
   cursor: not-allowed;
+  background-color: var(--th-disable-btn-bg-color); /* Tailwind gray-300 */
+  color: var(--th-disable-btn-color); /* Tailwind gray-400 for text */
+  opacity: var(--th-disable-btn-opacity); /* extra faded look */
 }
 
 .small {

@@ -11,6 +11,11 @@
   color: #0f172a;
 }
 
+.collapsediconStyle {
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
 .navigation_icon {
   display: flex;
   align-items: center;
@@ -22,6 +27,10 @@
 .navigation_text_collapsed {
   display: none;
   transition: all 0.3s ease-in-out;
+}
+
+.collapsed_icon {
+  font-size: 2.2rem;
 }
 
 .navigation_links:hover {

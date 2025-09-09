@@ -18,10 +18,14 @@ export async function createProjectAction(formData) {
 
     const data = await res.json();
 
+    if (data.status === "Fails") {
+      return data;
+    }
+
     console.log("Create Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -55,7 +59,7 @@ export async function updateProjectAction(formData, slug) {
     console.log("Update Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -88,7 +92,7 @@ export async function updateProjectImage(formData, slug) {
     const data = await res.json();
     console.log("Update Project Image API Response:", data);
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -118,7 +122,7 @@ export async function deleteProjectImages(projectId) {
     const data = await res.json();
 
     if (res.ok && data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -148,7 +152,7 @@ export async function updateProjectGallery(formData, slug) {
     console.log("Update Project Gallery API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -179,7 +183,7 @@ export async function deleteGalleryImgAction(imageUrl, slug) {
     console.log("Update Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -246,8 +250,12 @@ export async function updateProjectSeoAction(formData, slug) {
 
     console.log("Update Project API Response:", data);
 
+    if (data.status === "Fails") {
+      return data;
+    }
+
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {

@@ -46,17 +46,15 @@ export default function CreateBlog(props) {
     try {
       setisBtnLoading(true);
       const response = await updateBlogContentAction(formData, slug);
-
-      if (response.data.status === "success") {
+      if (response.status === "success") {
         setisBtnLoading(false);
         console.log("SEO data saved:", response);
-        toast.success(response.data.message);
+        toast.success(response.message);
       } else {
         console.error("Failed to save SEO data:", response.error);
         setisBtnLoading(false);
       }
     } catch (error) {
-      console.error("Error saving SEO data:", error);
       setisBtnLoading(false);
     }
 
@@ -70,6 +68,11 @@ export default function CreateBlog(props) {
           btnText="publish"
           btnLoading={isBtnLoading}
           handelClick={handleSave}
+        />
+        <ClickBtn
+          btnText="Next"
+          btnLoading={isBtnLoading}
+          handelClick={onNext}
         />
       </div>
       <div className={styles.createContainer}>

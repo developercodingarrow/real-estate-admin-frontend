@@ -70,7 +70,7 @@ export default function AmanitiesBarCreate(props) {
           <div>
             <SubmitBtn
               btnText="create New"
-              size="small"
+              size="medium"
               btnLoading={isBtnLoading}
             />
           </div>

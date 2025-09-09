@@ -12,6 +12,7 @@ import SubmitBtn from "@/src/components/elements/buttons/SubmitBtn";
 import ClickBtn from "@/src/components/elements/buttons/ClickBtn";
 import { updateProjectAction } from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
+import { formatDate } from "@/src/_logicalFunctions/formatDate";
 export default function SRUpdateApartment(props) {
   const { apiData, slug, onNext } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
@@ -23,7 +24,7 @@ export default function SRUpdateApartment(props) {
     setValue,
     watch,
     reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onChange", // CHANGED to onChange for real-time validation
     reValidateMode: "onChange", // CHANGED to onChange for real-time validation
@@ -59,16 +60,15 @@ export default function SRUpdateApartment(props) {
         city: apiData.city || "",
         location: apiData.location || "",
         address: apiData.address || "",
-        projectTitle: apiData.projectTitle || "",
         price: apiData.price || "",
         carpetArea: apiData.carpetArea || "",
         builtUpArea: apiData.builtUpArea || "",
         superBuiltUpArea: apiData.superBuiltUpArea || "",
-        noOfFloors: apiData.noOfFloors || "",
-        noOfUnits: apiData.noOfUnits || "",
+        noOfUnits: apiData.noOfUnits ? String(apiData.noOfUnits) : "",
+        noOfFloors: apiData.noOfFloors ? String(apiData.noOfFloors) : "",
         unitType: apiData.unitType || "",
         reraNo: apiData.reraNo || "",
-        possessionDate: apiData.possessionDate || "",
+        possessionDate: formatDate(apiData.possessionDate) || "",
         basicPrice: apiData.basicPrice || "",
       });
     }
@@ -81,12 +81,11 @@ export default function SRUpdateApartment(props) {
       const response = await updateProjectAction(data, slug);
       if (response.error) {
         setisBtnLoading(false);
-        console.error("Error creating project:", response.error);
+        toast.error(response.error);
         return;
       }
-      if (response.data.status === "success") {
-        console.log("update project:", response);
-        toast.success(response.data.message);
+      if (response.status === "success") {
+        toast.success(response.message);
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -119,7 +118,11 @@ export default function SRUpdateApartment(props) {
         </div>
 
         <div className={styles.submitBtn_wrapper}>
-          <SubmitBtn btnText="Update" btnLoading={isBtnLoading} />
+          <SubmitBtn
+            btnText="Update"
+            btnLoading={isBtnLoading}
+            disabledBtn={!isValid}
+          />
           <ClickBtn btnText="Next" handelClick={onNext} />
         </div>
       </form>

@@ -1,15 +1,18 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import styles from "./css/projecttypelocation.module.css";
 import {
   projectStatusOptions,
   projectTypeOptions,
-  builderOptions,
 } from "@/src/jsonData/sellApartmentData";
 import { Controller } from "react-hook-form";
 import CustomeHookSelector from "@/src/components/inputsElements/CustomeHookSelector";
+import { ApiDataContext } from "@/src/_contextApi/ApiDataContextProvider";
 
 export default function ProjectType(props) {
   const { control, errors, register } = props; // <-- now use control instead of register
+  const { apiBuilderList } = useContext(ApiDataContext);
+
   return (
     <div className={styles.main_container}>
       <div className={styles.inner_container}>
@@ -59,7 +62,7 @@ export default function ProjectType(props) {
                   <CustomeHookSelector
                     label="Project Builder"
                     name={field.name}
-                    options={builderOptions}
+                    options={apiBuilderList}
                     value={field.value}
                     onChange={field.onChange}
                     error={fieldState.error?.message}

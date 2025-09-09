@@ -18,7 +18,7 @@ export default function SingleImageUpload(props) {
   const fileInputRef = useRef(null);
   // 🔥 keep API image in state so UI updates immediately after delete
   const [serverImage, setServerImage] = useState(imageUrl || null);
-  console.log("serverImage---", serverImage);
+
   const {
     previewImage,
     setPreviewImage,
@@ -38,18 +38,15 @@ export default function SingleImageUpload(props) {
     try {
       setisBtnLoading(true);
       const res = await imageUplodhandeler(image, uploadFor, slug);
-
+      console.log("res-single image--", res);
       if (res.error) {
-        console.log(res.error);
         setisBtnLoading(false);
         return;
       }
-
-      console.log(res.data);
-      if (res.data.status === "success") {
+      if (res.status === "success") {
         // ✅ update server image after upload
-        toast.success(res.data.message);
-        setServerImage(res?.data?.url || null);
+        toast.success(res.message);
+        setServerImage(res?.url || null);
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -61,14 +58,13 @@ export default function SingleImageUpload(props) {
   const handelDeleteImg = async () => {
     try {
       const res = await deleteProjectImages(slug);
-      console.log(res);
       if (res.error) {
         console.log(res.error);
         return;
       }
-      if (res.data.status === "success") {
+      if (res.status === "success") {
         // ✅ update server image after upload
-        toast.success(res.data.message);
+        toast.success(res.message);
         setPreviewImage(null);
         setServerImage(null);
       }

@@ -47,11 +47,7 @@ export default function FillterBarCreate(props) {
             </div>
           </div>
           <div>
-            <SubmitBtn
-              btnText="create New"
-              size="small"
-              btnLoading={isBtnLoading}
-            />
+            <SubmitBtn btnText="create New" btnLoading={isBtnLoading} />
           </div>
         </div>
       </form>

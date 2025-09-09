@@ -1,16 +1,21 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
 import styles from "./citylist.module.css";
+import dynamicImport from "next/dynamic";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import TableFooter from "../../tableElements/TableFooter";
 import TableSearch from "../../search/TableSearch";
 import CityTable from "../../tableElements/CityTable";
-import {
-  createCityAction,
-  deleteCityAction,
-} from "@/src/app/utils/citiesActions";
 import FillterBarCreate from "../../barcreate/FillterBarCreate";
-import { AppContext } from "@/src/_contextApi/AppContext";
+import ComponentLoading from "../../loading/ComponentLoading";
+const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
+  ssr: false, // ensures it only loads on client side
+  loading: () => (
+    <div className="dynimic_model_wrapper">
+      <ComponentLoading />
+    </div>
+  ), // optional fallback
+});
 
 export default function CityList(props) {
   const { apiData, handelCreate, handelDelete } = props;
@@ -29,7 +34,7 @@ export default function CityList(props) {
 
   return (
     <div className={styles.main_conatiner}>
-      {" "}
+      <DeleteModel deletehandel={handelDelete} />{" "}
       <div className={styles.page_heading}>Cities List</div>
       <div className={styles.page_fillter_wrapper}>
         <div className={styles.fillter_left_column}>

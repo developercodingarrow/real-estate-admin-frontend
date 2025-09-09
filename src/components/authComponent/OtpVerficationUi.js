@@ -12,7 +12,6 @@ import { useParams, useRouter } from "next/navigation";
 export default function OtpVerficationUi(props) {
   const router = useRouter();
   const { slug } = props;
-  console.log("slug--", slug);
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const {
     register,
@@ -32,10 +31,16 @@ export default function OtpVerficationUi(props) {
     try {
       setisBtnLoading(true);
       const res = await loginotpVerfication(data, slug);
+      if (res.status === "Fails" || res.error) {
+        toast.error(res.message);
+        setisBtnLoading(false);
+        return;
+      }
       if (res.status == "success") {
         setisBtnLoading(false);
         router.refresh();
         router.push("/");
+        router.refresh();
       }
     } catch (error) {
       console.log(error);
@@ -44,6 +49,7 @@ export default function OtpVerficationUi(props) {
   };
   return (
     <div className={styles.main_container}>
+      <ToastContainer />
       <div className={styles.center_container}>
         <div className={styles.form_header}>
           <div className={styles.form_heading}>

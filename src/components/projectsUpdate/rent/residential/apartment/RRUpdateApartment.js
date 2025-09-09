@@ -15,17 +15,22 @@ import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
 import { Controller } from "react-hook-form";
 import PriceDetails from "../../../commanProjectFileds/PriceDetails";
 import FloorDetails from "../../../commanProjectFileds/FloorDetails";
+import {
+  bedroomOptions,
+  bathroomOptions,
+  balconiesOptions,
+} from "@/src/jsonData/projectFiledsData";
 
 export default function RRUpdateApartment(props) {
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { apiData, slug, onNext } = props;
-  console.log("apiData---", apiData);
+
   const {
     control,
     reset,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       noOfBedrooms: "", // default selected value
@@ -36,6 +41,11 @@ export default function RRUpdateApartment(props) {
       builtUpArea: "",
       superBuiltUpArea: "",
       rent: "",
+      noOfFloors: "",
+      city: "",
+      location: "",
+      address: "",
+      propertyOnFloor: "",
     },
   });
 
@@ -54,55 +64,26 @@ export default function RRUpdateApartment(props) {
         builtUpArea: apiData.builtUpArea || "",
         superBuiltUpArea: apiData.superBuiltUpArea || "",
         rent: apiData.rent ? String(apiData.rent) : "",
+        noOfFloors: apiData.noOfFloors ? String(apiData.noOfFloors) : "",
+        city: apiData.city || "",
+        location: apiData.location || "",
+        address: apiData.address || "",
+        propertyOnFloor: apiData.propertyOnFloor || "",
       });
     }
   }, [apiData, reset]);
 
-  const bedroomOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const bathroomOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const balconiesOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const availabilityStatus = [
-    { value: "ready-to-move", label: "Ready to Move" },
-    { value: "under-construction", label: "Under Construction" },
-  ];
-
   const handelsubmit = async (data) => {
     try {
-      console.log("data:", data);
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
       if (response.error) {
         setisBtnLoading(false);
-        console.error("Error creating project:", response.error);
+        toast.error(response.error);
         return;
       }
-      if (response.data.status === "success") {
-        console.log("update project:", response);
-        toast.success(response.data.message);
+      if (response.status === "success") {
+        toast.success(response.message);
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -159,7 +140,11 @@ export default function RRUpdateApartment(props) {
         </div>
 
         <div className={styles.submitBtn_wrapper}>
-          <SubmitBtn btnText="Update" btnLoading={isBtnLoading} />
+          <SubmitBtn
+            btnText="Update"
+            btnLoading={isBtnLoading}
+            disabledBtn={!isValid}
+          />
           <ClickBtn btnText="Next" handelClick={onNext} />
         </div>
       </form>

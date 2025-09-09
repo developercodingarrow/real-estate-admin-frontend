@@ -8,7 +8,7 @@ export default function ProjectOfficialDetails(props) {
     <div className={styles.main_container}>
       <div className={styles.inner_container}>
         <section>
-          <div className={styles.column_title}>Location</div>
+          <div className={styles.column_title}>Official Details</div>
           <div className={styles.filed_container}>
             <div className={styles.filed_wrapper}>
               <CustomeHookInput
@@ -33,7 +33,7 @@ export default function ProjectOfficialDetails(props) {
                 control={control}
                 register={register}
                 rules={{
-                  required: "Number of floors is required",
+                  required: "Basic Price is required",
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",
@@ -53,6 +53,51 @@ export default function ProjectOfficialDetails(props) {
                   required: "posssession Date is required",
                 }}
                 error={errors.possessionDate?.message}
+              />
+            </div>
+          </div>
+
+          <div className={styles.filed_container}>
+            <div className={styles.filed_wrapper}>
+              <CustomeHookInput
+                inputLabel="Total no of Floors"
+                inputPlaceholder="Total Floors"
+                type="number"
+                name="noOfFloors"
+                control={control}
+                register={register}
+                rules={{
+                  required: "Total Number of Floor is required",
+                }}
+                error={errors.noOfFloors?.message}
+              />
+            </div>
+            <div className={styles.filed_wrapper}>
+              <CustomeHookInput
+                inputLabel="Total no Of Units"
+                inputPlaceholder="No Of Units"
+                type="number"
+                name="noOfUnits"
+                control={control}
+                register={register}
+                rules={{
+                  required: "units number is required",
+                }}
+                error={errors.noOfUnits?.message}
+              />
+            </div>
+            <div className={styles.filed_wrapper}>
+              <CustomeHookInput
+                inputLabel="Unit Type"
+                inputPlaceholder="unitType Ex-3bhk,4bhk"
+                name="unitType"
+                type="text"
+                control={control}
+                register={register}
+                rules={{
+                  required: "Unit Type is required",
+                }}
+                error={errors.unitType?.message}
               />
             </div>
           </div>

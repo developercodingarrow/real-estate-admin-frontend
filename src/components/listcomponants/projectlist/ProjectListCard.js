@@ -6,6 +6,7 @@ import StaticprojectImg from "../../../../public/web-img/default-project-image.p
 import Image from "next/image";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import Link from "next/link";
+import { formatDate } from "@/src/_logicalFunctions/formatDate";
 export default function ProjectListCard(props) {
   const { dataList } = props;
   const { handelOpenDeleteModel } = useContext(ModelsContext);
@@ -54,16 +55,20 @@ export default function ProjectListCard(props) {
           </div>
           <div className={styles.card_footer_wrapper}>
             <div className={styles.project_stats}>
-              <div className={styles.stats_box}>
-                <div className={styles.stats_staticText}>Price</div>
-                <div className={styles.stats_dynimicText}>
-                  {dataList?.price}
+              {dataList.basicPrice && (
+                <div className={styles.stats_box}>
+                  <div className={styles.stats_staticText}>Price</div>
+                  <div className={styles.stats_dynimicText}>
+                    {dataList?.price}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className={styles.stats_box}>
-                <div className={styles.stats_staticText}>Unites</div>
-                <div className={styles.stats_dynimicText}>{dataList?.unit}</div>
+                <div className={styles.stats_staticText}>property Type</div>
+                <div className={styles.stats_dynimicText}>
+                  {dataList?.propertyType}
+                </div>
               </div>
               <div className={styles.stats_box}>
                 <div className={styles.stats_staticText}>Status</div>
@@ -74,7 +79,7 @@ export default function ProjectListCard(props) {
               <div className={styles.stats_box}>
                 <div className={styles.stats_staticText}>Crated Date</div>
                 <div className={styles.stats_dynimicText}>
-                  {dataList?.createdDate}
+                  {formatDate(dataList?.createdAt)}
                 </div>
               </div>
             </div>

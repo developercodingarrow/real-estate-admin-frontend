@@ -1,6 +1,7 @@
 import React from "react";
 import { API_BASE_URL } from "@/config";
 import SCofficeCoWprkingWrapper from "../wrapper";
+import NotDataFound from "@/src/components/errorpages/NotDataFound";
 
 export default async function SCofficeCoWprkingpage({ params }) {
   const { slug } = params;
@@ -19,7 +20,7 @@ export default async function SCofficeCoWprkingpage({ params }) {
     );
 
     if (response.status === 404) {
-      return "not found";
+      return <NotDataFound />;
     }
 
     if (response.status === 200) {

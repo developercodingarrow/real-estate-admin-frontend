@@ -11,7 +11,7 @@ export default function PriceDetails(props) {
     <div className={styles.main_container}>
       <div className={styles.inner_container}>
         <section>
-          <div className={styles.column_title}>Location</div>
+          <div className={styles.column_title}>Rent</div>
           <div className={styles.filed_container}>
             <div className={styles.filed_wrapper}>
               <CustomeHookInput

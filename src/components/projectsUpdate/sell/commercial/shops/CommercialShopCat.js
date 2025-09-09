@@ -22,7 +22,7 @@ export default function CommercialShopCat(props) {
     reset,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       city: "",
@@ -32,7 +32,7 @@ export default function CommercialShopCat(props) {
       carpetArea: "",
       builtUpArea: "",
       superBuiltUpArea: "",
-      totalFloors: "",
+      noOfFloors: "",
       propertyOnFloor: "",
     },
   });
@@ -40,7 +40,7 @@ export default function CommercialShopCat(props) {
   useEffect(() => {
     if (apiData) {
       reset({
-        totalFloors: apiData.totalFloors ? String(apiData.totalFloors) : "",
+        noOfFloors: apiData.noOfFloors ? String(apiData.noOfFloors) : "",
         projectStatus: apiData.projectStatus || "",
         city: apiData.city || "",
         location: apiData.location || "",
@@ -55,17 +55,15 @@ export default function CommercialShopCat(props) {
 
   const handelsubmit = async (data) => {
     try {
-      console.log("data:", data);
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
       if (response.error) {
         setisBtnLoading(false);
-        console.error("Error creating project:", response.error);
+        toast.error(response.error);
         return;
       }
-      if (response.data.status === "success") {
-        console.log("update project:", response);
-        toast.success(response.data.message);
+      if (response.status === "success") {
+        toast.success(response.message);
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -100,7 +98,11 @@ export default function CommercialShopCat(props) {
           </section>
         </div>
         <div className={styles.submitBtn_wrapper}>
-          <SubmitBtn btnText="Update" btnLoading={isBtnLoading} />
+          <SubmitBtn
+            btnText="Update"
+            btnLoading={isBtnLoading}
+            disabledBtn={!isValid}
+          />
           <ClickBtn btnText="Next" handelClick={onNext} />
         </div>
       </form>

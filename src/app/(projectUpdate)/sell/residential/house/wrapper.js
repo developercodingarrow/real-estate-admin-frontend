@@ -1,27 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProjectAmenities from "@/src/components/amenities/ProjectAmenities";
 import ProjectImageUploader from "@/src/components/imageUploder/ProjectImageUploader";
 import AddKeywords from "@/src/components/keywordsComponent/AddKeywords";
 import UpdateProjectUiLayout from "@/src/components/projectsUpdate/layoutUi/UpdateProjectUiLayout";
 import ProjectSeo from "@/src/components/seoComponents/ProjectSeo";
 import SRUpdateHouse from "@/src/components/projectsUpdate/sell/residential/house/SRUpdateHouse";
+import { StepperContext } from "@/src/_contextApi/StepperProvider";
 
 export default function UpdateSRHousewrapper(props) {
   const { data, slug } = props;
-  const [step, setStep] = useState(1); // step tracking
-  const goNext = () => setStep((prev) => prev + 1);
-  const goBack = () => setStep((prev) => Math.max(1, prev - 1));
+  const { step, goNext, goBack } = useContext(StepperContext);
 
-  // Save step whenever it changes
-  useEffect(() => {
-    localStorage.setItem(
-      `stepper-${slug}`,
-      JSON.stringify({ step, timestamp: Date.now() })
-    );
-  }, [step, slug]);
-
-  
   const renderStepComponent = () => {
     switch (step) {
       case 1:

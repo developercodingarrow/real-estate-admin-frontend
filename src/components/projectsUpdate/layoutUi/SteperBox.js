@@ -6,10 +6,10 @@ export default function SteperBox(props) {
 
   const steps = [
     "Project Details",
-    "Project Image",
-    "Project Amnities",
-    "Project Content",
-    "Project Keywords/unique slug",
+    "Image",
+    "Amnities",
+    "Content",
+    "Keywords/unique slug",
   ];
 
   return (

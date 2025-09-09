@@ -37,3 +37,9 @@
   text-transform: capitalize;
   margin-bottom: 2rem;
 }
+
+.submitBtn_wrapper {
+  display: flex;
+  column-gap: 2rem;
+  justify-content: flex-end;
+}

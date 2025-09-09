@@ -1,0 +1,85 @@
+.project_Publsih_statsContinaer {
+  border: 1px solid var(--th-white-color);
+  box-shadow: var(--th-box-shadow);
+  background-color: var(--th-white-color);
+  width: 100%;
+}
+
+.stats_header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--th-border-color-gray);
+}
+
+.header_title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--th-dark-blue-color);
+  text-transform: capitalize;
+}
+
+.circleChart_wrapper {
+  width: 100%;
+  height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statsBox_mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.statsBox_container {
+  width: 20rem;
+  background-color: var(--th-white-color);
+  box-shadow: var(--th-box-shadow);
+  padding: 1rem;
+}
+
+.StatsBox_innerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.statsBox_rightColumn {
+  /* border: 1px solid red; */
+}
+
+.statsBox_title {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--th-dark-blue-color);
+  text-transform: capitalize;
+}
+
+.statsBox_statsNumber {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.statsIcon_Box {
+  font-size: 1.6rem;
+  color: var(--th-white-color);
+  background-color: #735dff;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statsLink_style {
+  font-size: 1.2rem;
+  color: var(--th-balanced-gray-text-color);
+}
+
+.loading_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

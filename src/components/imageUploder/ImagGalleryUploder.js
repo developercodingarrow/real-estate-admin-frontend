@@ -71,10 +71,9 @@ export default function ImagGalleryUploder(props) {
 
     try {
       const res = await updateProjectGallery(formData, slug);
-      if (res.data.status === "success") {
-        console.log("✅ Gallery updated:", res.data);
+      if (res.status === "success") {
         setisBtnLoading(false);
-        toast.success(res.data.message);
+        toast.success(res.message);
       } else {
         setisBtnLoading(false);
         console.error("Upload failed:", res.error);
@@ -89,9 +88,9 @@ export default function ImagGalleryUploder(props) {
     try {
       const res = await deleteGalleryImgAction(imgurl, slug);
       console.log(res.data);
-      if (res.data.status === "success") {
+      if (res.status === "success") {
         setApiImages((prev) => prev.filter((img) => img.url !== imgurl));
-        toast.success(res.data.message);
+        toast.success(res.message);
       }
     } catch (error) {
       console.error("Error uploading:", err);

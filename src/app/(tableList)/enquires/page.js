@@ -15,7 +15,7 @@ export default async function EnquireListpage() {
     });
 
     if (response.status === 404) {
-      return "not found";
+      return <NotDataFound />;
     }
 
     if (response.status === 200) {

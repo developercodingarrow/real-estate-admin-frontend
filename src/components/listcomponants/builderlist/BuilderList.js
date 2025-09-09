@@ -1,10 +1,9 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
+import dynamicImport from "next/dynamic";
 import styles from "./builderlist.module.css";
 import ListTable from "../../tableElements/ListTable";
 import TableSearch from "../../search/TableSearch";
-import ClickBtn from "../../elements/buttons/ClickBtn";
-import { builderList } from "@/src/jsonData/tabledata";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import TableFooter from "../../tableElements/TableFooter";
 import FillterBarCreate from "../../barcreate/FillterBarCreate";
@@ -13,11 +12,23 @@ import {
   deleteBuilderAction,
 } from "@/src/app/utils/builderActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
+import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
+import ComponentLoading from "../../loading/ComponentLoading";
+
+const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
+  ssr: false, // ensures it only loads on client side
+  loading: () => (
+    <div className="dynimic_model_wrapper">
+      <ComponentLoading />
+    </div>
+  ), // optional fallback
+});
 
 export default function BuilderList(props) {
   const { apiData } = props;
   const [builders, setBuilders] = useState(apiData);
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
+  const { idForDelete, handelCloseDeleteModel } = useContext(ModelsContext);
 
   const handelCreateBuilder = async (data) => {
     try {
@@ -35,12 +46,15 @@ export default function BuilderList(props) {
     }
   };
 
-  const handelDelete = async (id) => {
+  const handelDelete = async () => {
     try {
-      const response = await deleteBuilderAction({ _id: id }); // ✅ pass id in body
-      if (response?.data?.status === "success") {
+      const response = await deleteBuilderAction({ _id: idForDelete }); // ✅ pass id in body
+      if (response?.status === "success") {
         // remove deleted builder instantly
-        setBuilders((prev) => prev.filter((builder) => builder._id !== id));
+        setBuilders((prev) =>
+          prev.filter((builder) => builder._id !== idForDelete)
+        );
+        handelCloseDeleteModel();
       }
     } catch (error) {
       console.log(error);
@@ -61,7 +75,7 @@ export default function BuilderList(props) {
 
   return (
     <div className={styles.main_conatiner}>
-      {" "}
+      <DeleteModel deletehandel={handelDelete} />{" "}
       <div className={styles.page_heading}>Builder List</div>
       <div className={styles.page_fillter_wrapper}>
         <div className={styles.fillter_left_column}>

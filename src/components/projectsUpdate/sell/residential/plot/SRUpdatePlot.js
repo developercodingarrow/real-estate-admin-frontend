@@ -13,6 +13,12 @@ import ProjectLocation from "../../../commanProjectFileds/ProjectLocation";
 import ProjectArea from "../../../commanProjectFileds/ProjectArea";
 import PlotArea from "../../../commanProjectFileds/PlotArea";
 import PlotOfficalDetails from "../../../commanProjectFileds/PlotOfficalDetails";
+import {
+  plotOpenSide,
+  plotPossionTime,
+  availabilityStatus,
+} from "@/src/jsonData/projectFiledsData";
+import { formatDate } from "@/src/_logicalFunctions/formatDate";
 
 export default function SRUpdatePlot(props) {
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
@@ -23,7 +29,7 @@ export default function SRUpdatePlot(props) {
     reset,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       city: "",
@@ -51,24 +57,14 @@ export default function SRUpdatePlot(props) {
         plotWidth: apiData.plotWidth ? String(apiData.plotWidth) : "",
         projectStatus: apiData.projectStatus || "",
         plotOpenSide: apiData.plotOpenSide ? String(apiData.plotOpenSide) : "",
+        possessionDate: formatDate(apiData.possessionDate) || "",
+        basicPrice: apiData.basicPrice || "",
       });
     }
   }, [apiData, reset]);
 
-  const availabilityStatus = [
-    { value: "ready-to-move", label: "Ready to Move" },
-    { value: "under-construction", label: "Under Construction" },
-  ];
-
-  const plotPossionTime = [
-    { value: "immediate", label: "Immediate" },
-    { value: "3-months ", label: "Within 3 Monrhs" },
-    { value: "6-months ", label: "Within 6 Monrhs" },
-  ];
-
   const handelsubmit = async (data) => {
     try {
-      console.log("data:", data);
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
 
@@ -78,9 +74,9 @@ export default function SRUpdatePlot(props) {
         console.error("Error creating project:", response.error);
         return;
       }
-      if (response.data.status === "success") {
+      if (response.status === "success") {
         console.log("update project:", response);
-        toast.success(response.data.message);
+        toast.success(response.message);
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -88,13 +84,6 @@ export default function SRUpdatePlot(props) {
       setisBtnLoading(false);
     }
   };
-
-  const plotOpenSide = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-  ];
 
   return (
     <div className={styles.main_conianter}>
@@ -140,7 +129,11 @@ export default function SRUpdatePlot(props) {
         </div>
 
         <div className={styles.submitBtn_wrapper}>
-          <SubmitBtn btnText="Update" btnLoading={isBtnLoading} />
+          <SubmitBtn
+            btnText="Update"
+            btnLoading={isBtnLoading}
+            disabledBtn={!isValid}
+          />
           <ClickBtn btnText="Next" handelClick={onNext} />
         </div>
       </form>

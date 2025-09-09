@@ -1,15 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./listtable.module.css";
 import { MdDelete, FiEdit } from "../ApplicationIcons";
+import { formatDate } from "@/src/_logicalFunctions/formatDate";
+import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 export default function ListTable(props) {
   const { tableData, handelDeleteItem } = props;
-
-  console.log(tableData);
+  const { handelOpenDeleteModel } = useContext(ModelsContext);
 
   const handelDeleteTableItem = (id) => {
-    console.log(id);
-    handelDeleteItem(id);
+    handelOpenDeleteModel(id);
   };
 
   return (
@@ -19,7 +19,7 @@ export default function ListTable(props) {
           <tr>
             <th>S No</th>
             <th>Builder Name</th>
-            <th>Created Date</th>
+            <th>Date</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -30,7 +30,7 @@ export default function ListTable(props) {
               <tr>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
-                <td>{item.createdAt}</td>
+                <td>{formatDate(item.createdAt)}</td>
                 <td>
                   <span className={styles.table_iconBox}>
                     <FiEdit className={styles.table_icon} />

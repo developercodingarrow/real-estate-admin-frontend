@@ -31,15 +31,25 @@ export default function AuthUi() {
       setisBtnLoading(true);
       const res = await otpLoginAction(data);
 
-      //   data.status == "success"
-      if (res.data.status == "success") {
-        console.log(res);
+      if (res.error) {
+        toast.error(res.error);
         setisBtnLoading(false);
-        toast.success(res.data.message);
+        return;
       }
-      router.push(`/auth/otpverification/${res.data.UrlToken}`);
+
+      if (res.status === "Fails" || res.error) {
+        toast.error(res.message);
+        setisBtnLoading(false);
+        return;
+      }
+      if (res.status == "success") {
+        setisBtnLoading(false);
+        toast.success(res.message);
+        router.push(`/auth/otpverification/${res.UrlToken}`);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("error---", error);
+      toast.error("Something went wrong...!");
       setisBtnLoading(false);
     }
   };

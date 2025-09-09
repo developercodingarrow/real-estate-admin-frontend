@@ -50,7 +50,7 @@ export async function createAmanitiesAction(formData) {
     console.log("Create Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -84,7 +84,7 @@ export async function deleteAmanitiesAction(formData) {
     console.log("delete Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {

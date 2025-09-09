@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import dynamicImport from "next/dynamic";
 import styles from "./amenities.module.css";
 import TableSearch from "../../search/TableSearch";
 import FillterBarCreate from "../../barcreate/FillterBarCreate";
@@ -6,6 +8,16 @@ import TableFooter from "../../tableElements/TableFooter";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import AmenitiesTable from "../../tableElements/AmenitiesTable";
 import AmanitiesBarCreate from "../../barcreate/AmanitiesBarCreate";
+import ComponentLoading from "../../loading/ComponentLoading";
+
+const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
+  ssr: false, // ensures it only loads on client side
+  loading: () => (
+    <div className="dynimic_model_wrapper">
+      <ComponentLoading />
+    </div>
+  ), // optional fallback
+});
 export default function AmenitiesList(props) {
   const { apiData, handelCreate, handelDelete } = props;
 
@@ -22,7 +34,7 @@ export default function AmenitiesList(props) {
   } = useTableFillters(apiData);
   return (
     <div className={styles.main_conatiner}>
-      {" "}
+      <DeleteModel deletehandel={handelDelete} />{" "}
       <div className={styles.page_heading}>Amanites List</div>
       <div className={styles.page_fillter_wrapper}>
         <div className={styles.fillter_left_column}>

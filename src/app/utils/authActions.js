@@ -20,15 +20,14 @@ export async function otpLoginAction(formData) {
       credentials: "include",
       body: JSON.stringify(formData),
     });
-
     const data = await res.json();
 
-    console.log("Create Project API Response:", data);
-
-    if (data.status === "success") {
-      return { data };
+    if (data.error) {
+      return data;
     }
-
+    if (data.status === "success") {
+      return data;
+    }
     return {
       error: data.message || "Unknown error",
       statusCode: res.status || 500,
@@ -43,11 +42,7 @@ export async function otpLoginAction(formData) {
 
 // (3) Admin Login OTP Verification API
 export async function loginotpVerfication(formData, slug) {
-  console.log("triger");
-  console.log("formData--", formData);
-  console.log("slug--", slug);
   const url = `${API_BASE_URL}/auth/login-otp/${slug}`;
-  console.log("url--", url);
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -59,7 +54,11 @@ export async function loginotpVerfication(formData, slug) {
     });
 
     const data = await res.json();
-    console.log("data--", data);
+    console.log("otp res---", data);
+    if (data.error) {
+      return data;
+    }
+
     if (data.status === "success") {
       const token = data.token;
       const userDetail = data.user;
@@ -78,7 +77,31 @@ export async function loginotpVerfication(formData, slug) {
       return data;
     }
   } catch (error) {
-    console.log("error---", error);
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+// (4) Admin Logout API
+export async function LogOutAction() {
+  const url = `${API_BASE_URL}/auth/logout`;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    // Remove cookies
+    const cookieStore = cookies();
+    cookieStore.set("jwt", "", { expires: new Date(0) });
+    cookieStore.set("user", "", { expires: new Date(0) });
+
+    return { status: "success", data };
+  } catch (error) {
     return {
       error: error.message || "Request failed",
       statusCode: 500,

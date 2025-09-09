@@ -6,10 +6,12 @@
   cursor: pointer;
 }
 
+/*   border: 1px solid #c7c7c7; */
+
 .selector_header {
   padding: 1rem 1.2rem;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -78,14 +80,14 @@
 
 /* custome hook selector  */
 .input_wrapper {
-  border: 1px solid #ddd;
+  border: 1px solid var(--th-gray-border-color);
   padding-right: 1rem;
   border-radius: 0.8rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 .lable_wrapper {
   margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 .text_inputStyle {
   border: none;

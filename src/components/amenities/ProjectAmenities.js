@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./projectamenities.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import CreateStaticBox from "../startCreate/CreateStaticBox";
 import TabBar from "./TabBar";
-import CustomeCheckBox from "../inputsElements/CustomeCheckBox";
 import AllAmenities from "./AllAmenities";
 import ClickBtn from "../elements/buttons/ClickBtn";
 export default function ProjectAmenities(props) {

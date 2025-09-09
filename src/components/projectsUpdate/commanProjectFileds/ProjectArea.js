@@ -19,13 +19,13 @@ export default function ProjectArea(props) {
                 control={control}
                 register={register}
                 rules={{
-                  required: "Number of floors is required",
+                  required: "builtUp Area is required",
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",
                   },
                 }}
-                error={errors.BuiltUpArea?.message}
+                error={errors.builtUpArea?.message}
               />
             </div>
             <div className={styles.filed_wrapper}>

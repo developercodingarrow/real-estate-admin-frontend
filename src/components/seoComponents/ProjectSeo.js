@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./seocomponents.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import CreateStaticBox from "../startCreate/CreateStaticBox";
 import ReactQuillElement from "../editor/ReactQuillElement";
 import { updateProjectSeoAction } from "@/src/app/utils/projectActions";
 import ClickBtn from "../elements/buttons/ClickBtn";
@@ -47,10 +46,15 @@ export default function ProjectSeo(props) {
       setisBtnLoading(true);
       const response = await updateProjectSeoAction(formData, slug);
 
-      if (response.data.status === "success") {
+      if (response.status === "Fails") {
+        toast.error(response.message);
         setisBtnLoading(false);
-        console.log("SEO data saved:", response);
-        toast.success(response.data.message);
+        return;
+      }
+
+      if (response.status === "success") {
+        setisBtnLoading(false);
+        toast.success(response.message);
       } else {
         console.error("Failed to save SEO data:", response.error);
         setisBtnLoading(false);

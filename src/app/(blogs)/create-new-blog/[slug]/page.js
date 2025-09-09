@@ -1,6 +1,7 @@
 import React from "react";
 import CreateBlogwrapper from "../wrapper";
 import { API_BASE_URL } from "@/config";
+import NotDataFound from "@/src/components/errorpages/NotDataFound";
 
 export default async function CreateNewBlogpage({ params }) {
   const { slug } = params;
@@ -16,18 +17,17 @@ export default async function CreateNewBlogpage({ params }) {
     });
 
     if (response.status === 404) {
-      return "not found";
+      return <NotDataFound />;
     }
 
     if (response.status === 200) {
       const initalData = await response.json();
-      console.log("initalData--", initalData);
+
       if (initalData.status == "success") {
         data = initalData.data;
       }
     }
   } catch (error) {
-    console.error("Error fetching data:", error);
     data = null;
     throw new Error(`Failed to fetch data: ${error}`);
   }

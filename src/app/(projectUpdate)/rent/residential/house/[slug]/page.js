@@ -1,6 +1,8 @@
 import React from "react";
-import UpdateRRHousewrapper from "../wrapper";
+
 import { API_BASE_URL } from "@/config";
+import NotDataFound from "@/src/components/errorpages/NotDataFound";
+import UpdateRRHousewrapper from "../wrapper";
 
 export default async function UpdateRRHousePage({ params }) {
   const { slug } = params;
@@ -19,7 +21,7 @@ export default async function UpdateRRHousePage({ params }) {
     );
 
     if (response.status === 404) {
-      return "not found";
+      return <NotDataFound />;
     }
 
     if (response.status === 200) {

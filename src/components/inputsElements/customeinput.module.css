@@ -3,9 +3,9 @@
 }
 
 .input_wrapper {
-  border: 1px solid #ddd;
-  border-radius: 0.8rem;
-  background-color: white;
+  border: 1px solid var(--th-gray-border-color);
+  border-radius: 0.5rem;
+  background-color: var(--th-white-color);
 }
 .lable_wrapper {
   margin-bottom: 0.5rem;
@@ -13,17 +13,16 @@
 }
 
 .lable_style {
-  font-size: 1.2rem;
-  /* margin-bottom: 1rem; */
+  font-size: 1.4rem;
 }
 
 .text_inputStyle {
   width: 100%;
   border: none;
   outline: none;
-  padding: 1rem 0.8rem;
+  padding: 1.2rem 0.8rem;
   border-radius: 0.8rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .error_text {

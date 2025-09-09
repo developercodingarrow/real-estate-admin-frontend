@@ -22,13 +22,11 @@ export default function AddKeywords(props) {
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
       if (response.error) {
-        console.error("Error creating project:", response.error);
         setisBtnLoading(false);
         return;
       }
-      if (response.data.status === "success") {
-        console.log("Create Project Action Response:", response);
-        toast.success(response.data.message);
+      if (response.status === "success") {
+        toast.success(response.message);
         setisBtnLoading(false);
         return;
       }

@@ -1,6 +1,9 @@
 "use client";
 import React, { useContext, useState } from "react";
+import dynamicImport from "next/dynamic";
 import styles from "./css/createproject.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import CustomeHookRadioBtn from "../inputsElements/CustomeHookRadioBtn";
 import {
@@ -8,17 +11,27 @@ import {
   commercialOptions,
 } from "@/src/jsonData/projectFiledsData";
 import { createProjectAction } from "@/src/app/utils/projectActions";
-import CreateStaticBox from "../startCreate/CreateStaticBox";
+
 import SubmitBtn from "../elements/buttons/SubmitBtn";
 import { AppContext } from "@/src/_contextApi/AppContext";
-import CreatedModel from "../models/CreatedModel";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
+import CreateStaticBox from "./CreateStaticBox";
+import ComponentLoading from "../loading/ComponentLoading";
+
+const CreatedModel = dynamicImport(() => import("../models/CreatedModel"), {
+  ssr: false, // ensures it only loads on client side
+  loading: () => (
+    <div className="dynimic_model_wrapper">
+      <ComponentLoading />
+    </div>
+  ), // optional fallback
+});
 
 export default function StartCreateProject() {
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { isCreatedOpen, setisCreatedOpen, handelCloseCreatedModel } =
     useContext(ModelsContext);
-  const [createdProjectId, setcreatedProjectId] = useState(null);
+  // const [createdProjectId, setcreatedProjectId] = useState(null);
   const [updatePageLink, setupdatePageLink] = useState(null);
   const {
     control,
@@ -31,6 +44,7 @@ export default function StartCreateProject() {
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
+      lookingFor: "",
       propertyCategory: "",
       propertyType: "",
     },
@@ -39,36 +53,36 @@ export default function StartCreateProject() {
   // ✅ Watch propertyCategory
   const propertyCategory = watch("propertyCategory");
 
+  // Create new Project
   const onSubmit = async (data) => {
-    console.log("SellApartment form data:", data);
     setisBtnLoading(true);
     try {
       const response = await createProjectAction(data);
-      if (response.error) {
-        console.error("Error creating project:", response.error);
+
+      if (response.status === "Fails") {
+        toast.error(response.message);
         setisBtnLoading(false);
+        return;
       }
-      if (response.data.status === "success") {
-        const result = response.data.data;
-        console.log("Create Project Action Response:", response.data.data);
+
+      if (response.status === "success") {
+        const result = response.data;
         setisBtnLoading(false);
         setupdatePageLink(
-          `${result.lookingFor}/${result.propertyCategory}/${result.propertyType}/${result._id}`
-        );
-        console.log(
           `${result.lookingFor}/${result.propertyCategory}/${result.propertyType}/${result._id}`
         );
 
         setisCreatedOpen(true);
       }
     } catch (error) {
-      console.error("Error creating project:", error);
+      toast.error("Something went wrong...!");
       setisBtnLoading(false);
     }
   };
 
   return (
     <div className={styles.main_container}>
+      <ToastContainer />
       <CreatedModel nextLink={updatePageLink} />
       <div className={styles.inner_container}>
         <div className={styles.left_column}>
@@ -137,6 +151,7 @@ export default function StartCreateProject() {
                     options={residentialOptions}
                     control={control}
                     errors={errors}
+                    rules={{ required: "Property type is required" }}
                   />
                 </div>
               )}
@@ -148,6 +163,7 @@ export default function StartCreateProject() {
                     options={commercialOptions}
                     control={control}
                     errors={errors}
+                    rules={{ required: "Property type is required" }}
                   />
                 </div>
               )}
@@ -158,6 +174,7 @@ export default function StartCreateProject() {
                 btnText="Create"
                 disabledBtn={!isValid}
                 btnLoading={isBtnLoading}
+                size="medium"
               />
             </div>
           </form>

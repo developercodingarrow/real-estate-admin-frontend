@@ -69,3 +69,34 @@ export async function deleteLocationAction(formData) {
     };
   }
 }
+
+// 3) GET ALL BUILDERS
+export async function allLocationAction() {
+  const url = `${API_BASE_URL}/location/allLocation`;
+
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      return { data: data.data }; // return builder array directly
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}

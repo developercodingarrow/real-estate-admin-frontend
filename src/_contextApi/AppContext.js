@@ -5,7 +5,7 @@ export const AppContext = createContext();
 
 export default function AppContextProvider({ children }) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isPageLoading, setisPageLoading] = useState(false);
+
   const [isBtnLoading, setisBtnLoading] = useState(false);
 
   const handelToggleAsidebar = () => {
@@ -17,8 +17,7 @@ export default function AppContextProvider({ children }) {
         isSidebarCollapsed,
         setIsSidebarCollapsed,
         handelToggleAsidebar,
-        isPageLoading,
-        setisPageLoading,
+
         isBtnLoading,
         setisBtnLoading,
       }}

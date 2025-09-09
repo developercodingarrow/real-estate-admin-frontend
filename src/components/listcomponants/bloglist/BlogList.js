@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
+import dynamicImport from "next/dynamic";
 import styles from "./bloglist.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
@@ -7,12 +8,27 @@ import TableFooter from "../../tableElements/TableFooter";
 import TableSearch from "../../search/TableSearch";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import BlogListCard from "./BlogListCard";
-import DeleteModel from "../../models/DeleteModel";
-import { deleteBlogWithImageAction } from "@/src/app/utils/blogAction";
+import {
+  deleteBlogWithImageAction,
+  starteBlogCreateAction,
+} from "@/src/app/utils/blogAction";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import { AppContext } from "@/src/_contextApi/AppContext";
+import ClickBtn from "../../elements/buttons/ClickBtn";
+import { useParams, useRouter } from "next/navigation";
+import ComponentLoading from "../../loading/ComponentLoading";
+
+const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
+  ssr: false, // ensures it only loads on client side
+  loading: () => (
+    <div className="dynimic_model_wrapper">
+      <ComponentLoading />
+    </div>
+  ), // optional fallback
+});
 
 export default function BlogList(props) {
+  const router = useRouter();
   const { apiData } = props;
   const { handelOpenDeleteModel, idForDelete, handelCloseDeleteModel } =
     useContext(ModelsContext);
@@ -51,6 +67,23 @@ export default function BlogList(props) {
     }
   };
 
+  const handelStartCreateBlog = async () => {
+    try {
+      setisBtnLoading(true);
+
+      const res = await starteBlogCreateAction();
+      console.log("start- creating blog-", res);
+      if (res.status === "success") {
+        toast.success(res.message);
+        router.push(`/create-new-blog/${res.data._id}`);
+        setisBtnLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setisBtnLoading(false);
+    }
+  };
+
   return (
     <div className={styles.main_conatiner}>
       <ToastContainer />
@@ -61,11 +94,17 @@ export default function BlogList(props) {
           <div className={styles.search_wrapper}>
             <TableSearch
               searchHandle={searchByTableFiled}
-              searchField="name"
-              placeholder="serach builder"
+              searchField="title"
+              placeholder="Enter Blog Title"
             />
           </div>
-          <div></div>
+          <div>
+            <ClickBtn
+              btnText="Create New Blog"
+              handelClick={handelStartCreateBlog}
+              btnLoading={isBtnLoading}
+            />
+          </div>
         </div>
         <div>
           <TableFooter

@@ -1,11 +1,9 @@
 "use client";
 import React, { useState, useContext, useMemo } from "react";
+import dynamicImport from "next/dynamic";
 import styles from "./projectlist.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import tagBg from "../../../../public/web-img/tagbg.png";
-import StaticprojectImg from "../../../../public/web-img/default-project-image.png";
-import Image from "next/image";
 import ProjectListCard from "./ProjectListCard";
 import ProjectFillterBar from "./ProjectFillterBar";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
@@ -14,7 +12,16 @@ import TableSearch from "../../search/TableSearch";
 import { deleteProjectWithImagesAction } from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
-import DeleteModel from "../../models/DeleteModel";
+import ComponentLoading from "../../loading/ComponentLoading";
+
+const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
+  ssr: false, // ensures it only loads on client side
+  loading: () => (
+    <div className="dynimic_model_wrapper">
+      <ComponentLoading />
+    </div>
+  ), // optional fallback
+});
 
 export default function ProjectList(props) {
   const { apiData } = props;

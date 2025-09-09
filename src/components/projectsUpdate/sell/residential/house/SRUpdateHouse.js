@@ -11,18 +11,23 @@ import { updateProjectAction } from "@/src/app/utils/projectActions";
 import ProjectArea from "../../../commanProjectFileds/ProjectArea";
 import ClickBtn from "@/src/components/elements/buttons/ClickBtn";
 import ProjectLocation from "../../../commanProjectFileds/ProjectLocation";
+import {
+  bedroomOptions,
+  bathroomOptions,
+  balconiesOptions,
+  availabilityStatus,
+} from "@/src/jsonData/projectFiledsData";
 
 export default function SRUpdateHouse(props) {
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { apiData, slug, onNext } = props;
 
-  console.log("apiData---", apiData);
   const {
     control,
     reset,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       noOfBedrooms: "", // default selected value
@@ -32,6 +37,9 @@ export default function SRUpdateHouse(props) {
       carpetArea: "",
       builtUpArea: "",
       superBuiltUpArea: "",
+      city: "",
+      location: "",
+      address: "",
     },
   });
 
@@ -49,55 +57,23 @@ export default function SRUpdateHouse(props) {
         carpetArea: apiData.carpetArea || "",
         builtUpArea: apiData.builtUpArea || "",
         superBuiltUpArea: apiData.superBuiltUpArea || "",
+        city: apiData.city || "",
+        location: apiData.location || "",
+        address: apiData.address || "",
       });
     }
   }, [apiData, reset]);
 
-  const bedroomOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const bathroomOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const balconiesOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const availabilityStatus = [
-    { value: "ready-to-move", label: "Ready to Move" },
-    { value: "under-construction", label: "Under Construction" },
-  ];
-
   const handelsubmit = async (data) => {
     try {
-      console.log("data:", data);
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
       if (response.error) {
         setisBtnLoading(false);
-        console.error("Error creating project:", response.error);
         return;
       }
-      if (response.data.status === "success") {
-        console.log("update project:", response);
-        toast.success(response.data.message);
+      if (response.status === "success") {
+        toast.success(response.message);
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -157,7 +133,11 @@ export default function SRUpdateHouse(props) {
         </div>
 
         <div className={styles.submitBtn_wrapper}>
-          <SubmitBtn btnText="Update" btnLoading={isBtnLoading} />
+          <SubmitBtn
+            btnText="Update"
+            btnLoading={isBtnLoading}
+            disabledBtn={!isValid}
+          />
           <ClickBtn btnText="Next" handelClick={onNext} />
         </div>
       </form>

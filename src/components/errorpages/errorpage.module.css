@@ -1,0 +1,54 @@
+.notfoundContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background: #f0f4f8;
+  color: #333;
+  padding: 20px;
+}
+
+.icon {
+  font-size: 3rem;
+  background: #e3f2fd;
+  color: #1565c0;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1565c0;
+  margin-bottom: 10px;
+}
+
+.message {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.homeBtn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  background: #1565c0;
+  color: #fff;
+}
+
+.homeBtn:hover {
+  background: #0d47a1;
+  transform: translateY(-2px);
+}

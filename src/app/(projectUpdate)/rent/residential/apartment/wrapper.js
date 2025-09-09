@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ProjectAmenities from "@/src/components/amenities/ProjectAmenities";
 import ProjectImageUploader from "@/src/components/imageUploder/ProjectImageUploader";
 import AddKeywords from "@/src/components/keywordsComponent/AddKeywords";
@@ -7,13 +7,11 @@ import UpdateProjectUiLayout from "@/src/components/projectsUpdate/layoutUi/Upda
 import SRUpdateApartment from "@/src/components/projectsUpdate/sell/residential/apartment/SRUpdateApartment";
 import ProjectSeo from "@/src/components/seoComponents/ProjectSeo";
 import RRUpdateApartment from "@/src/components/projectsUpdate/rent/residential/apartment/RRUpdateApartment";
+import { StepperContext } from "@/src/_contextApi/StepperProvider";
 
 export default function UpdateRRApartmentWrapper(props) {
   const { data, slug } = props;
-  const [step, setStep] = useState(1); // step tracking
-  const goNext = () => setStep((prev) => prev + 1);
-  const goBack = () => setStep((prev) => Math.max(1, prev - 1));
-
+  const { step, goNext, goBack } = useContext(StepperContext);
   const renderStepComponent = () => {
     switch (step) {
       case 1:
