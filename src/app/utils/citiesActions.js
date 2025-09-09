@@ -1,15 +1,18 @@
 "use server";
-
+import { cookies } from "next/headers"; // Import the cookies function
 import { API_BASE_URL } from "@/config";
 
 //1) Create City  API
 export async function createCityAction(formData) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/city/createCity`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -17,8 +20,6 @@ export async function createCityAction(formData) {
     });
 
     const data = await res.json();
-
-    console.log("Create Project API Response:", data);
 
     if (data.status === "success") {
       return data;
@@ -38,12 +39,15 @@ export async function createCityAction(formData) {
 
 //2) Delete Builder  API
 export async function deleteCityAction(formData) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/city/deleteCity`;
 
   try {
     const res = await fetch(url, {
       method: "DELETE",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -72,12 +76,15 @@ export async function deleteCityAction(formData) {
 
 // 3) GET ALL BUILDERS
 export async function allCitiesAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/city/allCity`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",

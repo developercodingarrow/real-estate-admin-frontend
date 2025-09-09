@@ -1,15 +1,18 @@
 "use server";
-
+import { cookies } from "next/headers"; // Import the cookies function
 import { API_BASE_URL } from "@/config";
 
 //1) Create Location  API
 export async function createLocationAction(formData) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/location/createNewLocation`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -38,12 +41,15 @@ export async function createLocationAction(formData) {
 
 //2) Delete Builder  API
 export async function deleteLocationAction(formData) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/location/deleteLocation`;
 
   try {
     const res = await fetch(url, {
       method: "DELETE",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -72,12 +78,15 @@ export async function deleteLocationAction(formData) {
 
 // 3) GET ALL BUILDERS
 export async function allLocationAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/location/allLocation`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",

@@ -1,14 +1,18 @@
 import React from "react";
-import CityListwrapper from "./wrapper";
 import { API_BASE_URL } from "@/config";
+import { cookies } from "next/headers";
+import CityListwrapper from "./wrapper";
 
 export default async function CityListpage() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   let data;
   try {
     const response = await fetch(`${API_BASE_URL}/city/allCity`, {
       method: "GET", // GET request to fetch the blog
       credentials: "include", // Include cookies in the request
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json", // Ensure this is set to JSON
       },
       cache: "no-store",

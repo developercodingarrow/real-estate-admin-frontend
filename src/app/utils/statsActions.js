@@ -1,15 +1,18 @@
 "use server";
-
+import { cookies } from "next/headers"; // Import the cookies function
 import { API_BASE_URL } from "@/config";
 
 // 3) GET ALL BUILDERS
 export async function projectStatsAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/stats/projectstats`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -34,12 +37,15 @@ export async function projectStatsAction() {
 }
 
 export async function enquireStatsAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/stats/enquirestats`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -64,12 +70,15 @@ export async function enquireStatsAction() {
 }
 
 export async function amnitiesStatsAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/stats/amenityStats`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -94,12 +103,15 @@ export async function amnitiesStatsAction() {
 }
 
 export async function overallStatsAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/stats/overallStats`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -124,12 +136,15 @@ export async function overallStatsAction() {
 }
 
 export async function projectPublishStatsAction() {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/stats/ProjectPublishStats`;
 
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",

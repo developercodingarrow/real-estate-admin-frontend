@@ -12,7 +12,6 @@ import { AppContext } from "@/src/_contextApi/AppContext";
 export default function AllAmenities(props) {
   const { apiData, slug, onBack, onNext } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
-  console.log("API Data in AllAmenities:", apiData);
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [amnitiesList, setamnitiesList] = useState([]);
 
@@ -29,7 +28,6 @@ export default function AllAmenities(props) {
 
   const fetchAmenities = async () => {
     const res = await allAmnitiesAction();
-    console.log("Fetched Amenities:", res);
     if (res.data.status === "success") {
       const allAmenities = res.data.data;
       // match amenities from apiData with fetched amenities

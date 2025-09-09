@@ -1,15 +1,18 @@
 "use server";
-
+import { cookies } from "next/headers"; // Import the cookies function
 import { API_BASE_URL } from "@/config";
 
 //8) Update Project  SEO API
 export async function starteBlogCreateAction(formData, slug) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/blog/startCreateBlog/`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -36,12 +39,15 @@ export async function starteBlogCreateAction(formData, slug) {
 
 //8) Update Project  SEO API
 export async function updateBlogContentAction(formData, slug) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/blog/updateBlogContnet/${slug}`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -70,12 +76,15 @@ export async function updateBlogContentAction(formData, slug) {
 
 // 3) Update Project Image  API
 export async function updateBlogImage(formData, slug) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/cdn-imge-upload/update-blog-image/${slug}`;
 
   try {
     const res = await fetch(url, {
       method: "PATCH",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         // "Content-Type": "multipart/form-data",
         // Authorization: `Bearer ${authToken}`,
       },
@@ -103,12 +112,15 @@ export async function updateBlogImage(formData, slug) {
 
 //9) Add Keywords API
 export async function addBlogKeywordsAction(formData, slug) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/blog/addKeywords/${slug}`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -136,12 +148,15 @@ export async function addBlogKeywordsAction(formData, slug) {
 }
 
 export async function updateBlogSlugAction(formData, slug) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/blog/updateSlug/${slug}`;
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",
@@ -169,12 +184,15 @@ export async function updateBlogSlugAction(formData, slug) {
 }
 
 export async function deleteBlogWithImageAction(id) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const url = `${API_BASE_URL}/cdn-imge-upload/deletBlogWithImage/${id}`;
 
   try {
     const res = await fetch(url, {
       method: "DELETE",
       headers: {
+        Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json",
       },
       credentials: "include",

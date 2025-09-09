@@ -36,11 +36,11 @@ export default function OtpVerficationUi(props) {
         setisBtnLoading(false);
         return;
       }
-      if (res.status == "success") {
+      console.log("test refresh---", res);
+      if (res.status === "success") {
         setisBtnLoading(false);
         router.refresh();
         router.push("/");
-        router.refresh();
       }
     } catch (error) {
       console.log(error);
