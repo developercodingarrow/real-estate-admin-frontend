@@ -11,8 +11,9 @@ import {
   updateProjectGallery,
 } from "@/src/app/utils/projectActions";
 import ClickBtn from "../elements/buttons/ClickBtn";
-
+import { useParams, useRouter } from "next/navigation";
 export default function ImagGalleryUploder(props) {
+  const router = useRouter();
   const { slug, apiData } = props;
   const [isBtnLoading, setisBtnLoading] = useState(false);
   const [apiImages, setApiImages] = useState(apiData?.galleryImages || []); // only urls
@@ -71,16 +72,20 @@ export default function ImagGalleryUploder(props) {
 
     try {
       const res = await updateProjectGallery(formData, slug);
+      console.log("project gallery---", res);
       if (res.status === "success") {
         setisBtnLoading(false);
         toast.success(res.message);
+        router.refresh();
       } else {
         setisBtnLoading(false);
         console.error("Upload failed:", res.error);
+        router.refresh();
       }
     } catch (err) {
       setisBtnLoading(false);
       console.error("Error uploading:", err);
+      router.refresh();
     }
   };
 
@@ -91,9 +96,11 @@ export default function ImagGalleryUploder(props) {
       if (res.status === "success") {
         setApiImages((prev) => prev.filter((img) => img.url !== imgurl));
         toast.success(res.message);
+        router.refresh();
       }
     } catch (error) {
       console.error("Error uploading:", err);
+      router.refresh();
     }
   };
 

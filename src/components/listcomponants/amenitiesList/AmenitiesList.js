@@ -9,6 +9,7 @@ import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import AmenitiesTable from "../../tableElements/AmenitiesTable";
 import AmanitiesBarCreate from "../../barcreate/AmanitiesBarCreate";
 import ComponentLoading from "../../loading/ComponentLoading";
+import EmptyListMessage from "../../errorpages/EmptyListMessage";
 
 const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
   ssr: false, // ensures it only loads on client side
@@ -73,10 +74,14 @@ export default function AmenitiesList(props) {
         </div>
       </div>
       <div className={styles.table_wrapper}>
-        <AmenitiesTable
-          tableData={visibleRows}
-          handelDeleteItem={handelDelete}
-        />
+        {visibleRows.length > 0 ? (
+          <AmenitiesTable
+            tableData={visibleRows}
+            handelDeleteItem={handelDelete}
+          />
+        ) : (
+          <EmptyListMessage message="No amenities yet — please create one to get started." />
+        )}
       </div>
     </div>
   );

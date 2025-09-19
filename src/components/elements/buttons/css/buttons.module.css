@@ -29,6 +29,7 @@
   line-height: 1.3;
   letter-spacing: 0.5px;
   color: var(--th-white-color);
+  font-size: 1.4rem;
 }
 
 .small {
@@ -38,4 +39,12 @@
   color: var(--th-white-color);
   cursor: pointer;
   padding: 0.8rem 1rem;
+}
+
+.medium:disabled,
+.small:disabled {
+  cursor: not-allowed;
+  background-color: var(--th-disable-btn-bg-color); /* Tailwind gray-300 */
+  color: var(--th-disable-btn-color); /* Tailwind gray-400 for text */
+  opacity: var(--th-disable-btn-opacity); /* extra faded look */
 }

@@ -15,7 +15,7 @@ export default async function CityListpage() {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json", // Ensure this is set to JSON
       },
-      cache: "no-store",
+      next: { revalidate: 86400 }, // ✅ revalidate after 1 day (24h)
     });
 
     if (response.status === 404) {

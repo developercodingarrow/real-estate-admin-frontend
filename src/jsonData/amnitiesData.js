@@ -44,4 +44,6 @@ export const amenitiesOptions = [
 export const amenitiesTypeOption = [
   { value: "apartment", label: "Apartment" },
   { value: "house", label: "House" },
+  { value: "shop", label: "shop" },
+  { value: "mall", label: "Mall" },
 ];

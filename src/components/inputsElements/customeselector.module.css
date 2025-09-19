@@ -86,8 +86,9 @@
   font-size: 1.4rem;
 }
 .lable_wrapper {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
   font-size: 1.4rem;
+  font-weight: 500;
 }
 .text_inputStyle {
   border: none;

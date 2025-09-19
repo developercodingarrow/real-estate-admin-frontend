@@ -19,7 +19,7 @@ export default function ProjectArea(props) {
                 control={control}
                 register={register}
                 rules={{
-                  required: "builtUp Area is required",
+                  // required: "builtUp Area is required",
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",
@@ -37,7 +37,7 @@ export default function ProjectArea(props) {
                 control={control}
                 register={register}
                 rules={{
-                  required: "carpetArea is required",
+                  // required: "carpetArea is required",
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",
@@ -55,7 +55,7 @@ export default function ProjectArea(props) {
                 control={control}
                 register={register}
                 rules={{
-                  required: "Super BuiltUp Area is required",
+                  // required: "Super BuiltUp Area is required",
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",

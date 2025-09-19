@@ -32,12 +32,15 @@
 
 .fillter_left_column {
   display: flex;
-  column-gap: 5rem;
+  column-gap: 3rem;
   align-items: center;
+  width: 70%;
 }
 
 .fillter_right_column {
-  height: 4rem;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 .search_wrapper {
   width: 25rem;

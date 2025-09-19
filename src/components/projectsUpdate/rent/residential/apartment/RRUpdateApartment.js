@@ -19,9 +19,12 @@ import {
   bedroomOptions,
   bathroomOptions,
   balconiesOptions,
+  availabilityReadytoMove,
 } from "@/src/jsonData/projectFiledsData";
+import { useParams, useRouter } from "next/navigation";
 
 export default function RRUpdateApartment(props) {
+  const router = useRouter();
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { apiData, slug, onNext } = props;
 
@@ -84,6 +87,7 @@ export default function RRUpdateApartment(props) {
       }
       if (response.status === "success") {
         toast.success(response.message);
+        router.refresh();
         setisBtnLoading(false);
       }
     } catch (error) {
@@ -106,6 +110,7 @@ export default function RRUpdateApartment(props) {
               options={bedroomOptions}
             />
           </section>
+
           <section className={styles.field_section_wrapper}>
             <RadioNumbers
               sectionTitle="No. of Bathrooms"
@@ -121,6 +126,14 @@ export default function RRUpdateApartment(props) {
               control={control}
               name="noOfBalconies"
               options={balconiesOptions}
+            />
+          </section>
+          <section className={styles.field_section_wrapper}>
+            <RadioNumbers
+              sectionTitle="Project Status"
+              control={control}
+              name="projectStatus"
+              options={availabilityReadytoMove}
             />
           </section>
 
@@ -145,7 +158,11 @@ export default function RRUpdateApartment(props) {
             btnLoading={isBtnLoading}
             disabledBtn={!isValid}
           />
-          <ClickBtn btnText="Next" handelClick={onNext} />
+          <ClickBtn
+            btnText="Next"
+            handelClick={onNext}
+            disabledBtn={!isValid}
+          />
         </div>
       </form>
     </div>

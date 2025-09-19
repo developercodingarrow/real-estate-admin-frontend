@@ -9,10 +9,16 @@ import ProjectFillterBar from "./ProjectFillterBar";
 import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import TableFooter from "../../tableElements/TableFooter";
 import TableSearch from "../../search/TableSearch";
-import { deleteProjectWithImagesAction } from "@/src/app/utils/projectActions";
+import {
+  deleteProjectWithImagesAction,
+  isFeauredProjectAction,
+  isPublishedProjectAction,
+} from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import ComponentLoading from "../../loading/ComponentLoading";
+import NotDataFound from "../../errorpages/NotDataFound";
+import EmptyListMessage from "../../errorpages/EmptyListMessage";
 
 const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
   ssr: false, // ensures it only loads on client side
@@ -25,7 +31,6 @@ const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
 
 export default function ProjectList(props) {
   const { apiData } = props;
-
   const { handelOpenDeleteModel, idForDelete, handelCloseDeleteModel } =
     useContext(ModelsContext);
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
@@ -34,7 +39,7 @@ export default function ProjectList(props) {
   const [projects, setprojects] = useState(apiData);
 
   const [filters, setFilters] = useState({
-    propertyCategory: "commercial",
+    propertyCategory: "residential",
     lookingFor: "sell",
   });
 
@@ -70,17 +75,53 @@ export default function ProjectList(props) {
       setisBtnLoading(true);
       const res = await deleteProjectWithImagesAction(idForDelete);
       console.log("res---", res);
-      if (res?.data?.status === "success") {
+      if (res?.status === "success") {
         // 🔹 Remove deleted blog from state
         setprojects((prev) => prev.filter((item) => item._id !== idForDelete));
-        toast.success(res.data.message);
+        toast.success(res.message);
         // 🔹 Close modal
         handelCloseDeleteModel();
       }
       setisBtnLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log("error--", error);
       setisBtnLoading(false);
+    }
+  };
+
+  const handelIsFeaured = async (id) => {
+    try {
+      const res = await isFeauredProjectAction({ id });
+      console.log(res);
+
+      if (res.error) {
+        toast.error(res.error);
+        return;
+      }
+      if (res.status === "success") {
+        toast.success(res.message);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handelIsPublished = async (id) => {
+    try {
+      const res = await isPublishedProjectAction({ id });
+      console.log(res);
+
+      if (res.error) {
+        toast.error(res.error);
+        return;
+      }
+      if (res.status === "success") {
+        toast.success(res.message);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -117,10 +158,15 @@ export default function ProjectList(props) {
       <div className={styles.table_wrapper}>
         {visibleRows.length > 0 ? (
           visibleRows.map((item, index) => (
-            <ProjectListCard key={index} dataList={item} />
+            <ProjectListCard
+              key={index}
+              dataList={item}
+              onToggleFeatured={handelIsFeaured}
+              onToggleIsPublished={handelIsPublished}
+            />
           ))
         ) : (
-          <p>No projects found.</p>
+          <EmptyListMessage message="No projects found. Please create a project first." />
         )}
       </div>
     </div>

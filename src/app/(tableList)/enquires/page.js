@@ -15,7 +15,7 @@ export default async function EnquireListpage() {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json", // Ensure this is set to JSON
       },
-      cache: "no-store",
+      next: { revalidate: 300 }, // 300 seconds = 5 minutes
     });
 
     if (response.status === 404) {

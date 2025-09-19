@@ -20,7 +20,7 @@ export default function ListTable(props) {
             <th>S No</th>
             <th>Builder Name</th>
             <th>Date</th>
-            <th>Edit</th>
+
             <th>Delete</th>
           </tr>
         </thead>
@@ -31,11 +31,6 @@ export default function ListTable(props) {
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{formatDate(item.createdAt)}</td>
-                <td>
-                  <span className={styles.table_iconBox}>
-                    <FiEdit className={styles.table_icon} />
-                  </span>
-                </td>
                 <td>
                   <span className={styles.table_iconBox}>
                     <MdDelete

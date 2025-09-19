@@ -14,12 +14,17 @@ import FloorDetails from "../../../commanProjectFileds/FloorDetails";
 import SubmitBtn from "@/src/components/elements/buttons/SubmitBtn";
 import ClickBtn from "@/src/components/elements/buttons/ClickBtn";
 import OfficeSetupDetails from "../../../commanProjectFileds/OfficeSetupDetails";
+import { useParams, useRouter } from "next/navigation";
+import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
+import CustomeAreaHookInput from "@/src/components/inputsElements/CustomeAreaHookInput";
 
 export default function CommercialOffice(props) {
+  const router = useRouter();
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { apiData, slug, onNext } = props;
   const {
     control,
+    register,
     reset,
     watch,
     handleSubmit,
@@ -38,6 +43,9 @@ export default function CommercialOffice(props) {
       officeCabines: "",
       officeMiniSeats: "",
       noOfFloors: "",
+      basicPrice: "",
+      ProjectArea: "",
+      StartsPrice: "",
     },
   });
 
@@ -59,6 +67,9 @@ export default function CommercialOffice(props) {
         officeCabines: apiData.officeCabines
           ? String(apiData.officeCabines)
           : "",
+        basicPrice: apiData.basicPrice ? String(apiData.basicPrice) : "",
+        ProjectArea: apiData.ProjectArea ? String(apiData.ProjectArea) : "",
+        StartsPrice: apiData.StartsPrice || "",
       });
     }
   }, [apiData, reset]);
@@ -77,6 +88,7 @@ export default function CommercialOffice(props) {
         console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.error("Error creating project:", error);
@@ -113,6 +125,50 @@ export default function CommercialOffice(props) {
           <section className={styles.field_section_wrapper}>
             <FloorDetails control={control} errors={errors} />
           </section>
+
+          <section className={styles.fieldColumn_section_wrapper}>
+            <CustomeHookInput
+              inputLabel="Project Area"
+              inputPlaceholder="Project Area in Acers"
+              type="text"
+              name="ProjectArea"
+              control={control}
+              register={register}
+              rules={{
+                required: "Project Area required",
+              }}
+              error={errors.ProjectArea?.message}
+            />
+
+            <CustomeHookInput
+              inputLabel="Starts Price"
+              inputPlaceholder="mention prefic with value cr,lakh"
+              type="text"
+              name="StartsPrice"
+              control={control}
+              register={register}
+              rules={{
+                required: "Starts Price required",
+              }}
+              error={errors.StartsPrice?.message}
+            />
+
+            <CustomeAreaHookInput
+              inputLabel="Basic Price"
+              inputPlaceholder="Basic Price"
+              type="number"
+              name="basicPrice"
+              control={control}
+              register={register}
+              rules={{
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: "Only numbers are allowed",
+                },
+              }}
+              error={errors.basicPrice?.message}
+            />
+          </section>
         </div>
         <div className={styles.submitBtn_wrapper}>
           <SubmitBtn
@@ -120,7 +176,11 @@ export default function CommercialOffice(props) {
             btnLoading={isBtnLoading}
             disabledBtn={!isValid}
           />
-          <ClickBtn btnText="Next" handelClick={onNext} />
+          <ClickBtn
+            btnText="Next"
+            handelClick={onNext}
+            disabledBtn={!isValid}
+          />
         </div>
       </form>
     </div>

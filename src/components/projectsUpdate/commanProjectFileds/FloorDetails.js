@@ -21,9 +21,7 @@ export default function FloorDetails(props) {
                 name="noOfFloors"
                 control={control}
                 register={register}
-                rules={{
-                  required: "Floors is required",
-                }}
+                rules={{}}
                 error={errors.noOfFloors?.message}
               />
             </div>

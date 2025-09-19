@@ -7,8 +7,10 @@ import ReactQuillElement from "../editor/ReactQuillElement";
 import { AppContext } from "@/src/_contextApi/AppContext";
 import ClickBtn from "../elements/buttons/ClickBtn";
 import { updateBlogContentAction } from "@/src/app/utils/blogAction";
+import { useParams, useRouter } from "next/navigation";
 
 export default function CreateBlog(props) {
+  const router = useRouter();
   const { apiData, slug, onNext, onBack } = props;
 
   console.log(apiData);
@@ -48,14 +50,17 @@ export default function CreateBlog(props) {
       const response = await updateBlogContentAction(formData, slug);
       if (response.status === "success") {
         setisBtnLoading(false);
+        router.refresh();
         console.log("SEO data saved:", response);
         toast.success(response.message);
       } else {
         console.error("Failed to save SEO data:", response.error);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       setisBtnLoading(false);
+      router.refresh();
     }
 
     // call API update function here with formData + slug
@@ -69,11 +74,7 @@ export default function CreateBlog(props) {
           btnLoading={isBtnLoading}
           handelClick={handleSave}
         />
-        <ClickBtn
-          btnText="Next"
-          btnLoading={isBtnLoading}
-          handelClick={onNext}
-        />
+        <ClickBtn btnText="Next" handelClick={onNext} />
       </div>
       <div className={styles.createContainer}>
         <div className={styles.titleContainer}>

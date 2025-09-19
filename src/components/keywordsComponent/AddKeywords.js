@@ -10,9 +10,12 @@ import ClickBtn from "../elements/buttons/ClickBtn";
 import {
   addKeywordsAction,
   updateProjectAction,
+  updateSlugAction,
 } from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
+import { useParams, useRouter } from "next/navigation";
 export default function AddKeywords(props) {
+  const router = useRouter();
   const { onNext, onBack, apiData, slug } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const [seconderyBtn, setseconderyBtn] = useState(false);
@@ -20,7 +23,8 @@ export default function AddKeywords(props) {
   const handelAddSlug = async (data) => {
     try {
       setisBtnLoading(true);
-      const response = await updateProjectAction(data, slug);
+      const response = await updateSlugAction(data, slug);
+      console.log(response);
       if (response.error) {
         setisBtnLoading(false);
         return;
@@ -28,11 +32,13 @@ export default function AddKeywords(props) {
       if (response.status === "success") {
         toast.success(response.message);
         setisBtnLoading(false);
+        router.refresh();
         return;
       }
     } catch (error) {
       console.error("Error creating project:", error);
       setisBtnLoading(false);
+      router.refresh();
     }
   };
 
@@ -45,10 +51,12 @@ export default function AddKeywords(props) {
       if (res.data.status === "success") {
         setseconderyBtn(false);
         toast.success(res.data.message);
+        router.refresh();
       }
     } catch (error) {
       console.log(error);
       setseconderyBtn(false);
+      router.refresh();
     }
   };
   return (

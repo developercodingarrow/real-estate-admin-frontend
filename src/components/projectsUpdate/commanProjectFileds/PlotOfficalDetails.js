@@ -20,7 +20,6 @@ export default function PlotOfficalDetails(props) {
                 control={control}
                 register={register}
                 rules={{
-                  required: "Number of floors is required",
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",
@@ -32,14 +31,27 @@ export default function PlotOfficalDetails(props) {
 
             <div className={styles.filed_wrapper}>
               <CustomeHookInput
+                inputLabel="Starts Price"
+                inputPlaceholder="prefic with value cr,lakh"
+                type="text"
+                name="StartsPrice"
+                control={control}
+                register={register}
+                error={errors.StartsPrice?.message}
+                rules={{
+                  required: "Starts Price required",
+                }}
+              />
+            </div>
+
+            <div className={styles.filed_wrapper}>
+              <CustomeHookInput
                 inputLabel="posssession"
                 inputPlaceholder="posssession Ex-2028"
                 name="possessionDate"
                 control={control}
                 register={register}
-                rules={{
-                  required: "posssession Date is required",
-                }}
+                rules={{}}
                 error={errors.possessionDate?.message}
               />
             </div>

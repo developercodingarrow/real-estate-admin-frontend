@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import styles from "./page.module.css";
 import EnquireLineChart from "@/src/components/stats/EnquireLineChart";
@@ -7,7 +6,14 @@ import ProjectPublishStatusDonutChart from "@/src/components/stats/ProjectPublis
 import StatsBox from "@/src/components/stats/StatsBox";
 import AmanitiesDonuteChart from "@/src/components/stats/AmanitiesDonuteChart";
 
-export default function HomePagewrapper() {
+export default function HomePagewrapper(props) {
+  const {
+    overallStats,
+    projectStats,
+    PublishStats,
+    amnitiesStats,
+    enquireStats,
+  } = props;
   return (
     <div className={styles.main_container}>
       <div className={styles.page_header}>
@@ -19,27 +25,27 @@ export default function HomePagewrapper() {
         </div>
       </div>
       <div className={styles.statsBox_wrapper}>
-        <StatsBox statsTitle="Total Projects" statsNumber={234} />
+        <StatsBox apiData={overallStats} />
       </div>
       <div className={styles.inner_container}>
         <div className={styles.left_column}>
           <div className={styles.project_wrapper}>
-            <ProjectTinyBarChart />
+            <ProjectTinyBarChart apiData={projectStats} />
           </div>
         </div>
         <div className={styles.right_column}>
           <div className={styles.sideBox_wrapepr}>
-            <ProjectPublishStatusDonutChart />
+            <ProjectPublishStatusDonutChart apiData={PublishStats} />
           </div>
           <div className={styles.sideBox_wrapepr}>
-            <AmanitiesDonuteChart />
+            <AmanitiesDonuteChart apiData={amnitiesStats} />
           </div>
         </div>
       </div>
 
       <div className={styles.full_width_container}>
         <div className={styles.project_wrapper}>
-          <EnquireLineChart />
+          <EnquireLineChart apiData={enquireStats} />
         </div>
       </div>
     </div>

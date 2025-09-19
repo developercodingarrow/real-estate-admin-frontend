@@ -91,7 +91,6 @@ export async function updateProjectImage(formData, slug) {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${authToken}`,
-        // "Content-Type": "multipart/form-data",
       },
       body: formData, // FormData should be sent as is
       credentials: "include",
@@ -159,7 +158,6 @@ export async function updateProjectGallery(formData, slug) {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${authToken}`,
-        "Content-Type": "application/json",
       },
       body: formData, // FormData should be sent directly
       credentials: "include",
@@ -356,7 +354,123 @@ export async function deleteProjectWithImagesAction(id) {
     console.log("delete Project API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+export async function isFeauredProjectAction(formData) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
+  const url = `${API_BASE_URL}/project/isfeatured`;
+
+  try {
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    console.log("Update Project API Response:", data);
+
+    if (data.status === "Fails") {
+      return data;
+    }
+
+    if (data.status === "success") {
+      return data;
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+export async function isPublishedProjectAction(formData) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
+  const url = `${API_BASE_URL}/project/isPublished`;
+
+  try {
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    console.log("Update Project API Response:", data);
+
+    if (data.status === "Fails") {
+      return data;
+    }
+
+    if (data.status === "success") {
+      return data;
+    }
+
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+export async function updateSlugAction(formData, slug) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
+  const url = `${API_BASE_URL}/project/updateslug/${slug}`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    console.log("Update Project API Response:", data);
+
+    if (data.status === "success") {
+      return data;
     }
 
     return {

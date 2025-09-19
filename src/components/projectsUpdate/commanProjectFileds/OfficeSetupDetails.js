@@ -21,9 +21,7 @@ export default function OfficeSetupDetails(props) {
                 name="officeMiniSeats"
                 control={control}
                 register={register}
-                rules={{
-                  required: "address is required",
-                }}
+                rules={{}}
                 error={errors.address?.message}
               />
             </div>
@@ -35,9 +33,7 @@ export default function OfficeSetupDetails(props) {
                 name="officeCabines"
                 control={control}
                 register={register}
-                rules={{
-                  required: "address is required",
-                }}
+                rules={{}}
                 error={errors.address?.message}
               />
             </div>

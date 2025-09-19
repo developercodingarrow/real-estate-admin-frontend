@@ -21,10 +21,10 @@ export async function createLocationAction(formData) {
 
     const data = await res.json();
 
-    console.log("Create Project API Response:", data);
+    console.log("Create Location API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {
@@ -61,7 +61,7 @@ export async function deleteLocationAction(formData) {
     console.log("delete location API Response:", data);
 
     if (data.status === "success") {
-      return { data };
+      return data;
     }
 
     return {

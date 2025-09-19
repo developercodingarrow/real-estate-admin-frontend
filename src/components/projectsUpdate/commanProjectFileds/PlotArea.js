@@ -14,24 +14,6 @@ export default function PlotArea(props) {
           </div>
           <div className={styles.filed_container}>
             <div className={styles.filed_wrapper}>
-              <CustomeAreaHookInput
-                inputLabel="Plot Area"
-                inputPlaceholder="Plot Area"
-                type="number"
-                name="plotArea"
-                control={control}
-                register={register}
-                rules={{
-                  required: "Number of floors is required",
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Only numbers are allowed",
-                  },
-                }}
-                error={errors.plotArea?.message}
-              />
-            </div>
-            <div className={styles.filed_wrapper}>
               <CustomeHookInput
                 inputLabel="Plot Length"
                 inputPlaceholder="Length of plot"
@@ -57,6 +39,21 @@ export default function PlotArea(props) {
                   required: "address is required",
                 }}
                 error={errors.plotWidth?.message}
+              />
+            </div>
+
+            <div className={styles.filed_wrapper}>
+              <CustomeHookInput
+                inputLabel="Project Area"
+                inputPlaceholder="Project Area in Acers"
+                type="text"
+                name="ProjectArea"
+                control={control}
+                register={register}
+                rules={{
+                  required: "Project Area required",
+                }}
+                error={errors.ProjectArea?.message}
               />
             </div>
           </div>

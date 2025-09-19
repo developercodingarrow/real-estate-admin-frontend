@@ -30,12 +30,7 @@ export default function AuthUi() {
     try {
       setisBtnLoading(true);
       const res = await otpLoginAction(data);
-
-      if (res.error) {
-        toast.error(res.error);
-        setisBtnLoading(false);
-        return;
-      }
+      console.log(res);
 
       if (res.status === "Fails" || res.error) {
         toast.error(res.message);
@@ -48,7 +43,6 @@ export default function AuthUi() {
         router.push(`/auth/otpverification/${res.UrlToken}`);
       }
     } catch (error) {
-      console.log("error---", error);
       toast.error("Something went wrong...!");
       setisBtnLoading(false);
     }

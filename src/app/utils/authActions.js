@@ -54,7 +54,6 @@ export async function loginotpVerfication(formData, slug) {
     });
 
     const data = await res.json();
-    console.log("otp res---", data);
     if (data.error) {
       return data;
     }

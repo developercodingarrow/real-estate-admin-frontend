@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./css/enquireLinechart.module.css";
 import {
   LineChart,
@@ -11,25 +11,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { enquireStatsAction } from "@/src/app/utils/statsActions";
 
-export default function EnquireLineChart() {
-  const [data, setData] = useState([]);
+export default function EnquireLineChart(props) {
+  const { apiData } = props;
 
-  const handelGetEnquire = async () => {
-    try {
-      const res = await enquireStatsAction();
-      if (res.status === "success") {
-        setData(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handelGetEnquire();
-  }, []);
   return (
     <div className={styles.main_container}>
       <div className={styles.stats_header}>
@@ -37,7 +22,7 @@ export default function EnquireLineChart() {
       </div>
       <div className={styles.barStats_wrapper}>
         <ResponsiveContainer>
-          <LineChart data={data}>
+          <LineChart data={apiData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
             <YAxis />

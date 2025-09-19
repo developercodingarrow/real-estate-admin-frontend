@@ -1,9 +1,12 @@
 import React from "react";
 import { API_BASE_URL } from "@/config";
+import { cookies } from "next/headers";
 import SCReadyToMoveWrapper from "../wrapper";
 import NotDataFound from "@/src/components/errorpages/NotDataFound";
 
 export default async function SCReadyToMovepage({ params }) {
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("jwt")?.value;
   const { slug } = params;
   let data;
   try {
@@ -13,6 +16,7 @@ export default async function SCReadyToMovepage({ params }) {
         method: "GET", // GET request to fetch the blog
         credentials: "include", // Include cookies in the request
         headers: {
+          Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json", // Ensure this is set to JSON
         },
         cache: "no-store",

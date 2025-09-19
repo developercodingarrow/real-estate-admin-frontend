@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import styles from "./css/projectlocation.module.css";
 import CustomeHookInput from "../../inputsElements/CustomeHookInput";
 import CustomeHookSelector from "../../inputsElements/CustomeHookSelector";
-import { cityOptions, locationOptions } from "@/src/jsonData/locationData";
 import { Controller } from "react-hook-form";
 import { ApiDataContext } from "@/src/_contextApi/ApiDataContextProvider";
 
@@ -58,9 +57,6 @@ export default function ProjectLocation(props) {
                 name="address"
                 control={control}
                 register={register}
-                rules={{
-                  required: "address is required",
-                }}
                 error={errors.address?.message}
               />
             </div>

@@ -21,6 +21,7 @@ export default function SRIndependentWrapper(props) {
             slug={slug}
             onNext={goNext}
             onBack={goBack}
+            headingText="independent house"
           />
         );
 

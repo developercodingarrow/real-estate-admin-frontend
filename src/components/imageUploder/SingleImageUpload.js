@@ -10,8 +10,10 @@ import { handeluplodProjectImage } from "@/src/app/imghandlers/imageHandlers";
 import { deleteProjectImages } from "@/src/app/utils/projectActions";
 import ClickBtn from "../elements/buttons/ClickBtn";
 import { AppContext } from "@/src/_contextApi/AppContext";
+import { useParams, useRouter } from "next/navigation";
 
 export default function SingleImageUpload(props) {
+  const router = useRouter();
   const { slug, apiData, imageUrl, uploadFor, imageUplodhandeler } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
 
@@ -41,6 +43,7 @@ export default function SingleImageUpload(props) {
       console.log("res-single image--", res);
       if (res.error) {
         setisBtnLoading(false);
+        router.refresh();
         return;
       }
       if (res.status === "success") {
@@ -48,10 +51,12 @@ export default function SingleImageUpload(props) {
         toast.success(res.message);
         setServerImage(res?.url || null);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.log("Error uploading image:", error);
       setisBtnLoading(false);
+      router.refresh();
     }
   };
 

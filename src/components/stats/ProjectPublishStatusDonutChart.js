@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styles from "./stats.module.css";
 
 import {
@@ -10,36 +10,23 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { projectPublishStatsAction } from "@/src/app/utils/statsActions";
 
 const COLORS = ["#FF8042", "#00C49F"]; // orange, teal
 
-export default function ProjectPublishStatusDonutChart() {
-  const [data, setData] = useState([]);
-  const handelGetStats = async () => {
-    try {
-      const res = await projectPublishStatsAction();
-      if (res.status === "success") {
-        const formattedData = res.data.map((item) => ({
-          name:
-            item._id === "publish"
-              ? "Publish"
-              : item._id === "draft"
-              ? "Draft"
-              : "Unknown", // handle null
-          value: item.count,
-        }));
-
-        setData(formattedData);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handelGetStats();
-  }, []);
+export default function ProjectPublishStatusDonutChart(props) {
+  const { apiData } = props;
+  const data = useMemo(() => {
+    if (!apiData) return [];
+    return apiData.map((item) => ({
+      name:
+        item._id === true
+          ? "Publish"
+          : item._id === false
+          ? "Draft"
+          : "Unknown",
+      value: item.count,
+    }));
+  }, [apiData]);
   return (
     <div className={styles.project_Publsih_statsContinaer}>
       <div className={styles.stats_header}>

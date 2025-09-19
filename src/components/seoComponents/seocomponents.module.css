@@ -39,7 +39,7 @@
 }
 
 .lable_style {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   /* margin-bottom: 1rem; */
 }
 
@@ -47,7 +47,8 @@
   border: 1px solid #ddd;
   border-radius: 0.8rem;
   background-color: white;
-  /* margin-bottom: 0.5rem; */
+  position: relative;
+  margin-bottom: 1rem;
 }
 
 .inputStyle,
@@ -55,7 +56,29 @@
   width: 100%;
   border: none;
   outline: none;
-  padding: 1rem 0.8rem;
+  padding: 1.2rem 0.8rem;
   border-radius: 0.8rem;
+  font-size: 1.4rem;
+  font-family: sans-serif;
+}
+
+.editor_container {
+  position: relative;
+  padding-top: 2rem;
+}
+
+.error_msg {
+  color: red;
+  position: absolute;
+  bottom: -2rem;
+  left: 0px;
+  font-size: 1.2rem;
+}
+
+.editorerror_msg {
+  color: red;
+  position: absolute;
+  top: 1rem;
+  right: 0px;
   font-size: 1.2rem;
 }

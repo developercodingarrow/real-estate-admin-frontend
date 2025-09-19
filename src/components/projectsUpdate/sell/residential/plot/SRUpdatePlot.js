@@ -19,6 +19,7 @@ import {
   availabilityStatus,
 } from "@/src/jsonData/projectFiledsData";
 import { formatDate } from "@/src/_logicalFunctions/formatDate";
+import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
 
 export default function SRUpdatePlot(props) {
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
@@ -26,6 +27,7 @@ export default function SRUpdatePlot(props) {
 
   const {
     control,
+    register,
     reset,
     watch,
     handleSubmit,
@@ -36,12 +38,15 @@ export default function SRUpdatePlot(props) {
       location: "",
       address: "",
       basicPrice: "",
-      plotArea: "", // default selected value
       plotLength: "", // default selected value
       plotWidth: "",
       projectStatus: "",
       plotOpenSide: "",
       plotPossession: "",
+      ProjectArea: "",
+      StartsPrice: "",
+      ProjectArea: apiData.ProjectArea ? String(apiData.ProjectArea) : "",
+      StartsPrice: apiData.StartsPrice || "",
     },
   });
 
@@ -52,7 +57,6 @@ export default function SRUpdatePlot(props) {
         location: apiData.location || "",
         address: apiData.address || "",
         plotPossession: apiData.plotPossession || "",
-        plotArea: apiData.plotArea ? String(apiData.plotArea) : "",
         plotLength: apiData.plotLength ? String(apiData.plotLength) : "",
         plotWidth: apiData.plotWidth ? String(apiData.plotWidth) : "",
         projectStatus: apiData.projectStatus || "",
@@ -71,6 +75,7 @@ export default function SRUpdatePlot(props) {
       console.log(response);
       if (response.error) {
         setisBtnLoading(false);
+        toast.error(response.error);
         console.error("Error creating project:", response.error);
         return;
       }
@@ -126,6 +131,7 @@ export default function SRUpdatePlot(props) {
           <section className={styles.field_section_wrapper}>
             <PlotOfficalDetails control={control} errors={errors} />
           </section>
+          <section className={styles.fieldColumn_section_wrapper}></section>
         </div>
 
         <div className={styles.submitBtn_wrapper}>

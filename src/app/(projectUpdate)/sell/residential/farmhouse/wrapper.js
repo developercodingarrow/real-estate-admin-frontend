@@ -21,6 +21,7 @@ export default function SRfarmhousewrapper(props) {
             slug={slug}
             onNext={goNext}
             onBack={goBack}
+            headingText="Farmhouse"
           />
         );
 

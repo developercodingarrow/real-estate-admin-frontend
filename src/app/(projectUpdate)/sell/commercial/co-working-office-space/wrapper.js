@@ -11,7 +11,7 @@ import { StepperContext } from "@/src/_contextApi/StepperProvider";
 export default function SCofficeCoWprkingWrapper(props) {
   const { data, slug } = props;
   const { step, goNext, goBack } = useContext(StepperContext);
-
+  console.log("data-- office api", data);
   const renderStepComponent = () => {
     switch (step) {
       case 1:

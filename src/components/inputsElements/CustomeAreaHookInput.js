@@ -21,13 +21,6 @@ export default function CustomeAreaHookInput(props) {
 
       <div className={styles.inputBox_wrapper}>
         <div className={styles.input_wrapper}>
-          {/* <input
-            id={name}
-            type={type}
-            placeholder={inputPlaceholder}
-            className={styles.inputStyle}
-            {...register(name, rules)}
-          /> */}
           <Controller
             name={name}
             control={control}

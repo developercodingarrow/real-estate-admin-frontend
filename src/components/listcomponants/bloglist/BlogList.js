@@ -50,33 +50,27 @@ export default function BlogList(props) {
 
   const handelDeleteBlog = async () => {
     try {
-      setisBtnLoading(true);
       const res = await deleteBlogWithImageAction(idForDelete);
-      console.log("res---", res);
-      if (res?.data?.status === "success") {
+      if (res?.status === "success") {
         // 🔹 Remove deleted blog from state
         setBlogs((prev) => prev.filter((blog) => blog._id !== idForDelete));
-        toast.success(res.data.message);
+        toast.success(res.message);
         // 🔹 Close modal
         handelCloseDeleteModel();
       }
-      setisBtnLoading(false);
     } catch (error) {
       console.log(error);
-      setisBtnLoading(false);
     }
   };
 
   const handelStartCreateBlog = async () => {
     try {
       setisBtnLoading(true);
-
       const res = await starteBlogCreateAction();
       console.log("start- creating blog-", res);
       if (res.status === "success") {
-        toast.success(res.message);
         router.push(`/create-new-blog/${res.data._id}`);
-        setisBtnLoading(false);
+        toast.success(res.message);
       }
     } catch (error) {
       console.log(error);

@@ -22,6 +22,7 @@ export default function SRvillawrapper(props) {
             slug={slug}
             onNext={goNext}
             onBack={goBack}
+            headingText="villa"
           />
         );
 

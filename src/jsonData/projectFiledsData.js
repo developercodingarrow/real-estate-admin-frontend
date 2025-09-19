@@ -20,6 +20,10 @@ export const availabilityStatus = [
   { value: "under-construction", label: "Under Construction" },
 ];
 
+export const availabilityReadytoMove = [
+  { value: "ready-to-move", label: "Ready to Move" },
+];
+
 export const propertyOnFloorOptions = [
   { value: "lower-basement", label: "Lower Basement" },
   { value: "basement", label: "Basement" },

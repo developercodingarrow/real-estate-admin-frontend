@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import dynamicImport from "next/dynamic";
 import styles from "./builderlist.module.css";
 import ListTable from "../../tableElements/ListTable";
@@ -14,6 +16,7 @@ import {
 import { AppContext } from "@/src/_contextApi/AppContext";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import ComponentLoading from "../../loading/ComponentLoading";
+import EmptyListMessage from "../../errorpages/EmptyListMessage";
 
 const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
   ssr: false, // ensures it only loads on client side
@@ -34,7 +37,11 @@ export default function BuilderList(props) {
     try {
       setisBtnLoading(true);
       const response = await createBuilderAction(data);
-      console.log(response);
+      if (response.error) {
+        toast.error(response.error);
+        setisBtnLoading(false);
+        return;
+      }
       if (response.data.status === "success") {
         console.log(response.data.data);
         setBuilders((prev) => [response.data.data, ...prev]);
@@ -49,11 +56,18 @@ export default function BuilderList(props) {
   const handelDelete = async () => {
     try {
       const response = await deleteBuilderAction({ _id: idForDelete }); // ✅ pass id in body
+      console.log(response);
+      if (response.error) {
+        toast.error(response.error);
+        handelCloseDeleteModel();
+        return;
+      }
       if (response?.status === "success") {
         // remove deleted builder instantly
         setBuilders((prev) =>
           prev.filter((builder) => builder._id !== idForDelete)
         );
+        toast.success(response.message);
         handelCloseDeleteModel();
       }
     } catch (error) {
@@ -75,6 +89,7 @@ export default function BuilderList(props) {
 
   return (
     <div className={styles.main_conatiner}>
+      <ToastContainer />
       <DeleteModel deletehandel={handelDelete} />{" "}
       <div className={styles.page_heading}>Builder List</div>
       <div className={styles.page_fillter_wrapper}>
@@ -93,7 +108,7 @@ export default function BuilderList(props) {
             />
           </div>
         </div>
-        <div>
+        <div className={styles.fillter_right_column}>
           <TableFooter
             totalRows={totalRows}
             currentPage={currentPage}
@@ -106,7 +121,11 @@ export default function BuilderList(props) {
         </div>
       </div>
       <div className={styles.table_wrapper}>
-        <ListTable tableData={visibleRows} handelDeleteItem={handelDelete} />
+        {visibleRows.length > 0 ? (
+          <ListTable tableData={visibleRows} handelDeleteItem={handelDelete} />
+        ) : (
+          <EmptyListMessage message="No builders yet — please create one to get started." />
+        )}
       </div>
     </div>
   );

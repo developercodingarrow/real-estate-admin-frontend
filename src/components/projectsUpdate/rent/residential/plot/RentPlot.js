@@ -20,7 +20,9 @@ import {
 } from "@/src/jsonData/projectFiledsData";
 import { formatDate } from "@/src/_logicalFunctions/formatDate";
 import PriceDetails from "../../../commanProjectFileds/PriceDetails";
+import { useParams, useRouter } from "next/navigation";
 export default function RentPlot(props) {
+  const router = useRouter();
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { apiData, slug, onNext } = props;
 
@@ -81,6 +83,7 @@ export default function RentPlot(props) {
         console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.error("Error creating project:", error);
@@ -140,7 +143,11 @@ export default function RentPlot(props) {
             btnLoading={isBtnLoading}
             disabledBtn={!isValid}
           />
-          <ClickBtn btnText="Next" handelClick={onNext} />
+          <ClickBtn
+            btnText="Next"
+            handelClick={onNext}
+            disabledBtn={!isValid}
+          />
         </div>
       </form>
     </div>

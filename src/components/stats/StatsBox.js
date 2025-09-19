@@ -10,39 +10,21 @@ import {
   FaLocationDot,
 } from "../ApplicationIcons";
 import Link from "next/link";
-import { overallStatsAction } from "@/src/app/utils/statsActions";
-import ComponentLoading from "../loading/ComponentLoading";
 
 export default function StatsBox(props) {
-  const [stats, setStats] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const res = await overallStatsAction();
-      if (res.status === "success") {
-        setStats(res.data);
-      }
-    })();
-  }, []);
-
-  if (!stats)
-    return (
-      <div className={styles.loading_wrapper}>
-        <ComponentLoading />
-      </div>
-    );
+  const { apiData } = props;
 
   const data = [
-    { title: "total projects", value: stats.totalProjects, slug: "projects" },
-    { title: "total blogs", value: stats.totalBlogs, slug: "blogs" },
-    { title: "total enquires", value: stats.totalEnquires, slug: "enquires" },
-    { title: "total builders", value: stats.totalBuilders, slug: "builders" },
+    { title: "total projects", value: apiData.totalProjects, slug: "projects" },
+    { title: "total blogs", value: apiData.totalBlogs, slug: "blogs" },
+    { title: "total enquires", value: apiData.totalEnquires, slug: "enquires" },
+    { title: "total builders", value: apiData.totalBuilders, slug: "builders" },
     {
       title: "total amenities",
-      value: stats.totalAmenities,
+      value: apiData.totalAmenities,
       slug: "amenities",
     },
-    { title: "total cities", value: stats.totalCities, slug: "cities" },
+    { title: "total cities", value: apiData.totalCities, slug: "cities" },
   ];
 
   const renderIcon = (iconType) => {

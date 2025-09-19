@@ -22,8 +22,6 @@ export default function CustomeHookSelector(props) {
           className={`${styles.text_inputStyle} ${
             error ? styles.errorBorder : ""
           }`}
-          // defaultValue=""
-          // {...(register ? register(name, rules) : {})} // <-- register applied here
           value={value || ""} // <-- controlled value
           onChange={(e) => onChange(e.target.value)}
         >

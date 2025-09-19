@@ -7,13 +7,26 @@ import Image from "next/image";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import Link from "next/link";
 import { formatDate } from "@/src/_logicalFunctions/formatDate";
+import ToggleBtn from "../../elements/toogleBtns/ToggleBtn";
 export default function ProjectListCard(props) {
-  const { dataList } = props;
+  const { dataList, onToggleFeatured, onToggleIsPublished } = props;
   const { handelOpenDeleteModel } = useContext(ModelsContext);
 
   const handelDeleteModel = (itemId) => {
     console.log(itemId);
     handelOpenDeleteModel(itemId);
+  };
+
+  const handleToggle = () => {
+    if (onToggleFeatured) {
+      onToggleFeatured(dataList._id); // pass id + new state
+    }
+  };
+
+  const handelToogleIsPublish = () => {
+    if (onToggleIsPublished) {
+      onToggleIsPublished(dataList._id); // pass id + new state
+    }
   };
   return (
     <div className={styles.project_card}>
@@ -55,15 +68,6 @@ export default function ProjectListCard(props) {
           </div>
           <div className={styles.card_footer_wrapper}>
             <div className={styles.project_stats}>
-              {dataList.basicPrice && (
-                <div className={styles.stats_box}>
-                  <div className={styles.stats_staticText}>Price</div>
-                  <div className={styles.stats_dynimicText}>
-                    {dataList?.price}
-                  </div>
-                </div>
-              )}
-
               <div className={styles.stats_box}>
                 <div className={styles.stats_staticText}>property Type</div>
                 <div className={styles.stats_dynimicText}>
@@ -84,6 +88,24 @@ export default function ProjectListCard(props) {
               </div>
             </div>
             <div className={styles.card_action_wrapper}>
+              <div className={styles.togleBtn_wrapper}>
+                <div className={styles.togleBtn_box}>
+                  <span className={styles.togle_Text}> Featured</span>
+                  <ToggleBtn
+                    initial={dataList?.isFeatured}
+                    onToggle={handleToggle}
+                  />
+                </div>
+
+                <div className={styles.togleBtn_box}>
+                  <span className={styles.togle_Text}> Publish Stats</span>
+                  <ToggleBtn
+                    initial={dataList?.publishStatus}
+                    onToggle={handelToogleIsPublish}
+                  />
+                </div>
+              </div>
+
               <div
                 className={styles.action_btn}
                 onClick={() => handelDeleteModel(dataList._id)}

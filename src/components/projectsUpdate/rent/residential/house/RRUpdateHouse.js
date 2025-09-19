@@ -14,8 +14,16 @@ import { useForm } from "react-hook-form";
 import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
 import { Controller } from "react-hook-form";
 import PriceDetails from "../../../commanProjectFileds/PriceDetails";
+import {
+  availabilityReadytoMove,
+  bedroomOptions,
+  bathroomOptions,
+  balconiesOptions,
+} from "@/src/jsonData/projectFiledsData";
+import { useParams, useRouter } from "next/navigation";
 
 export default function RRUpdateHouse(props) {
+  const router = useRouter();
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const { apiData, slug, onNext } = props;
 
@@ -63,38 +71,6 @@ export default function RRUpdateHouse(props) {
     }
   }, [apiData, reset]);
 
-  const bedroomOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const bathroomOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const balconiesOptions = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-  ];
-
-  const availabilityStatus = [
-    { value: "ready-to-move", label: "Ready to Move" },
-    { value: "under-construction", label: "Under Construction" },
-  ];
-
   const handelsubmit = async (data) => {
     try {
       setisBtnLoading(true);
@@ -109,6 +85,7 @@ export default function RRUpdateHouse(props) {
         console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.error("Error creating project:", error);
@@ -144,6 +121,15 @@ export default function RRUpdateHouse(props) {
               control={control}
               name="noOfBalconies"
               options={balconiesOptions}
+            />
+          </section>
+
+          <section className={styles.field_section_wrapper}>
+            <RadioNumbers
+              sectionTitle="Availability Status"
+              control={control}
+              name="projectStatus"
+              options={availabilityReadytoMove}
             />
           </section>
 

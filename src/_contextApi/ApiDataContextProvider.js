@@ -19,7 +19,7 @@ export default function ApiDataContextProvider({ children }) {
         const builderResult = await allbuildersAction();
         if (builderResult?.data) {
           const formattedBuilders = builderResult.data.map((b) => ({
-            value: b._id, // use _id for DB relations
+            value: b.name, // use _id for DB relations
             label: b.name, // display name
           }));
           setapiBuilderList(formattedBuilders);
@@ -29,7 +29,7 @@ export default function ApiDataContextProvider({ children }) {
         const cityResult = await allCitiesAction();
         if (cityResult?.data) {
           const formattedCities = cityResult.data.map((c) => ({
-            value: c._id, // unique id
+            value: c.name, // unique id
             label: c.name, // display name
           }));
           setApiCitiesList(formattedCities);
@@ -39,7 +39,7 @@ export default function ApiDataContextProvider({ children }) {
         const LocationResult = await allLocationAction();
         if (LocationResult?.data) {
           const formattedCities = LocationResult.data.map((c) => ({
-            value: c._id, // unique id
+            value: c.name, // unique id
             label: c.name, // display name
           }));
           setapiLocationList(formattedCities);

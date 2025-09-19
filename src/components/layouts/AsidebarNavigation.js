@@ -51,6 +51,12 @@ export default function AsidebarNavigation() {
       name: "Cities",
       icon: FaLocationDot,
     },
+
+    {
+      hrfLink: "/location",
+      name: "Location",
+      icon: FaLocationDot,
+    },
     {
       hrfLink: "/amenities",
       name: "amenities",

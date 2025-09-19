@@ -8,6 +8,7 @@ import TableSearch from "../../search/TableSearch";
 import CityTable from "../../tableElements/CityTable";
 import FillterBarCreate from "../../barcreate/FillterBarCreate";
 import ComponentLoading from "../../loading/ComponentLoading";
+import EmptyListMessage from "../../errorpages/EmptyListMessage";
 const DeleteModel = dynamicImport(() => import("../../models/DeleteModel"), {
   ssr: false, // ensures it only loads on client side
   loading: () => (
@@ -73,7 +74,11 @@ export default function CityList(props) {
         </div>
       </div>
       <div className={styles.table_wrapper}>
-        <CityTable tableData={visibleRows} handelDeleteItem={handelDelete} />
+        {visibleRows.length > 0 ? (
+          <CityTable tableData={visibleRows} handelDeleteItem={handelDelete} />
+        ) : (
+          <EmptyListMessage message="No cities yet — please create one to get started." />
+        )}
       </div>
     </div>
   );

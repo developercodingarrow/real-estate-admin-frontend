@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styles from "./css/projectTineyBarChar.module.css";
 import {
   ResponsiveContainer,
@@ -9,47 +9,37 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-import { projectStatsAction } from "@/src/app/utils/statsActions";
 
-export default function ProjectTinyBarChart() {
-  const [data, setData] = useState([]);
+export default function ProjectTinyBarChart(props) {
+  const { apiData } = props;
 
-  const handelGetSatsData = async () => {
-    try {
-      const res = await projectStatsAction();
+  // Format data directly from apiData
+  const data = useMemo(() => {
+    if (!apiData) return [];
 
-      if (res.status === "success") {
-        const { byType, byCategory, byPublishStatus } = res.data;
+    const { byType, byCategory, byPublishStatus } = apiData;
 
-        const formattedByType = byType.map((item) => ({
-          name: item._id,
-          value: item.count,
-        }));
+    const formattedByType = byType?.map((item) => ({
+      name: item._id,
+      value: item.count,
+    }));
 
-        const formattedByCategory = byCategory.map((item) => ({
-          name: item._id,
-          value: item.count,
-        }));
+    const formattedByCategory = byCategory?.map((item) => ({
+      name: item._id,
+      value: item.count,
+    }));
 
-        const formattedByPublishStatus = byPublishStatus.map((item) => ({
-          name: item._id,
-          value: item.count,
-        }));
+    const formattedByPublishStatus = byPublishStatus?.map((item) => ({
+      name: item._id,
+      value: item.count,
+    }));
 
-        setData([
-          { label: "Type", values: formattedByType },
-          { label: "Category", values: formattedByCategory },
-          { label: "Publish Status", values: formattedByPublishStatus },
-        ]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handelGetSatsData();
-  }, []);
+    return [
+      { label: "Type", values: formattedByType },
+      { label: "Category", values: formattedByCategory },
+      { label: "Publish Status", values: formattedByPublishStatus },
+    ];
+  }, [apiData]);
 
   return (
     <div className={styles.main_container}>

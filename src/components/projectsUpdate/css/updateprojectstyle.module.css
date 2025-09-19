@@ -18,3 +18,13 @@
   display: flex;
   column-gap: 3rem;
 }
+
+.fieldColumn_section_wrapper {
+  display: flex;
+  align-items: flex-start;
+  column-gap: 3rem;
+}
+
+.form_inner_container {
+  margin-bottom: 2rem;
+}

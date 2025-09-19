@@ -8,8 +8,10 @@ import { allAmnitiesAction } from "@/src/app/utils/amnitiesActions";
 import { updateProjectAmnitiesAction } from "@/src/app/utils/projectActions";
 import ClickBtn from "../elements/buttons/ClickBtn";
 import { AppContext } from "@/src/_contextApi/AppContext";
+import { useParams, useRouter } from "next/navigation";
 
 export default function AllAmenities(props) {
+  const router = useRouter();
   const { apiData, slug, onBack, onNext } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const [selectedAmenities, setSelectedAmenities] = useState([]);
@@ -49,16 +51,16 @@ export default function AllAmenities(props) {
         amenities: selectedAmenities.map((a) => a._id), // only send IDs
       };
 
-      console.log(payload);
-
       const res = await updateProjectAmnitiesAction(payload, slug);
-      console.log("Update Project Response:", res.data);
+      console.log("Update amnites:", res.data);
       if (res.data.status === "success") {
         toast.success(res.data.message);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.log("Error uploading image:", error);
+      router.refresh();
       setisBtnLoading(false);
     }
   };

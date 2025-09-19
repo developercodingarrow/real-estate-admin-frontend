@@ -17,13 +17,18 @@ import {
   balconiesOptions,
   availabilityStatus,
 } from "@/src/jsonData/projectFiledsData";
+import { useParams, useRouter } from "next/navigation";
+import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
+import CustomeAreaHookInput from "@/src/components/inputsElements/CustomeAreaHookInput";
 
 export default function SRUpdateHouse(props) {
+  const router = useRouter();
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
-  const { apiData, slug, onNext } = props;
+  const { apiData, slug, onNext, headingText = "house" } = props;
 
   const {
     control,
+    register,
     reset,
     watch,
     handleSubmit,
@@ -40,6 +45,9 @@ export default function SRUpdateHouse(props) {
       city: "",
       location: "",
       address: "",
+      basicPrice: "",
+      ProjectArea: "",
+      StartsPrice: "",
     },
   });
 
@@ -60,6 +68,9 @@ export default function SRUpdateHouse(props) {
         city: apiData.city || "",
         location: apiData.location || "",
         address: apiData.address || "",
+        basicPrice: apiData.basicPrice ? String(apiData.basicPrice) : "",
+        ProjectArea: apiData.ProjectArea ? String(apiData.ProjectArea) : "",
+        StartsPrice: apiData.StartsPrice || "",
       });
     }
   }, [apiData, reset]);
@@ -75,17 +86,19 @@ export default function SRUpdateHouse(props) {
       if (response.status === "success") {
         toast.success(response.message);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.error("Error creating project:", error);
       setisBtnLoading(false);
+      router.refresh();
     }
   };
 
   return (
     <div className={styles.main_conianter}>
       <ToastContainer />
-      <div className={styles.page_title}>Fill The fileds for House</div>
+      <div className={styles.page_title}>Fill The fileds for {headingText}</div>
       <form onSubmit={handleSubmit(handelsubmit)}>
         <div className={styles.form_inner_container}>
           <section className={styles.field_section_wrapper}>
@@ -130,6 +143,51 @@ export default function SRUpdateHouse(props) {
           <section className={styles.field_section_wrapper}>
             <ProjectArea control={control} errors={errors} />
           </section>
+
+          <section className={styles.fieldColumn_section_wrapper}>
+            <CustomeHookInput
+              inputLabel="Project Area"
+              inputPlaceholder="property Area in sq.yards"
+              type="text"
+              name="ProjectArea"
+              control={control}
+              register={register}
+              error={errors.ProjectArea?.message}
+              rules={{
+                required: "Area is required",
+              }}
+            />
+
+            <CustomeHookInput
+              inputLabel="Starts Price"
+              inputPlaceholder="prefic with value cr,lakh"
+              type="text"
+              name="StartsPrice"
+              control={control}
+              register={register}
+              error={errors.StartsPrice?.message}
+              rules={{
+                required: "Staring Price is required",
+              }}
+            />
+
+            <CustomeAreaHookInput
+              inputLabel="Basic Price"
+              inputPlaceholder="Basic Price"
+              type="number"
+              name="basicPrice"
+              control={control}
+              register={register}
+              rules={{
+                required: "Basic Price is required",
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: "Only numbers are allowed",
+                },
+              }}
+              error={errors.basicPrice?.message}
+            />
+          </section>
         </div>
 
         <div className={styles.submitBtn_wrapper}>
@@ -138,7 +196,11 @@ export default function SRUpdateHouse(props) {
             btnLoading={isBtnLoading}
             disabledBtn={!isValid}
           />
-          <ClickBtn btnText="Next" handelClick={onNext} />
+          <ClickBtn
+            btnText="Next"
+            handelClick={onNext}
+            disabledBtn={!isValid}
+          />
         </div>
       </form>
     </div>

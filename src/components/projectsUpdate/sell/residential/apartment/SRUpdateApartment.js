@@ -13,7 +13,16 @@ import ClickBtn from "@/src/components/elements/buttons/ClickBtn";
 import { updateProjectAction } from "@/src/app/utils/projectActions";
 import { AppContext } from "@/src/_contextApi/AppContext";
 import { formatDate } from "@/src/_logicalFunctions/formatDate";
+import {
+  projectTypeOptions,
+  projectStatusOptions,
+} from "@/src/jsonData/sellApartmentData";
+import RadioNumbers from "../../../commanProjectFileds/RadioNumbers";
+import { useParams, useRouter } from "next/navigation";
+import CustomeHookInput from "@/src/components/inputsElements/CustomeHookInput";
+
 export default function SRUpdateApartment(props) {
+  const router = useRouter();
   const { apiData, slug, onNext } = props;
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
 
@@ -46,6 +55,8 @@ export default function SRUpdateApartment(props) {
       reraNo: "",
       possessionDate: "",
       basicPrice: "",
+      ProjectArea: "",
+      StartsPrice: "",
       // ...etc
     },
   });
@@ -69,14 +80,15 @@ export default function SRUpdateApartment(props) {
         unitType: apiData.unitType || "",
         reraNo: apiData.reraNo || "",
         possessionDate: formatDate(apiData.possessionDate) || "",
-        basicPrice: apiData.basicPrice || "",
+        basicPrice: apiData.basicPrice ? String(apiData.basicPrice) : "",
+        ProjectArea: apiData.ProjectArea ? String(apiData.ProjectArea) : "",
+        StartsPrice: apiData.StartsPrice || "",
       });
     }
   }, [apiData, reset]);
 
   const handelsubmit = async (data) => {
     try {
-      console.log("data:", data);
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
       if (response.error) {
@@ -87,6 +99,7 @@ export default function SRUpdateApartment(props) {
       if (response.status === "success") {
         toast.success(response.message);
         setisBtnLoading(false);
+        router.refresh();
       }
     } catch (error) {
       console.error("Error creating project:", error);
@@ -101,8 +114,24 @@ export default function SRUpdateApartment(props) {
       </div>
       <form onSubmit={handleSubmit(handelsubmit)}>
         <div className={styles.form_inner_container}>
-          <section className={styles.field_section_wrapper}>
+          <section className={styles.fieldColumn_section_wrapper}>
+            <RadioNumbers
+              sectionTitle="Property Type"
+              control={control}
+              name="projectType"
+              options={projectTypeOptions}
+            />
+
             <ProjectType control={control} errors={errors} />
+          </section>
+
+          <section className={styles.field_section_wrapper}>
+            <RadioNumbers
+              sectionTitle="Project Status"
+              control={control}
+              name="projectStatus"
+              options={projectStatusOptions}
+            />
           </section>
 
           <section className={styles.field_section_wrapper}>
@@ -115,6 +144,34 @@ export default function SRUpdateApartment(props) {
           <section className={styles.field_section_wrapper}>
             <ProjectOfficialDetails control={control} errors={errors} />
           </section>
+
+          <section className={styles.fieldColumn_section_wrapper}>
+            <CustomeHookInput
+              inputLabel="Project Area"
+              inputPlaceholder="Project Area in Acers"
+              type="text"
+              name="ProjectArea"
+              control={control}
+              register={register}
+              rules={{
+                required: "Project Area required",
+              }}
+              error={errors.ProjectArea?.message}
+            />
+
+            <CustomeHookInput
+              inputLabel="Starts Price"
+              inputPlaceholder="mention prefic with value cr,lakh"
+              type="text"
+              name="StartsPrice"
+              control={control}
+              register={register}
+              rules={{
+                required: "Starts Price required",
+              }}
+              error={errors.StartsPrice?.message}
+            />
+          </section>
         </div>
 
         <div className={styles.submitBtn_wrapper}>
@@ -123,7 +180,11 @@ export default function SRUpdateApartment(props) {
             btnLoading={isBtnLoading}
             disabledBtn={!isValid}
           />
-          <ClickBtn btnText="Next" handelClick={onNext} />
+          <ClickBtn
+            btnText="Next"
+            handelClick={onNext}
+            disabledBtn={!isValid}
+          />
         </div>
       </form>
     </div>

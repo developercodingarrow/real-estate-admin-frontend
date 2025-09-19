@@ -36,9 +36,8 @@ export default function OtpVerficationUi(props) {
         setisBtnLoading(false);
         return;
       }
-      console.log("test refresh---", res);
+
       if (res.status === "success") {
-        setisBtnLoading(false);
         router.refresh();
         router.push("/");
       }

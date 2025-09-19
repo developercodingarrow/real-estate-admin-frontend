@@ -30,6 +30,12 @@
   align-items: center;
 }
 
+.fillter_right_column {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .page_fillter_wrapper {
   display: flex;
   align-items: center;
