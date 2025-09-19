@@ -9,7 +9,7 @@ const encryptionKey = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
 
 //1) OTP Login  API
 export async function otpLoginAction(formData) {
-  const url = `${API_BASE_URL}/auth/superAdminlogin`;
+  const url = `https://dashboardrealestate.litversehub.com/api/v1/real-estate/admin/auth/superAdminlogin`;
   console.log("url login ---", url);
   try {
     const res = await fetch(url, {
