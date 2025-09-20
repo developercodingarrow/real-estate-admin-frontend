@@ -45,7 +45,7 @@ export default function AmenitiesList(props) {
                 <TableSearch
                   searchHandle={searchByTableFiled}
                   searchField="name"
-                  placeholder="serach city"
+                  placeholder="serach amenities"
                 />
               </div>
             </div>

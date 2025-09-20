@@ -14,7 +14,7 @@ export default async function LocationListpage() {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "application/json", // Ensure this is set to JSON
       },
-      next: { revalidate: 86400 }, // ✅ revalidate after 1 day (24h)
+      next: { revalidate: 10 }, // ✅ revalidate after 1 day (24h)
     });
 
     if (response.status === 404) {
