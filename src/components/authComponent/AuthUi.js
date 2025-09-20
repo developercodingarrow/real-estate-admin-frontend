@@ -30,8 +30,11 @@ export default function AuthUi() {
     try {
       setisBtnLoading(true);
       const res = await otpLoginAction(data);
-      console.log(res);
-
+      if (res.error) {
+        toast.error(res.error);
+        setisBtnLoading(false);
+        return;
+      }
       if (res.status === "Fails" || res.error) {
         toast.error(res.message);
         setisBtnLoading(false);

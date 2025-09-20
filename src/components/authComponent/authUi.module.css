@@ -49,3 +49,8 @@
   bottom: -2.2rem;
   font-size: 1.2rem;
 }
+
+@media only screen and (max-width: 720px) {
+
+
+}

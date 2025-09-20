@@ -88,7 +88,7 @@ export default function OtpVerficationUi(props) {
             </div>
             <div className={styles.form_submitBtn_wrapper}>
               <SubmitBtn
-                btnText="Login"
+                btnText="Submit"
                 fullWidth={true}
                 size="large"
                 btnLoading={isBtnLoading}

@@ -219,4 +219,7 @@ h4 {
 }
 
 @media only screen and (max-width: 720px) {
+  .authMainLayout_wrapper {
+    padding: 6rem 0rem;
+  }
 }

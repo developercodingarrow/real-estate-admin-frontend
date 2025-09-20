@@ -54,7 +54,7 @@ export async function loginotpVerfication(formData, slug) {
     });
 
     const data = await res.json();
-    if (data.error) {
+    if (data.status === "Fails") {
       return data;
     }
 
