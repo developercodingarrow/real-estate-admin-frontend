@@ -24,22 +24,22 @@ export default async function Homepage() {
       fetch(`${API_BASE_URL}/stats/overallStats`, {
         method: "GET",
         headers: { Authorization: `Bearer ${authToken}` },
-        next: { revalidate: 86400 },
+        next: { revalidate: 10 },
       }),
       fetch(`${API_BASE_URL}/stats/projectStats`, {
         method: "GET",
         headers: { Authorization: `Bearer ${authToken}` },
-        next: { revalidate: 86400 },
+        next: { revalidate: 10 },
       }),
       fetch(`${API_BASE_URL}/stats/ProjectPublishStats`, {
         method: "GET",
         headers: { Authorization: `Bearer ${authToken}` },
-        next: { revalidate: 86400 },
+        next: { revalidate: 10 },
       }),
       fetch(`${API_BASE_URL}/stats/amenityStats`, {
         method: "GET",
         headers: { Authorization: `Bearer ${authToken}` },
-        next: { revalidate: 86400 },
+        next: { revalidate: 10 },
       }),
       fetch(`${API_BASE_URL}/stats/enquirestats`, {
         method: "GET",
