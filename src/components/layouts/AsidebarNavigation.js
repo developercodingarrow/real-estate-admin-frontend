@@ -13,8 +13,11 @@ import {
   FaEnvelopeOpenText,
   SiBrandfolder,
 } from "../ApplicationIcons";
+import { AuthContext } from "@/src/_contextApi/authContext";
 export default function AsidebarNavigation() {
   const { isSidebarCollapsed } = useContext(AppContext);
+  const { authUser } = useContext(AuthContext);
+  const useRole = authUser?.role;
   const navigationOption = [
     {
       hrfLink: "/",
@@ -34,7 +37,8 @@ export default function AsidebarNavigation() {
     {
       hrfLink: "/enquires",
       name: "Enquires",
-      icon: FaEnvelopeOpenText, // Use the actual component, not a string
+      icon: FaEnvelopeOpenText,
+      role: "superAdmin", // Only superAdmin can see this
     },
     {
       hrfLink: "/project-list",
@@ -64,9 +68,15 @@ export default function AsidebarNavigation() {
     },
   ];
 
+  // Filter navigation based on role
+  const filteredNavigation = navigationOption.filter((item) => {
+    if (item.role) return item.role === useRole; // Only show if role matches
+    return true; // Show all others
+  });
+
   return (
     <div className={styles.navigatio_wrapper}>
-      {navigationOption.map((item, index) => {
+      {filteredNavigation.map((item, index) => {
         const IconComponent = item.icon; // Store the icon component in a variable
         return (
           <Link
