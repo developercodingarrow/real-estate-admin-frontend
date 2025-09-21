@@ -49,6 +49,7 @@ export default function BuilderList(props) {
       }
       if (response.data.status === "success") {
         console.log(response.data.data);
+        toast.success(response?.message);
         setBuilders((prev) => [response.data.data, ...prev]);
         setisBtnLoading(false);
       }

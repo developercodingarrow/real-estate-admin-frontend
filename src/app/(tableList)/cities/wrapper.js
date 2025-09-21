@@ -53,7 +53,7 @@ export default function CityListwrapper(props) {
       if (response?.status === "success") {
         // remove deleted builder instantly
         setcities((prev) => prev.filter((item) => item._id !== idForDelete));
-        toast.success("-City Deleted successfully");
+        toast.success(response?.message);
         handelCloseDeleteModel();
       }
     } catch (error) {

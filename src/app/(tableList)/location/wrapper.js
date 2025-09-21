@@ -37,7 +37,7 @@ export default function LocationWrapper(props) {
         return;
       }
       if (response.status === "success") {
-        toast.success("-Location created successfully");
+        toast.success(response?.message);
         setlocations((prev) => [response.data, ...prev]);
         setisBtnLoading(false);
       }
