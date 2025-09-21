@@ -6,13 +6,20 @@ import StaticprojectImg from "../../../../public/web-img/default-project-image.p
 import Link from "next/link";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import { formatDate } from "@/src/_logicalFunctions/formatDate";
+import ToggleBtn from "../../elements/toogleBtns/ToggleBtn";
 
 export default function BlogListCard(props) {
-  const { dataList } = props;
+  const { dataList, onToggleIsPublished } = props;
   const { handelOpenDeleteModel } = useContext(ModelsContext);
 
   const handelDeleteModel = (itemId) => {
     handelOpenDeleteModel(itemId);
+  };
+
+  const handelToogleIsPublish = () => {
+    if (onToggleIsPublished) {
+      onToggleIsPublished(dataList._id); // pass id + new state
+    }
   };
   return (
     <div className={styles.blog_card}>
@@ -47,6 +54,13 @@ export default function BlogListCard(props) {
           <div className={styles.card_action_wrapper}>
             <div>{formatDate(dataList?.createdAt)}</div>
             <div className={styles.card_actions}>
+              <div className={styles.togleBtn_box}>
+                <span className={styles.togle_Text}> Publish Stats</span>
+                <ToggleBtn
+                  initial={dataList?.publishStatus}
+                  onToggle={handelToogleIsPublish}
+                />
+              </div>
               <div
                 className={styles.action_btn}
                 onClick={() => handelDeleteModel(dataList._id)}

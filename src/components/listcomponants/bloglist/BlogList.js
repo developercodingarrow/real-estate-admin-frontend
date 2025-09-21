@@ -10,6 +10,7 @@ import useTableFillters from "@/src/_custome_hooks/useTableFillters";
 import BlogListCard from "./BlogListCard";
 import {
   deleteBlogWithImageAction,
+  isPublishedBlogtAction,
   starteBlogCreateAction,
 } from "@/src/app/utils/blogAction";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
@@ -78,6 +79,24 @@ export default function BlogList(props) {
     }
   };
 
+  const handelIsPublished = async (id) => {
+    try {
+      const res = await isPublishedBlogtAction({ id });
+      console.log(res);
+
+      if (res.error) {
+        toast.error(res.error);
+        return;
+      }
+      if (res.status === "success") {
+        toast.success(res.message);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.main_conatiner}>
       <ToastContainer />
@@ -115,7 +134,11 @@ export default function BlogList(props) {
       <div className={styles.table_wrapper}>
         {visibleRows.length > 0 ? (
           visibleRows.map((item, index) => (
-            <BlogListCard key={index} dataList={item} />
+            <BlogListCard
+              key={index}
+              dataList={item}
+              onToggleIsPublished={handelIsPublished}
+            />
           ))
         ) : (
           <p>No projects found.</p>
