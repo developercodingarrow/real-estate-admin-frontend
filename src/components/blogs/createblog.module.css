@@ -12,16 +12,34 @@
 
 .inputTitle {
   width: 100%;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
   border: none;
   outline: none;
   padding: 10px 0;
   color: #333;
   background: transparent;
+  font-family: var(--font-poppins);
+  letter-spacing: 0.2rem;
 }
 
 .inputTitle::placeholder {
   color: #999;
   font-weight: normal;
+}
+
+.error_msg {
+  color: red;
+  /* position: absolute; */
+  /* bottom: -2rem;
+  left: 0px; */
+  font-size: 1.2rem;
+}
+
+.editorerror_msg {
+  color: red;
+  /* position: absolute;
+  top: 1rem;
+  right: 0px; */
+  font-size: 1.2rem;
 }

@@ -83,20 +83,22 @@ const ReactQuillElement = ({ inputValue, inputChnageHandler }) => {
     return () => document.head.removeChild(styleElement);
   }, []);
   return (
-    <ReactQuill
-      theme="bubble"
-      value={inputValue}
-      modules={modules}
-      formats={formats}
-      onChange={inputChnageHandler}
-      className={styles.editor_style}
-      placeholder="Write your content here..."
-      style={{
-        height: "600px",
-        background: "#fff",
-        borderRadius: "4px",
-      }}
-    />
+    <div>
+      <ReactQuill
+        theme="bubble"
+        value={inputValue}
+        modules={modules}
+        formats={formats}
+        onChange={inputChnageHandler}
+        className={styles.editor_style}
+        placeholder="Write your content here..."
+        style={{
+          height: "600px",
+          background: "#fff",
+          borderRadius: "4px",
+        }}
+      />
+    </div>
   );
 };
 
