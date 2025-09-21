@@ -22,7 +22,9 @@ export async function createLocationAction(formData) {
     const data = await res.json();
 
     console.log("Create Location API Response:", data);
-
+    if (data.status === "Fails") {
+      return data;
+    }
     if (data.status === "success") {
       return data;
     }

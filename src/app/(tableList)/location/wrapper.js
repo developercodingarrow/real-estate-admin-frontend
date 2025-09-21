@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
-import CityList from "@/src/components/listcomponants/citylist/CityList";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import { AppContext } from "@/src/_contextApi/AppContext";
 import { ModelsContext } from "@/src/_contextApi/ModelContextProvider";
 import {
@@ -18,10 +19,25 @@ export default function LocationWrapper(props) {
   const handelCreateLocation = async (data) => {
     try {
       setisBtnLoading(true);
-      const response = await createLocationAction(data);
 
+      const response = await createLocationAction(data);
+      if (response.error) {
+        toast.error(response.error);
+        return;
+      }
+      if (response.error) {
+        toast.error(response.error);
+        setisBtnLoading(false);
+        return;
+      }
+
+      if (response.status === "Fails") {
+        toast.error(response.message);
+        setisBtnLoading(false);
+        return;
+      }
       if (response.status === "success") {
-        console.log(response.data);
+        toast.success("-Location created successfully");
         setlocations((prev) => [response.data, ...prev]);
         setisBtnLoading(false);
       }
@@ -37,6 +53,7 @@ export default function LocationWrapper(props) {
       if (response?.status === "success") {
         // remove deleted builder instantly
         setlocations((prev) => prev.filter((item) => item._id !== idForDelete));
+        toast.success("-Location Deleted successfully");
         handelCloseDeleteModel();
       }
     } catch (error) {
@@ -45,6 +62,7 @@ export default function LocationWrapper(props) {
   };
   return (
     <div>
+      <ToastContainer />
       <LocationList
         apiData={locations}
         handelCreate={handelCreateLocation}

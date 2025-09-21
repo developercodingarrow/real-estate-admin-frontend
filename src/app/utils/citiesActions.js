@@ -20,7 +20,9 @@ export async function createCityAction(formData) {
     });
 
     const data = await res.json();
-
+    if (data.status === "Fails") {
+      return data;
+    }
     if (data.status === "success") {
       return data;
     }
@@ -57,6 +59,10 @@ export async function deleteCityAction(formData) {
     const data = await res.json();
 
     console.log("delete Project API Response:", data);
+
+    if (data.status === "Fails") {
+      return data;
+    }
 
     if (data.status === "success") {
       return data;

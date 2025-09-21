@@ -42,6 +42,11 @@ export default function BuilderList(props) {
         setisBtnLoading(false);
         return;
       }
+      if (response.status === "Fails") {
+        toast.error(response.message);
+        setisBtnLoading(false);
+        return;
+      }
       if (response.data.status === "success") {
         console.log(response.data.data);
         setBuilders((prev) => [response.data.data, ...prev]);
@@ -56,7 +61,10 @@ export default function BuilderList(props) {
   const handelDelete = async () => {
     try {
       const response = await deleteBuilderAction({ _id: idForDelete }); // ✅ pass id in body
-      console.log(response);
+      if (response.error) {
+        toast.error(response.error);
+        return;
+      }
       if (response.error) {
         toast.error(response.error);
         handelCloseDeleteModel();
