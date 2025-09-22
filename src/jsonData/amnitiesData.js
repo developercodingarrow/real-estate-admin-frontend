@@ -46,4 +46,5 @@ export const amenitiesTypeOption = [
   { value: "house", label: "House" },
   { value: "shop", label: "shop" },
   { value: "mall", label: "Mall" },
+  { value: "co-working-office-space", label: "office space" },
 ];
