@@ -3,10 +3,13 @@ import React, { useContext, useState } from "react";
 import styles from "./navbar.module.css";
 import { LogOutAction } from "@/src/app/utils/authActions";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "@/src/_contextApi/authContext";
 
 export default function MainNavbar() {
   const router = useRouter();
   const [logoutLoading, setlogoutLoading] = useState(false);
+  const { authUser } = useContext(AuthContext);
+  const useRole = authUser?.role;
 
   const handelLogOut = async () => {
     try {
@@ -25,7 +28,8 @@ export default function MainNavbar() {
   return (
     <div className={styles.main_container}>
       <div className="">
-        <h2>Home</h2>
+        {useRole === "superAdmin" && <h2>Super Admin</h2>}
+        {useRole === "admin" && <h2>Admin</h2>}
       </div>
       <div className={styles.btn_style} onClick={handelLogOut}>
         {logoutLoading ? "loading.." : "LOGOUT"}
