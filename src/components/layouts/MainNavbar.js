@@ -15,7 +15,8 @@ export default function MainNavbar() {
     try {
       setlogoutLoading(true);
       const res = await LogOutAction();
-      if (res.data.status === "success") {
+      console.log(res);
+      if (res.status === "success") {
         router.refresh();
         router.push("/auth/login");
         setlogoutLoading(false);

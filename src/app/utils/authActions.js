@@ -9,8 +9,72 @@ const encryptionKey = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
 
 //1) OTP Login  API
 export async function otpLoginAction(formData) {
-  const url = `https://dashboardrealestate.litversehub.com/api/v1/real-estate/admin/auth/superAdminlogin`;
+  const url = `${API_BASE_URL}/auth/superAdminlogin`;
   console.log("url login ---", url);
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      return data;
+    }
+    if (data.status === "success") {
+      return data;
+    }
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+//1) OTP Login  API
+export async function otpAdminLoginAction(formData) {
+  const url = `${API_BASE_URL}/auth/adminLogin`;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      return data;
+    }
+    if (data.status === "success") {
+      return data;
+    }
+    return {
+      error: data.message || "Unknown error",
+      statusCode: res.status || 500,
+    };
+  } catch (error) {
+    return {
+      error: error.message || "Request failed",
+      statusCode: 500,
+    };
+  }
+}
+
+//1) OTP Login  API
+export async function otpEditorLoginAction(formData) {
+  const url = `${API_BASE_URL}/auth/editorLogin`;
   try {
     const res = await fetch(url, {
       method: "POST",

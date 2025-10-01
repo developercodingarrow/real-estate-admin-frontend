@@ -13,6 +13,7 @@ import { MdDelete, MdOutlineHomeWork } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FiEdit } from "react-icons/fi";
 import { SiBrandfolder } from "react-icons/si";
+import { RiTeamLine } from "react-icons/ri";
 
 export {
   IoReorderThree,
@@ -34,4 +35,5 @@ export {
   SiBrandfolder,
   MdOutlineHomeWork,
   FaEnvelopeOpenText,
+  RiTeamLine,
 };

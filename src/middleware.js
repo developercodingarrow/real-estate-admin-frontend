@@ -27,7 +27,7 @@ export async function middleware(request) {
   }
 
   // ✅ If user is logged in but NOT an admin or superAdmin, force logout and redirect
-  if (!["superAdmin", "admin"].includes(userRole)) {
+  if (!["superAdmin", "admin", "editor"].includes(userRole)) {
     response.cookies.delete("jwt");
     response.cookies.delete("user");
     return NextResponse.redirect(new URL("/auth/login", request.url));

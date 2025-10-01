@@ -1,7 +1,7 @@
 .selector_container {
   position: relative;
   width: 100%;
-  max-width: 200px;
+  max-width: 30rem;
   /* margin-top: 1.6rem; */
   cursor: pointer;
 }

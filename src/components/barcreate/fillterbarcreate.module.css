@@ -27,7 +27,6 @@
   font-size: 1.4rem;
   letter-spacing: 0.5px;
   font-family: var(--th-font-family);
-  text-transform: capitalize;
 }
 
 .error {

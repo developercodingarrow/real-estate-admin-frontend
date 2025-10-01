@@ -12,6 +12,7 @@ import {
   MdOutlineHomeWork,
   FaEnvelopeOpenText,
   SiBrandfolder,
+  RiTeamLine,
 } from "../ApplicationIcons";
 import { AuthContext } from "@/src/_contextApi/authContext";
 export default function AsidebarNavigation() {
@@ -23,55 +24,78 @@ export default function AsidebarNavigation() {
       hrfLink: "/",
       name: "Home",
       icon: MdLeaderboard,
+      roles: ["superAdmin", "admin", "editor"], // visible to all roles
     },
     {
       hrfLink: "/create-project",
       name: "New Project",
       icon: FaPlusSquare,
+      roles: ["superAdmin", "admin"], // only superAdmin and admin
     },
     {
       hrfLink: "/blogs",
-      name: "blogs",
-      icon: IoDocumentText, // Use the actual component, not a string
+      name: "Blogs",
+      icon: IoDocumentText,
+      roles: ["superAdmin", "admin", "editor"], // all roles can see blogs
     },
     {
       hrfLink: "/enquires",
       name: "Enquires",
       icon: FaEnvelopeOpenText,
-      role: "superAdmin", // Only superAdmin can see this
+      roles: ["superAdmin"], // only superAdmin
+    },
+    {
+      hrfLink: "/teams",
+      name: "Teams",
+      icon: RiTeamLine,
+      roles: ["superAdmin"], // only superAdmin
     },
     {
       hrfLink: "/project-list",
       name: "Project List",
-      icon: FaBuilding, // Use the actual component, not a string
+      icon: FaBuilding,
+      roles: ["superAdmin", "admin"], // editor not allowed
     },
     {
       hrfLink: "/builders",
       name: "Builder",
       icon: SiBrandfolder,
+      roles: ["superAdmin", "admin"],
     },
     {
       hrfLink: "/cities",
       name: "Cities",
       icon: FaLocationDot,
+      roles: ["superAdmin", "admin"],
     },
-
     {
       hrfLink: "/location",
       name: "Location",
       icon: FaLocationDot,
+      roles: ["superAdmin", "admin"],
     },
     {
       hrfLink: "/amenities",
-      name: "amenities",
+      name: "Amenities",
       icon: MdOutlineHomeWork,
+      roles: ["superAdmin", "admin"],
+    },
+    // databackup
+    {
+      hrfLink: "/databackup",
+      name: "Data Backup",
+      icon: MdOutlineHomeWork,
+      roles: ["superAdmin"],
     },
   ];
 
   // Filter navigation based on role
   const filteredNavigation = navigationOption.filter((item) => {
-    if (item.role) return item.role === useRole; // Only show if role matches
-    return true; // Show all others
+    // if no roles are defined, show it by default
+    if (!item.roles) return true;
+
+    // check if the user role is inside the allowed roles array
+    return item.roles.includes(useRole);
   });
 
   return (

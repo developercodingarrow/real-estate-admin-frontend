@@ -1,0 +1,55 @@
+.backupBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  border-radius: 1rem;
+  background: linear-gradient(
+    135deg,
+    #c0d6f9 0%,
+    #a6c1ee 100%
+  ); /* noticeable pastel blue gradient */
+  transition: transform 0.3s;
+  margin-bottom: 1rem;
+}
+
+.backupBar:hover {
+  transform: translateY(-3px);
+}
+
+.backupInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.backupText {
+  font-weight: 500;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+.icon {
+  color: #1a1a1a;
+  font-size: 2rem;
+}
+
+.backupBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #fff;
+  color: #2575fc;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.backupBtn:hover {
+  background-color: #e6f0ff;
+  transform: scale(1.05);
+}

@@ -6,10 +6,11 @@ import "react-toastify/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import SubmitBtn from "../elements/buttons/SubmitBtn";
 import { AppContext } from "@/src/_contextApi/AppContext";
-import { otpLoginAction } from "@/src/app/utils/authActions";
+
 import { useParams, useRouter } from "next/navigation";
 
-export default function AuthUi() {
+export default function AuthUi(props) {
+  const { loginFor, handellogin } = props;
   const router = useRouter();
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const {
@@ -29,14 +30,10 @@ export default function AuthUi() {
   const onSubmit = async (data) => {
     try {
       setisBtnLoading(true);
-      const res = await otpLoginAction(data);
-      if (res.error) {
-        toast.error(res.error);
-        setisBtnLoading(false);
-        return;
-      }
+      const res = await handellogin(data);
+      console.log("res", res);
       if (res.status === "Fails" || res.error) {
-        toast.error(res.message);
+        toast.error(res.message || res.error);
         setisBtnLoading(false);
         return;
       }
@@ -57,7 +54,7 @@ export default function AuthUi() {
       <div className={styles.center_container}>
         <div className={styles.form_header}>
           <div className={styles.form_heading}>
-            <h1>Login In </h1>
+            <h1> {loginFor} Login In </h1>
           </div>
           <div className={styles.form_subHeading}>
             Welcome back! Please enter your register e-mail
