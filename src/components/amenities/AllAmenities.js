@@ -52,14 +52,13 @@ export default function AllAmenities(props) {
       };
 
       const res = await updateProjectAmnitiesAction(payload, slug);
-      console.log("Update amnites:", res.data);
+
       if (res.data.status === "success") {
         toast.success(res.data.message);
         setisBtnLoading(false);
         router.refresh();
       }
     } catch (error) {
-      console.log("Error uploading image:", error);
       router.refresh();
       setisBtnLoading(false);
     }
@@ -68,8 +67,6 @@ export default function AllAmenities(props) {
   useEffect(() => {
     fetchAmenities();
   }, []);
-
-  console.log("selected Amenities:", selectedAmenities);
 
   return (
     <div>

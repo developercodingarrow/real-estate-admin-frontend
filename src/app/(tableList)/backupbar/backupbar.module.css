@@ -57,3 +57,22 @@
 .jsonBtn:hover {
   background: #0b5ed7;
 }
+
+@media only screen and (max-width: 720px) {
+  .main_conatiner {
+    padding: var(--th-list-layout-mobile-pading);
+  }
+
+  .backupBar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+  }
+}

@@ -5,7 +5,7 @@ import CustomeHookRadioBtn from "../../inputsElements/CustomeHookRadioBtn";
 
 export default function NumberOfBeadrooms(props) {
   const { control, errors, register, sectionTitle, name } = props;
-  console.log(name);
+
   return (
     <div className={styles.main_container}>
       <div className={styles.inner_container}>

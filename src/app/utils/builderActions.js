@@ -22,7 +22,6 @@ export async function createBuilderAction(formData) {
 
     const data = await res.json();
 
-    console.log("Create Project API Response:", data);
     if (data.status === "Fails") {
       return data;
     }
@@ -60,8 +59,6 @@ export async function deleteBuilderAction(formData) {
     });
 
     const data = await res.json();
-
-    console.log("delete Project API Response:", data);
 
     if (data.status === "success") {
       return data;

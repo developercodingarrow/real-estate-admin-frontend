@@ -16,6 +16,10 @@ export default function AuthNavbar() {
             className={styles.imgStyle}
           />
         </Link>
+        <div className={styles.login_links}>
+          <Link href={"/auth/adminlogin"}>Admin Login</Link>
+          <Link href={"/auth/editorlogin"}>Editor Login</Link>
+        </div>
       </div>
     </div>
   );

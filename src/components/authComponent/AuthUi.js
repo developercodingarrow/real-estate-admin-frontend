@@ -31,7 +31,7 @@ export default function AuthUi(props) {
     try {
       setisBtnLoading(true);
       const res = await handellogin(data);
-      console.log("res", res);
+
       if (res.status === "Fails" || res.error) {
         toast.error(res.message || res.error);
         setisBtnLoading(false);

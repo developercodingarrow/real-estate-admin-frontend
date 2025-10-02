@@ -26,28 +26,24 @@ export default function AddBlogKeywords(props) {
       setisBtnLoading(true);
       const response = await updateBlogSlugAction(data, slug);
       if (response.error) {
-        console.error("Error creating project:", response.error);
         setisBtnLoading(false);
         return;
       }
       if (response.data.status === "success") {
-        console.log("Create Project Action Response:", response);
         toast.success(response.data.message);
         setisBtnLoading(false);
         return;
       }
     } catch (error) {
-      console.error("Error creating project:", error);
       setisBtnLoading(false);
     }
   };
 
   const handeladdkeywords = async (keywords) => {
-    console.log(keywords);
     setseconderyBtn(true);
     try {
       const res = await addBlogKeywordsAction({ keywords }, slug);
-      console.log("chip---", res.data);
+
       if (res.data.status === "success") {
         setseconderyBtn(false);
         toast.success(res.data.message);

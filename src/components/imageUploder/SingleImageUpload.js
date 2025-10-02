@@ -40,7 +40,7 @@ export default function SingleImageUpload(props) {
     try {
       setisBtnLoading(true);
       const res = await imageUplodhandeler(image, uploadFor, slug);
-      console.log("res-single image--", res);
+
       if (res.error) {
         setisBtnLoading(false);
         router.refresh();
@@ -54,7 +54,6 @@ export default function SingleImageUpload(props) {
         router.refresh();
       }
     } catch (error) {
-      console.log("Error uploading image:", error);
       setisBtnLoading(false);
       router.refresh();
     }

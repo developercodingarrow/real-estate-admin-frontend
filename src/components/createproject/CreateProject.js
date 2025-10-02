@@ -17,27 +17,18 @@ export default function CreateProject() {
   const [sectionSubType, setsectionSubType] = useState("");
 
   const handleRadioChange = (e) => {
-    console.log(e.target.value);
     setSelectedOption(e.target.value);
   };
 
   const handlePropertyPuposeChange = (e) => {
-    console.log(e.target.value);
     setpropertyPurpose(e.target.value);
   };
 
   const handleSubTypeChange = (e) => {
-    console.log(e.target.value);
     setPropertySubType(e.target.value);
   };
 
   const handleProcess = () => {
-    console.log("Selected Options:", {
-      purpose: propertyPurpose,
-      propertyType: selectedOption,
-      subType: propertySubType,
-    });
-    console.log("sleted property type---", sectionSubType);
     setsectionSubType(propertySubType);
   };
 

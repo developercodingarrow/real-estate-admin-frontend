@@ -38,3 +38,35 @@
 .sideBox_wrapepr {
   margin-bottom: 5rem;
 }
+
+@media only screen and (max-width: 1020px) {
+  .main_container {
+    padding: 1rem 1rem;
+    background-color: #f5f6fa;
+  }
+
+  .page_header {
+    margin-bottom: 1rem;
+  }
+  .page_Title {
+    font-size: 1.4rem;
+    color: var(--th-dark-blue-color);
+  }
+  .sub_heading {
+    font-size: 1.2rem;
+    color: var(--th-dark-blue-color);
+  }
+
+  .inner_container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+  .left_column {
+    width: 100%;
+  }
+
+  .right_column {
+    width: 100%;
+  }
+}

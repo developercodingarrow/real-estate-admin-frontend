@@ -31,6 +31,7 @@
 
 .collapsed_icon {
   font-size: 2.2rem;
+  color: var(--th-primary-color);
 }
 
 .navigation_links:hover {

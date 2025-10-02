@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const AppContext = createContext();
 
 export default function AppContextProvider({ children }) {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
   const [isBtnLoading, setisBtnLoading] = useState(false);
 

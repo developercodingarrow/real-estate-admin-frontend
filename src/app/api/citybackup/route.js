@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req) {
   try {
-    console.log("➡️ Calling Express backup API...");
-
     // forward cookies from the incoming request
     const cookie = req.headers.get("cookie") || "";
 
@@ -16,8 +14,6 @@ export async function GET(req) {
         },
       }
     );
-
-    console.log("Express API status:", response.status);
 
     if (!response.ok) {
       const text = await response.text();

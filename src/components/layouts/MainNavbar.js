@@ -15,7 +15,6 @@ export default function MainNavbar() {
     try {
       setlogoutLoading(true);
       const res = await LogOutAction();
-      console.log(res);
       if (res.status === "success") {
         router.refresh();
         router.push("/auth/login");
@@ -28,9 +27,10 @@ export default function MainNavbar() {
   };
   return (
     <div className={styles.main_container}>
-      <div className="">
+      <div className={styles.navbar_role}>
         {useRole === "superAdmin" && <h2>Super Admin</h2>}
         {useRole === "admin" && <h2>Admin</h2>}
+        {useRole === "editor" && <h2>Editor</h2>}
       </div>
       <div className={styles.btn_style} onClick={handelLogOut}>
         {logoutLoading ? "loading.." : "LOGOUT"}

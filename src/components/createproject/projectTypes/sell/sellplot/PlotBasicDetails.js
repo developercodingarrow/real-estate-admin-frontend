@@ -9,12 +9,10 @@ export default function PlotBasicDetails() {
   const [plotOpenside, setplotOpenside] = useState("");
   const [plotPossion, setplotPossion] = useState("");
   const handelPlotOpensideChnage = (e) => {
-    console.log(e.target.value);
     setplotOpenside(e.target.value);
   };
 
   const handelPlotPossion = (e) => {
-    console.log(e.target.value);
     setplotPossion(e.target.value);
   };
   return (

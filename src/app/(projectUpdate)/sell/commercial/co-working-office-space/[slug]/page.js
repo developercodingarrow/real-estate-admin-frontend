@@ -39,8 +39,6 @@ export default async function SCofficeCoWprkingpage({ params }) {
     throw new Error(`Failed to fetch data: ${error}`);
   }
 
-  console.log("apia data for office--", data);
-
   return (
     <div>
       <SCofficeCoWprkingWrapper data={data} slug={slug} />

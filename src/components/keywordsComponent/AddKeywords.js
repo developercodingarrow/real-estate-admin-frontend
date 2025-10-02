@@ -24,7 +24,6 @@ export default function AddKeywords(props) {
     try {
       setisBtnLoading(true);
       const response = await updateSlugAction(data, slug);
-      console.log(response);
       if (response.error) {
         setisBtnLoading(false);
         return;
@@ -36,25 +35,22 @@ export default function AddKeywords(props) {
         return;
       }
     } catch (error) {
-      console.error("Error creating project:", error);
       setisBtnLoading(false);
       router.refresh();
     }
   };
 
   const handeladdkeywords = async (keywords) => {
-    console.log(keywords);
     setseconderyBtn(true);
     try {
       const res = await addKeywordsAction({ keywords }, slug);
-      console.log("chip---", res.data);
+
       if (res.data.status === "success") {
         setseconderyBtn(false);
         toast.success(res.data.message);
         router.refresh();
       }
     } catch (error) {
-      console.log(error);
       setseconderyBtn(false);
       router.refresh();
     }

@@ -7,9 +7,13 @@ import { IoReorderThree } from "../ApplicationIcons";
 import { AppContext } from "@/src/_contextApi/AppContext";
 import Link from "next/link";
 export default function AisebarHearder() {
-  const { handelToggleAsidebar } = useContext(AppContext);
+  const { handelToggleAsidebar, isSidebarCollapsed } = useContext(AppContext);
   return (
-    <div className={styles.asidebar_header}>
+    <div
+      className={`${styles.asidebar_header} ${
+        isSidebarCollapsed ? styles.collapased_asidebar_header : ""
+      }`}
+    >
       <Link href={"/"} className={styles.logo_wrapper}>
         <Image
           src={logo}

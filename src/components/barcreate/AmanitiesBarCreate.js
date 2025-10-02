@@ -67,7 +67,7 @@ export default function AmanitiesBarCreate(props) {
               )}
             </div>
           </div>
-          <div>
+          <div className={styles.team_create_btn_wrapper}>
             <SubmitBtn
               btnText="create New"
               size="medium"

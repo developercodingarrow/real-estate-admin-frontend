@@ -13,26 +13,21 @@ export default function ApartmentOptions() {
 
   const [selectedAvailability, setselectedAvailability] = useState("");
   const handleFlatsRoomsChange = (e) => {
-    console.log(e.target.value);
     setslectedFlatRoom(e.target.value);
   };
 
   const handleFlatsBathRoomsChange = (e) => {
-    console.log(e.target.value);
     setselectedFlateBathrooms(e.target.value);
   };
 
   const handleFlatsBalconicesChange = (e) => {
-    console.log(e.target.value);
     setselectedBalconies(e.target.value);
   };
   const handleFlatsStatusChange = (e) => {
-    console.log(e.target.value);
     setslectedApartmentStatus(e.target.value);
   };
 
   const handleFlatsAvailabilityStatusChange = (e) => {
-    console.log(e.target.value);
     setselectedAvailability(e.target.value);
   };
 
@@ -330,14 +325,14 @@ export default function ApartmentOptions() {
             <CustomeSelector
               options={totalNoFollor}
               defaultSelected="apartment"
-              onSelect={(value) => console.log("Selected:", value)}
+              // onSelect={(value) => console.log("Selected:", value)}
               placeholder="Select Total Floors"
             />
 
             <CustomeSelector
               options={propertyNoFollor}
               defaultSelected="basement"
-              onSelect={(value) => console.log("Selected:", value)}
+              // onSelect={(value) => console.log("Selected:", value)}
               placeholder="Select Property on Floors"
             />
           </div>

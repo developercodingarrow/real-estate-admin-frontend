@@ -15,7 +15,7 @@ export default function Teamwarpper(props) {
     try {
       setisBtnLoading(true);
       const response = await createTeamAction(data);
-      console.log(response);
+
       if (response.error || response.status === "Fails") {
         toast.error(response.message || response.error);
         setisBtnLoading(false);
@@ -23,7 +23,6 @@ export default function Teamwarpper(props) {
       }
 
       if (response.status === "success") {
-        console.log(response.data);
         setteams((prev) => [response.data, ...prev]);
         toast.success("-Amnities created successfully");
         setisBtnLoading(false);

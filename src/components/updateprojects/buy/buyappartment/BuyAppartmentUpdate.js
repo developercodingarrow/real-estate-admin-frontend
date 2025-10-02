@@ -80,7 +80,6 @@ export default function BuyAppartmentUpdate(props) {
         console.error("Error creating project:", response.error);
       }
       if (response.data.status === "success") {
-        console.log("Create Project Action Response:", response);
       }
     } catch (error) {
       console.error("Error creating project:", error);

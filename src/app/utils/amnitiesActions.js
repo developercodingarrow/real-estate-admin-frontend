@@ -18,7 +18,6 @@ export async function allAmnitiesAction() {
     });
 
     const data = await res.json();
-    console.log("Update Project API Response:", data);
 
     if (data.status === "success") {
       return { data };
@@ -93,8 +92,6 @@ export async function deleteAmanitiesAction(formData) {
     });
 
     const data = await res.json();
-
-    console.log("delete Project API Response:", data);
 
     if (data.status === "success") {
       return data;

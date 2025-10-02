@@ -13,7 +13,6 @@ export default function ProjectListCard(props) {
   const { handelOpenDeleteModel } = useContext(ModelsContext);
 
   const handelDeleteModel = (itemId) => {
-    console.log(itemId);
     handelOpenDeleteModel(itemId);
   };
 
@@ -106,21 +105,23 @@ export default function ProjectListCard(props) {
                 </div>
               </div>
 
-              <div
-                className={styles.action_btn}
-                onClick={() => handelDeleteModel(dataList._id)}
-              >
-                {" "}
-                Delete
+              <div className={styles.action_btnsWrapper}>
+                <div
+                  className={styles.action_btn}
+                  onClick={() => handelDeleteModel(dataList._id)}
+                >
+                  {" "}
+                  Delete
+                </div>
+                <Link
+                  href={`/${dataList.lookingFor}/${dataList.propertyCategory}/${dataList?.propertyType}/${dataList?._id}`}
+                  className={styles.action_btn}
+                >
+                  {" "}
+                  Edit
+                </Link>
+                <div className={styles.action_btn}> View</div>
               </div>
-              <Link
-                href={`/${dataList.lookingFor}/${dataList.propertyCategory}/${dataList?.propertyType}/${dataList?._id}`}
-                className={styles.action_btn}
-              >
-                {" "}
-                Edit
-              </Link>
-              <div className={styles.action_btn}> View</div>
             </div>
           </div>
         </div>

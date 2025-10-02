@@ -17,7 +17,7 @@ export default function CityListwrapper(props) {
     try {
       setisBtnLoading(true);
       const response = await createCityAction(data);
-      console.log(response);
+
       if (response.error) {
         toast.error(response.error);
         setisBtnLoading(false);
@@ -30,7 +30,6 @@ export default function CityListwrapper(props) {
         return;
       }
       if (response.status === "success") {
-        console.log(response.data);
         toast.success("-City created successfully");
         setcities((prev) => [response.data, ...prev]);
         setisBtnLoading(false);

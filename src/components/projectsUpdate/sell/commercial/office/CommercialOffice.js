@@ -85,7 +85,6 @@ export default function CommercialOffice(props) {
         return;
       }
       if (response.status === "success") {
-        console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
         router.refresh();

@@ -13,7 +13,6 @@ export default function CreateBlog(props) {
   const router = useRouter();
   const { apiData, slug, onNext, onBack } = props;
 
-  console.log(apiData);
   const { isBtnLoading, setisBtnLoading } = useContext(AppContext);
   const [formData, setFormData] = useState({
     title: "",
@@ -125,7 +124,7 @@ export default function CreateBlog(props) {
       if (response.status === "success") {
         setisBtnLoading(false);
         router.refresh();
-        console.log("SEO data saved:", response);
+
         toast.success(response.message);
       } else {
         console.error("Failed to save SEO data:", response.error);

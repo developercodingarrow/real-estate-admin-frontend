@@ -58,8 +58,6 @@ export async function deleteCityAction(formData) {
 
     const data = await res.json();
 
-    console.log("delete Project API Response:", data);
-
     if (data.status === "Fails") {
       return data;
     }

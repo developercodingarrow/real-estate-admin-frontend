@@ -56,8 +56,6 @@ export async function updateBlogContentAction(formData, slug) {
 
     const data = await res.json();
 
-    console.log("Update Project API Response:", data);
-
     if (data.status === "success") {
       return data;
     }
@@ -93,7 +91,7 @@ export async function updateBlogImage(formData, slug) {
     });
 
     const data = await res.json();
-    console.log("Update Project Image API Response:", data);
+
     if (data.status === "success") {
       return data;
     }
@@ -129,8 +127,6 @@ export async function addBlogKeywordsAction(formData, slug) {
 
     const data = await res.json();
 
-    console.log("add keywords API Response:", data);
-
     if (data.status === "success") {
       return { data };
     }
@@ -164,8 +160,6 @@ export async function updateBlogSlugAction(formData, slug) {
     });
 
     const data = await res.json();
-
-    console.log("Update Project API Response:", data);
 
     if (data.status === "success") {
       return { data };
@@ -201,8 +195,6 @@ export async function deleteBlogWithImageAction(id) {
 
     const data = await res.json();
 
-    console.log("delete Project API Response:", data);
-
     if (data.status === "success") {
       return data;
     }
@@ -236,8 +228,6 @@ export async function isPublishedBlogtAction(formData) {
     });
 
     const data = await res.json();
-
-    console.log("Update Project API Response:", data);
 
     if (data.status === "Fails") {
       return data;

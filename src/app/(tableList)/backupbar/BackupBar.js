@@ -17,14 +17,6 @@ export default function BackupBar(props) {
           <FaFileExcel className={styles.icon} />
           <span>Export Excel</span>
         </button>
-
-        <button
-          onClick={onBackupJson}
-          className={`${styles.btn} ${styles.jsonBtn}`}
-        >
-          <FaDatabase className={styles.icon} />
-          <span>Backup JSON</span>
-        </button>
       </div>
     </div>
   );

@@ -72,7 +72,6 @@ export default function RentCommercialoffice(props) {
         return;
       }
       if (response.status === "success") {
-        console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
         router.refresh();

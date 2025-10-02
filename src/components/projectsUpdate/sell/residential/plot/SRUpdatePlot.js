@@ -72,15 +72,13 @@ export default function SRUpdatePlot(props) {
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
 
-      console.log(response);
       if (response.error) {
         setisBtnLoading(false);
         toast.error(response.error);
-        console.error("Error creating project:", response.error);
+
         return;
       }
       if (response.status === "success") {
-        console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
       }

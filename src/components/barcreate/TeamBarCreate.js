@@ -89,7 +89,7 @@ export default function TeamBarCreate(props) {
               )}
             </div>
           </div>
-          <div>
+          <div className={styles.team_create_btn_wrapper}>
             <SubmitBtn btnText="Add" size="medium" btnLoading={isBtnLoading} />
           </div>
         </div>

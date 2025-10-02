@@ -9,3 +9,15 @@
 .option_radio_Wrapper {
   display: flex;
 }
+
+@media only screen and (max-width: 1020px) {
+  .inner_contaner {
+    width: 100%;
+  }
+
+  .left_column {
+    width: 100%;
+  }
+
+  
+}

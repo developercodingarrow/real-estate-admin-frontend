@@ -44,7 +44,7 @@ export default function DynimicTable(props) {
 const renderCellContent = (indexNo, column, row, elemnetdata) => {
   let content = null;
   let className = "";
-  console.log(column.key, elemnetdata);
+
   switch (column.component) {
     case "number":
       content = indexNo + 1;

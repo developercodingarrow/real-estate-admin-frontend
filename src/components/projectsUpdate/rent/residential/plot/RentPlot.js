@@ -72,15 +72,13 @@ export default function RentPlot(props) {
       setisBtnLoading(true);
       const response = await updateProjectAction(data, slug);
 
-      console.log(response);
       if (response.error) {
         setisBtnLoading(false);
-        console.error("Error creating project:", response.error);
+
         toast.error(response.error);
         return;
       }
       if (response.status === "success") {
-        console.log("update project:", response);
         toast.success(response.message);
         setisBtnLoading(false);
         router.refresh();

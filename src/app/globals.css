@@ -12,6 +12,8 @@
   --th-disable-btn-opacity: 0.7;
   --th-gray-border-color: #c7c7c7;
   --th-balanced-gray-text-color: #6b7280;
+  --th-list-layout-dekstop-pading: 5rem;
+  --th-list-layout-mobile-pading: 1rem;
 }
 
 html {

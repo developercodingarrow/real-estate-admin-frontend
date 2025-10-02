@@ -21,7 +21,6 @@ export async function createLocationAction(formData) {
 
     const data = await res.json();
 
-    console.log("Create Location API Response:", data);
     if (data.status === "Fails") {
       return data;
     }
@@ -59,8 +58,6 @@ export async function deleteLocationAction(formData) {
     });
 
     const data = await res.json();
-
-    console.log("delete location API Response:", data);
 
     if (data.status === "success") {
       return data;

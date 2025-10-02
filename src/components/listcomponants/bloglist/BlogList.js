@@ -68,7 +68,7 @@ export default function BlogList(props) {
     try {
       setisBtnLoading(true);
       const res = await starteBlogCreateAction();
-      console.log("start- creating blog-", res);
+
       if (res.status === "success") {
         router.push(`/create-new-blog/${res.data._id}`);
         toast.success(res.message);
@@ -82,7 +82,6 @@ export default function BlogList(props) {
   const handelIsPublished = async (id) => {
     try {
       const res = await isPublishedBlogtAction({ id });
-      console.log(res);
 
       if (res.error) {
         toast.error(res.error);
@@ -111,8 +110,9 @@ export default function BlogList(props) {
               placeholder="Enter Blog Title"
             />
           </div>
-          <div>
+          <div className={styles.clickBtn_wrapper}>
             <ClickBtn
+              size="medium"
               btnText="Create New Blog"
               handelClick={handelStartCreateBlog}
               btnLoading={isBtnLoading}

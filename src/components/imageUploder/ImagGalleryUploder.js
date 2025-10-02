@@ -17,7 +17,6 @@ export default function ImagGalleryUploder(props) {
   const { slug, apiData } = props;
   const [isBtnLoading, setisBtnLoading] = useState(false);
   const [apiImages, setApiImages] = useState(apiData?.galleryImages || []); // only urls
-  console.log("apidata", apiData);
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
   const { images, addImages, removeImage, clearAllImages, maxImages } =
@@ -52,9 +51,7 @@ export default function ImagGalleryUploder(props) {
   };
 
   // optional: see what's in state
-  useEffect(() => {
-    console.log("[component] images updated:", images);
-  }, [images]);
+  useEffect(() => {}, [images]);
 
   const handleClick = () => {
     if (fileInputRef.current) {
@@ -72,14 +69,14 @@ export default function ImagGalleryUploder(props) {
 
     try {
       const res = await updateProjectGallery(formData, slug);
-      console.log("project gallery---", res);
+
       if (res.status === "success") {
         setisBtnLoading(false);
         toast.success(res.message);
         router.refresh();
       } else {
         setisBtnLoading(false);
-        console.error("Upload failed:", res.error);
+
         router.refresh();
       }
     } catch (err) {
@@ -92,7 +89,7 @@ export default function ImagGalleryUploder(props) {
   const handelDeleteApiGalleryImage = async (imgurl) => {
     try {
       const res = await deleteGalleryImgAction(imgurl, slug);
-      console.log(res.data);
+
       if (res.status === "success") {
         setApiImages((prev) => prev.filter((img) => img.url !== imgurl));
         toast.success(res.message);

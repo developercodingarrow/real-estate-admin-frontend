@@ -21,7 +21,7 @@ export async function middleware(request) {
   // ✅ If user is NOT logged in, allow only /auth/* routes
   if (!jwtToken) {
     if (!pathname.startsWith("/auth")) {
-      return NextResponse.redirect(new URL("/auth/login", request.url));
+      return NextResponse.redirect(new URL("/auth/adminlogin", request.url));
     }
     return NextResponse.next(); // Allow login/signup pages
   }
@@ -30,7 +30,7 @@ export async function middleware(request) {
   if (!["superAdmin", "admin", "editor"].includes(userRole)) {
     response.cookies.delete("jwt");
     response.cookies.delete("user");
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    return NextResponse.redirect(new URL("/auth/adminlogin", request.url));
   }
 
   // ✅ If user is already logged in, prevent access to login/signup pages

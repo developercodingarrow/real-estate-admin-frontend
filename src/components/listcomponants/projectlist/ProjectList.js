@@ -74,7 +74,7 @@ export default function ProjectList(props) {
     try {
       setisBtnLoading(true);
       const res = await deleteProjectWithImagesAction(idForDelete);
-      console.log("res---", res);
+
       if (res?.status === "success") {
         // 🔹 Remove deleted blog from state
         setprojects((prev) => prev.filter((item) => item._id !== idForDelete));
@@ -92,7 +92,6 @@ export default function ProjectList(props) {
   const handelIsFeaured = async (id) => {
     try {
       const res = await isFeauredProjectAction({ id });
-      console.log(res);
 
       if (res.error) {
         toast.error(res.error);
@@ -110,7 +109,6 @@ export default function ProjectList(props) {
   const handelIsPublished = async (id) => {
     try {
       const res = await isPublishedProjectAction({ id });
-      console.log(res);
 
       if (res.error) {
         toast.error(res.error);
@@ -132,18 +130,22 @@ export default function ProjectList(props) {
       <div className={styles.page_heading}>Project List</div>
       <div className={styles.page_fillter_wrapper}>
         <div className={styles.fillter_left_column}>
-          <ProjectFillterBar
-            filters={filters}
-            onFilterChange={handleFilterChange}
-            totalCount={filteredData.length}
-          />
-          <TableSearch
-            searchHandle={searchByTableFiled}
-            searchField="title"
-            placeholder="Enter project Title"
-          />
+          <div className={styles.project_fillter_bar_wrapper}>
+            <ProjectFillterBar
+              filters={filters}
+              onFilterChange={handleFilterChange}
+              totalCount={filteredData.length}
+            />
+          </div>
+          <div className={styles.search_wrapper}>
+            <TableSearch
+              searchHandle={searchByTableFiled}
+              searchField="title"
+              placeholder="Enter project Title"
+            />
+          </div>
         </div>
-        <div>
+        <div className={styles.fillter_right_column}>
           <TableFooter
             totalRows={totalRows}
             currentPage={currentPage}

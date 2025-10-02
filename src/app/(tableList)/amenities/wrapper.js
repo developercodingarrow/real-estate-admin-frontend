@@ -32,7 +32,6 @@ export default function AmenitiesWrapper(props) {
         return;
       }
       if (response.status === "success") {
-        console.log(response.data);
         setcities((prev) => [response.data, ...prev]);
         toast.success("-Amnities created successfully");
         setisBtnLoading(false);

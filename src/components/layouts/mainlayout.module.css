@@ -37,7 +37,7 @@
 }
 
 .children_wrapper {
-  margin-left: 25rem;
+  margin-left: 23rem;
   padding-top: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -45,5 +45,5 @@
 }
 
 .children_wrapper_collapsed {
-  margin-left: 7rem;
+  margin-left: 5rem;
 }

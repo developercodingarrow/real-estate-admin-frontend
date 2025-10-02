@@ -48,7 +48,6 @@ export default function BuilderList(props) {
         return;
       }
       if (response.data.status === "success") {
-        console.log(response.data.data);
         toast.success(response?.message);
         setBuilders((prev) => [response.data.data, ...prev]);
         setisBtnLoading(false);
@@ -110,7 +109,7 @@ export default function BuilderList(props) {
               placeholder="serach builder"
             />
           </div>
-          <div>
+          <div className={styles.fillterbarCreate_wrapper}>
             <FillterBarCreate
               inputPlaceholder="create new builder"
               handelCreate={handelCreateBuilder}
